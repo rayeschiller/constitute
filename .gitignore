@@ -1,2 +1,5 @@
-/Users/rinaschiller/Documents/personalDev/PST/pst_django/pst/__pycache__/*
-
+pst/migrations/__pycache__
+.DS_Store
+pst/__pycache__
+pst/migrations/__pycache__
+pst/migrations/__pycache__/
