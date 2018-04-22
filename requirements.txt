@@ -1,6 +1,8 @@
 certifi==2018.1.18
 chardet==3.0.4
+dj-database-url==0.5.0
 Django==2.0.2
+django-heroku==0.3.1
 future==0.16.0
 idna==2.6
 oauthlib==2.0.7
@@ -10,3 +12,4 @@ requests==2.18.4
 requests-oauthlib==0.8.0
 TwitterSearch==1.0.2
 urllib3==1.22
+whitenoise==3.3.1
