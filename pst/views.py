@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Tweet
 from .twitterSearch import getTweets
+from rest_framework.decorators import api_view
+from .serializers import test
+from rest_framework.response import Response
 
 # Create your views here.
 def index(request):
@@ -16,3 +19,11 @@ def index(request):
 		tweet.save()
 	return HttpResponse(template.render(context,request))
 
+@api_view(['get'])
+def fetch_tweets(request):
+	#fetch all tweet objects
+	tweets = Tweet.objects.all()
+	#serialize the tweets
+	test()
+	serializer = TweetSerializer(tweets, many=True)
+	return Response(serializer.data)
