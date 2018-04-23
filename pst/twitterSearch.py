@@ -18,12 +18,11 @@ def getTweets():
             )
 
 		for tweet in ts.search_tweets_iterable(tso):
-			print(tweet)
-			tweet = Tweet(text = tweet['text'], username = "@RinaS", isRetweet=False, location="new york")
+			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=False, date=tweet['created_at'], location="new york")
+			print("Test")
 			tweet.save()
-			print("Tweet saved")
 		return ts.search_tweets_iterable(tso)
-		
+
 	except TwitterSearchException as e:
 		print(e)
 
