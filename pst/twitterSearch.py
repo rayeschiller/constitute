@@ -19,7 +19,6 @@ def getTweets():
 
 		for tweet in ts.search_tweets_iterable(tso):
 			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=False, date=tweet['created_at'], location="new york")
-			print("Test")
 			tweet.save()
 		return ts.search_tweets_iterable(tso)
 
