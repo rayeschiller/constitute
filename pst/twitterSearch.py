@@ -2,12 +2,12 @@ from TwitterSearch import *
 from .models import Tweet
 
 def getTweets():
+
 	try:
 		tso = TwitterSearchOrder()
 
 		tso.set_keywords(["bitch", "hillaryclinton"])
 		tso.set_language("en")
-		tso.set_count(10)
 		tso.set_include_entities(False)
 
 		ts = TwitterSearch(
@@ -17,9 +17,12 @@ def getTweets():
             access_token_secret = 'qx9uoD5yzsUWeBgzVqIzChO7rruAvNjhomKmqua9nsfpl'
             )
 
-		for tweet in ts.search_tweets_iterable(tso):
-			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=False, date=tweet['created_at'], location="new york")
-			tweet.save()
+		# for tweet in ts.search_tweets_iterable(tso):
+			# tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=False, date=tweet['created_at'], location="new york")
+			# tweet = Tweet(text=tweet.text, username=tweet.user.screen_name, isRetweet=False, date=tweet.created_at, location="none")
+			# tweet.save()
+			# print(tweet['text'])
+		print(ts.search_tweets_iterable(tso))
 		return ts.search_tweets_iterable(tso)
 
 	except TwitterSearchException as e:
