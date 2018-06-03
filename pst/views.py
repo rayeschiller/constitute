@@ -4,7 +4,6 @@ from django.template import loader
 from .models import Tweet
 from .twitterSearch import getTweets
 from rest_framework.decorators import api_view
-from .serializers import test
 from rest_framework.response import Response
 
 # Create your views here.
