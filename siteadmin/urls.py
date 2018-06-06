@@ -14,12 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
-from pst.views import fetch_tweets, fetch_sexist_words
+from django.urls import path, re_path
+from django.views.generic import TemplateView
 
 urlpatterns = [
-	path('index/', include('pst.urls')),
-    path('admin/', admin.site.urls),
-    path('fetch_tweets/', fetch_tweets),
-    path('fetch_sexist_words/', fetch_sexist_words)
+path('admin/', admin.site.urls),
+  # path('api/', include('mynewapp.urls')),
+  re_path('.*', TemplateView.as_view(template_name='index.html')),
 ]
