@@ -52,12 +52,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, 'build/static'),
+]
+
 ROOT_URLCONF = 'siteadmin.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ os.path.join(BASE_DIR, 'build') ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,8 +84,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pst',
-        'USER': 'rinaschiller',
-        'PASSWORD': 'fucksexism',
+        'USER': 'nataliedoppstadt',
+        'PASSWORD': 'upperwest',
         'HOST': 'localhost',
         'PORT': '',
     }
