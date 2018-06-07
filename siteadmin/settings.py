@@ -83,9 +83,9 @@ WSGI_APPLICATION = 'siteadmin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pst',
-        'USER': 'rinaschiller',
-        'PASSWORD': 'fucksexism',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -133,3 +133,6 @@ STATIC_URL = '/static/'
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)

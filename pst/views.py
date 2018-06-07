@@ -8,12 +8,13 @@ from rest_framework.response import Response
 from .serializers import TweetSerializer, SexistWordSerializer
 
 # Create your views here.
-def index(request):
+def getTweets(request):
 	tweets = getTweets()
 	template = loader.get_template('pst/index.html')
 	context = {
 		'tweets': tweets,
 	}	
+	print("here")
 	try:
 		for tweet in tweets:
 			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=False, date=tweet['created_at'], location="new york")
