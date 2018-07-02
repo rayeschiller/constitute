@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -80,17 +81,18 @@ WSGI_APPLICATION = 'siteadmin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'd2pbnd12evl5hv',
+#         'USER': 'bwvmyilvptrtnr',
+#         'PASSWORD': 'b52165df7e76420aa0f1f37b3f083970d6a898e4f6990e4bf7acf2e0edc250dc',
+#         'HOST': 'ec2-54-163-240-54.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -133,6 +135,3 @@ STATIC_URL = '/static/'
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
-
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)

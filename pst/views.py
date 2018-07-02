@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from .serializers import TweetSerializer, SexistWordSerializer
 
 # Create your views here.
-def getTweets(request):
+def printTweets(request):
 	tweets = getTweets()
 	template = loader.get_template('pst/index.html')
 	context = {

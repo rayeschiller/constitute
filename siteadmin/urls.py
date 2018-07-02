@@ -16,14 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
-from pst.views import fetch_tweets, fetch_sexist_words
+from pst.views import fetch_tweets, fetch_sexist_words, printTweets
 
 urlpatterns = [
-path('admin/', admin.site.urls),
+# path('admin/', admin.site.urls),
   # path('api/', include('mynewapp.urls')),
-  re_path('.*', TemplateView.as_view(template_name='index.html')),
-  path('getTweets/', include('pst.urls')),
-  path('admin/', admin.site.urls),
+  re_path('home/', TemplateView.as_view(template_name='index.html')),
+  path('printTweets/', printTweets),
   path('fetch_tweets/', fetch_tweets),
   path('fetch_sexist_words/', fetch_sexist_words)
 ]
