@@ -1,23 +1,29 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import axios from 'axios'
 
 class App extends Component {
-  render() {
+  constructor () {
+    super() 
+    this.state = {
+      username: ''
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick () {
+    axios.get('https://localhost:8000/index')
+      .then(response => console.log(response))
+    
+  }
+
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">PSSSSSShhhhT</h1>
-        </header>
-        <div class="container">
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
-       </div>
+      <div className='button__container'>
+        <button className='button' onClick={this.handleClick}>
+  Click Me
+</button>
       </div>
-    );
+    )
   }
 }
-
-export default App;
+export default App
