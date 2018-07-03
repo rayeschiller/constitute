@@ -91,6 +91,8 @@ WSGI_APPLICATION = 'siteadmin.wsgi.application'
 #         'PORT': '5432',
 #     }
 # }
+
+#need to deploy server with heroku local for this to work otherwise use above credentials
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
