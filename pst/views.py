@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from .serializers import TweetSerializer, SexistWordSerializer
 
 # Create your views here.
-def index(request):
+def printTweets(request):
 	tweets = getTweets()
 	template = loader.get_template('pst/index.html')
 	context = {
@@ -16,7 +16,7 @@ def index(request):
 	}	
 	try:
 		for tweet in tweets:
-			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=False, date=tweet['created_at'], location="new york")
+			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=tweet['retweeted'], date=tweet['created_at'], location=tweet['coordinates'])
 			tweet.save()
 	except:
 		pass

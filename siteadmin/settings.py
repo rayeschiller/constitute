@@ -77,19 +77,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'siteadmin.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pst',
-        'USER': 'nataliedoppstadt',
-        'PASSWORD': 'upperwest',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
+#need to deploy server with heroku local for this to work otherwise use above credentials
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # webpack loader config
 WEBPACK_LOADER = {
