@@ -9,7 +9,7 @@ urlpatterns = [
   # path('api/', include('mynewapp.urls')),
      path('', views.index, name='index'),
      url(r'^', TemplateView.as_view(template_name="main.html")),
-    re_path('index/', TemplateView.as_view(template_name='index.html')),
+  #  re_path('index/', TemplateView.as_view(template_name='index.html')),
 
 ]
 # path('', views.index, name='index'),

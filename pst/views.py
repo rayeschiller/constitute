@@ -16,8 +16,7 @@ def printTweets(request):
 	}	
 	try:
 		for tweet in tweets:
-			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=tweet['retweeted'], date=tweet['created_at'], location=tweet['coordinates'])
-			tweet.save()
+-			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=False, date=tweet['created_at'], location="new york")	+			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=tweet['retweeted'], date=tweet['created_at'], location=tweet['coordinates'])
 	except:
 		pass
 	return HttpResponse(template.render(context,request))

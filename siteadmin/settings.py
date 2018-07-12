@@ -76,6 +76,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'siteadmin.wsgi.application'
 
+# Database
+# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+# DATABASES = {
+#    'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'd2pbnd12evl5hv',
+#         'USER': 'bwvmyilvptrtnr',
+#         'PASSWORD': 'b52165df7e76420aa0f1f37b3f083970d6a898e4f6990e4bf7acf2e0edc250dc',
+#         'HOST': 'ec2-54-163-240-54.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }       
 
 #need to deploy server with heroku local for this to work otherwise use above credentials
 DATABASES = {}
