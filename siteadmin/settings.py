@@ -26,7 +26,7 @@ SECRET_KEY = '$qejs(-&epj2g#763!ff1g=)1l4*@@16bc^cw&vy&rzy1!06o_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'pst-360.herokuapp.com']
 
 
 # Application definition
@@ -80,21 +80,22 @@ WSGI_APPLICATION = 'siteadmin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+# local
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pst',
+        'USER': 'username',
+        'PASSWORD': 'pw',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'd2pbnd12evl5hv',
-#         'USER': 'bwvmyilvptrtnr',
-#         'PASSWORD': 'b52165df7e76420aa0f1f37b3f083970d6a898e4f6990e4bf7acf2e0edc250dc',
-#         'HOST': 'ec2-54-163-240-54.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
-
-#need to deploy server with heroku local for this to work otherwise use above credentials
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+#need to deploy local server with heroku cli for this to work otherwise use local/hard-coded credentials
+# DATABASES ={}
+# db_from_env = dj_database_url.config(conn_max_age=500, ssl_require=True)
+# DATABASES['default'] = db_from_env
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

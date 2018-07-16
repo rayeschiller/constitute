@@ -17,12 +17,6 @@ def getTweets():
             access_token_secret = 'qx9uoD5yzsUWeBgzVqIzChO7rruAvNjhomKmqua9nsfpl'
             )
 
-		# for tweet in ts.search_tweets_iterable(tso):
-			# tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=False, date=tweet['created_at'], location="new york")
-			# tweet = Tweet(text=tweet.text, username=tweet.user.screen_name, isRetweet=False, date=tweet.created_at, location="none")
-			# tweet.save()
-			# print(tweet['text'])
-		print(ts.search_tweets_iterable(tso))
 		return ts.search_tweets_iterable(tso)
 
 	except TwitterSearchException as e:

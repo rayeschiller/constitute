@@ -3,23 +3,18 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Tweet, SexistWord
 from .twitterSearch import getTweets
+from .tweetProcessing import processTweets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import TweetSerializer, SexistWordSerializer
 
 # Create your views here.
 def printTweets(request):
-	tweets = getTweets()
+	tweets = processTweets()
 	template = loader.get_template('pst/index.html')
 	context = {
 		'tweets': tweets,
 	}	
-	try:
-		for tweet in tweets:
-			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=tweet['retweeted'], date=tweet['created_at'], location=tweet['coordinates'])
-			tweet.save()
-	except:
-		pass
 	return HttpResponse(template.render(context,request))
 
 @api_view(['GET'])
