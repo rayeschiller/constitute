@@ -10,12 +10,14 @@ from .serializers import TweetSerializer, SexistWordSerializer
 
 # Create your views here.
 def printTweets(request):
+
 	tweets = processTweets()
-	template = loader.get_template('pst/index.html')
-	context = {
-		'tweets': tweets,
-	}	
-	return HttpResponse(template.render(context,request))
+
+	try:
+		for tweet in tweets:
+-			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=False, date=tweet['created_at'], location="new york")	+			tweet = Tweet(text = tweet['text'], username = tweet['user']['screen_name'], isRetweet=tweet['retweeted'], date=tweet['created_at'], location=tweet['coordinates'])
+	except:
+		pass
 
 @api_view(['GET'])
 def fetch_tweets(request):
