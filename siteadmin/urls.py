@@ -28,6 +28,6 @@ path('admin/', admin.site.urls),
   path('fetch_tweets/', fetch_tweets),
   path('fetch_sexist_words/', fetch_sexist_words)
 #   re_path('.*', TemplateView.as_view(template_name='index.html')),
-  url(r'^', TemplateView.as_view(template_name='index.html')),
+#   url(r'^', TemplateView.as_view(template_name='index.html')),
 
 ]

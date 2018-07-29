@@ -85,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'pst',
-        'USER': 'username',
-        'PASSWORD': 'pw',
+        'USER': 'rinaschiller',
+        'PASSWORD': 'fucksexism',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -97,7 +97,6 @@ DATABASES = {
 # db_from_env = dj_database_url.config(conn_max_age=500, ssl_require=True)
 # DATABASES['default'] = db_from_env
 
-=======
 # DATABASES = {
 #    'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -108,9 +107,6 @@ DATABASES = {
 #         'PORT': '5432',
 #     }       
 
-#need to deploy server with heroku local for this to work otherwise use above credentials
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # webpack loader config
 WEBPACK_LOADER = {

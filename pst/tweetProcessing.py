@@ -13,8 +13,6 @@ def processTweets():
             print(e)
             print('tweet not saved')
             return tweets
-if __name__ == "__main__":
-    processTweets()
 
 def getIsRetweet(tweet):
     return tweet['retweeted_status'] != None
@@ -75,3 +73,6 @@ def getText(tweet):
 def getUserFullName(tweet):
     return tweet['user']['name']
 
+
+if __name__ == "__main__":
+    processTweets()
