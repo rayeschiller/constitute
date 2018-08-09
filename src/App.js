@@ -2,32 +2,39 @@ import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
 
-const Tweet1 = (props) => {
-  return (
+// const Tweet1 = (props) => {
+//   return (
 
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">{props.username}</h5>
-        <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-        <p className="card-text">{props.text}</p>
-        <a href="#" className="card-link">Card link</a>
-        <a href="#" className="card-link">Another link</a>
-      </div>
-    </div>
-  );
-};
+//     <div className="card">
+//       <div className="card-body">
+//         <h5 className="card-title">{props.username}</h5>
+//         <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+//         <p className="card-text">{props.text}</p>
+//         <a href="#" className="card-link">Card link</a>
+//         <a href="#" className="card-link">Another link</a>
+//       </div>
+//     </div>
+    
+//   );
+// };
+
 const TweetList = (props) => {
   return (
     <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweetId} {...tweet}/>)}
     </div>
+
   );
+  
 }
 
 class App extends Component {
   state = {
     tweets: [
     { tweetId: "511181794914627584"},
-    { tweetId: "511181744914727584"},
+    { tweetId: "1026861180357201920"},
+    {tweetId: "1026874418935619594"},
+    {tweetId: "1026264526059008000"},
+    {tweetId:"1026278098994647041"}
 ]};
   constructor() {
     super()
