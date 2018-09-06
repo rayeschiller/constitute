@@ -25,14 +25,15 @@ def getFollowers(tweet):
 
 def getLocation(tweet):
     location = ''
-    if 'place' in tweet:
+    if tweet['place'] is not None:
         location = tweet['place']['full_name']
         print(tweet['place']['full_name'])
-    elif 'quoted_status' in tweet:
-        try:
-            location = tweet['quoted_status']['place']['full_name']
-        except:     
-            location = tweet['retweeted_status']['place']['full_name']
+    # elif tweet['quoted_status']['place']['full_name'] is not None:
+    #     location = tweet['quoted_status']['place']['full_name']
+    # elif tweet['retweeted_status']['place']['full_name'] is not None:
+    #     location = tweet['retweeted_status']['place']['full_name']
+    # else:
+    #     location = ''
     return location
 
             
