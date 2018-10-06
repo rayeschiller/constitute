@@ -11,3 +11,5 @@ staticfiles/
 .Pipfile
 Pipfile
 Pipfile.lock
+node_modules/
+pst/migrations/

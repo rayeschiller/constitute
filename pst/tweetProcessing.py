@@ -5,7 +5,10 @@ def processTweets():
     tweets = getTweets()
     try:
         for tweet in tweets:   
-            tweet = Tweet(text = getText(tweet), username = tweet['user']['screen_name'], isRetweet=getIsRetweet(tweet), date=tweet['created_at'], location=getLocation(tweet), sentiment=getSentiment(), userIcon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), user_full_name=getUserFullName(tweet))
+            tweet = Tweet(text = getText(tweet), username = getUsername, isRetweet=getIsRetweet(tweet), 
+            date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(), 
+            userIcon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), 
+            user_full_name=getUserFullName(tweet))
             tweet.save()
             print('tweet saved')
         return tweets
@@ -13,6 +16,12 @@ def processTweets():
             print(e)
             print('tweet not saved')
             return tweets
+
+def getDate(tweet):
+    return tweet['created_at']
+
+def getUsername(tweet):
+    return tweet['user']['screen_name']
 
 def getIsRetweet(tweet):
     return 'retweeted_status' in tweet 

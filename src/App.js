@@ -30,7 +30,6 @@ const TweetList = (props) => {
 class App extends Component {
   state = {
     tweets: [
-    { tweetId: "511181794914627584"},
     { tweetId: "1026861180357201920"},
     {tweetId: "1026874418935619594"},
     {tweetId: "1026264526059008000"},
