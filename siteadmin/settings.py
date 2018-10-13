@@ -81,16 +81,24 @@ WSGI_APPLICATION = 'siteadmin.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 # local
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'pst',
+#         'USER': 'julianaEmmanuelli',
+#         'PASSWORD': 'fucksexism',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pst',
-        'USER': 'rinaschiller',
-        'PASSWORD': 'fucksexism',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
+
 
 #need to deploy local server with heroku cli for this to work otherwise use local/hard-coded credentials
 # DATABASES ={}

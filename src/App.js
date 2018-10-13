@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
 
+import { connect } from "react-redux";
+
 // const Tweet1 = (props) => {
 //   return (
 
@@ -26,6 +28,9 @@ const TweetList = (props) => {
   );
   
 }
+
+
+//TO DO ATTEMPT TO FETCH SOMETHING
 
 class App extends Component {
   state = {
@@ -75,4 +80,19 @@ class App extends Component {
     )
   }
 }
-export default App
+
+const mapStateToProps = state => {
+  return {
+    fetching: state.fetching,
+    value: state.value,
+    error: state.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onRequestDog: () => dispatch({ type: "API_CALL_REQUEST" })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
