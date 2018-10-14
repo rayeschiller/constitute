@@ -20,14 +20,14 @@ import { connect } from "react-redux";
 //   );
 // };
 
-const TweetList = (props) => {
-  return (
-    <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweetId} {...tweet}/>)}
-    </div>
+// const TweetList = (props) => {
+//   return (
+//     <div>{props /.tweets.map(tweet=> <Tweet key={tweet.tweetId} {...tweet}/>)}
+//     </div>
 
-  );
+//   );
   
-}
+// }
 
 
 //TO DO ATTEMPT TO FETCH SOMETHING
@@ -49,6 +49,8 @@ class App extends Component {
 
   
   render () {
+    const {onRequestTweet} = this.props;
+    
     return (
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -69,7 +71,7 @@ class App extends Component {
             </div>
             <div className="col-sm-8 text-left"> 
               <h1>Tweets</h1>
-              <TweetList tweets={this.state.tweets} />
+              {onRequestTweet}
             </div>
             <div className="col-sm-2 sidenav">
             </div>
@@ -84,14 +86,14 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     fetching: state.fetching,
-    value: state.value,
+    tweet: state.tweet_id,
     error: state.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRequestDog: () => dispatch({ type: "API_CALL_REQUEST" })
+    onRequestTweet: () => dispatch({ type: "API_CALL_REQUEST" })
   };
 };
 

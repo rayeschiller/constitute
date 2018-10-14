@@ -10,7 +10,7 @@ import createSagaMiddleware from "redux-saga";
 import { Provider } from "react-redux";
 
 import { reducer } from "./redux";
-import { watcherSaga } from "./sagas";
+import { watcherSaga } from "./saga";
 
 
 // create the saga middleware
@@ -30,5 +30,5 @@ let store = createStore(
 sagaMiddleware.run(watcherSaga);
 
 
-ReactDOM.render(<Provider store={store}><App tweets="here"/> </Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><div><App tweets="here"/> </div></Provider>, document.getElementById('root'));
 registerServiceWorker();

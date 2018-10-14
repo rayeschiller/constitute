@@ -10,7 +10,7 @@ export function* watcherSaga() {
 function fetchTweets() {
   return axios({
     method: "get",
-    url: "https:localhost:8000" //TODO need to change 
+    url: "http://localhost:8000/fetch_tweets/"
   });
 }
 
@@ -18,10 +18,10 @@ function fetchTweets() {
 function* workerSaga() { //* in function indicates a generator function, see ES^ docs 
   try {
     const response = yield call(fetchTweets);
-    const value = response.data.message;
+    const tweet = response.data.message;
 
     // dispatch a success action to the store with the new tweet 
-    yield put({ type: "API_CALL_SUCCESS", value });
+    yield put({ type: "API_CALL_SUCCESS", tweet });
   
   } catch (error) {
     // dispatch a failure action to the store with the error
