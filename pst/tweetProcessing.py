@@ -5,7 +5,7 @@ def processTweets():
     tweets = getTweets()
     try:
         for tweet in tweets:   
-            tweet = Tweet(text = getText(tweet), username = getUsername, isRetweet=getIsRetweet(tweet), 
+            tweet = Tweet(text = getText(tweet), username = getUsername(tweet), isRetweet=getIsRetweet(tweet), 
             date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(), 
             userIcon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), 
             user_full_name=getUserFullName(tweet))

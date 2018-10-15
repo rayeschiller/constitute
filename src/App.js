@@ -44,7 +44,6 @@ class App extends Component {
           isLoaded: true,
           items: result
         });
-        console.log("TESTTESTETESTST");
         console.log(result);
       }
     )
