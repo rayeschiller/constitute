@@ -3,14 +3,13 @@ import './App.css'
 import {Tweet} from 'react-twitter-widgets';
 import {URL, FETCH_TWEETS} from './config/Api';
 
-// const TweetList = (props) => {
-//   return (
-//     <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweetId} {...tweet}/>)}
-//     </div>
+const TweetList = (props) => {
+  return (
+    <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweet_id} {...tweet}/>)}
+    </div>
 
-//   );
-  
-// }
+  ); 
+}
 
 class App extends Component {
   // state = {
@@ -26,7 +25,8 @@ class App extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
+      tweets: [],
     };
 
     console.log("*****");
@@ -42,13 +42,16 @@ class App extends Component {
       (result) => {
         this.setState({
           isLoaded: true,
-          items: result
+          items: result,
+          tweets: result.map(function(tweet){
+            return {"tweetId": tweet.tweet_id};
+          })
         });
         console.log(result);
       }
-    )
+    )  
   }
-  
+
   render () {
     const { error, isLoaded, items} = this.state;
     if (error){
@@ -75,15 +78,15 @@ class App extends Component {
             <div className="col-sm-2 sidenav">
             </div>
             <div className="col-sm-8 text-left"> 
-              {/* <h1>Tweets</h1> */}
-              {/* <TweetList tweets={this.state.tweets} /> */}
-              <ul>
+              <h3>Tweets</h3>
+              <TweetList tweets={this.state.tweets} />
+              {/* <ul>
                 {items.map(item => (
                   <li key={item.text}>
-                    {item.text} {item.username}
+                    {item.tweet_id} 
                   </li>
                 ))}
-              </ul>
+              </ul> */}
             </div>
             <div className="col-sm-2 sidenav">
             </div>
