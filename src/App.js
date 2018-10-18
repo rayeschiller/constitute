@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
-import {URL, FETCH_TWEETS} from './config/Api';
 
 const TweetList = (props) => {
   return (
@@ -12,13 +11,6 @@ const TweetList = (props) => {
 }
 
 class App extends Component {
-  // state = {
-  //   tweets: [
-  //   { tweetId: "1026861180357201920"},
-  //   {tweetId: "1026874418935619594"},
-  //   {tweetId: "1026264526059008000"},
-  //   {tweetId:"1026278098994647041"}
-  // ]};
   
   constructor(props) {
     super(props)
