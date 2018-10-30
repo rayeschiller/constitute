@@ -1,6 +1,8 @@
 from .twitterSearch import getTweets
 from .models import Tweet
-import random 
+import random
+from .tweetSentiment import *
+
 def processTweets():
     tweets = getTweets()
     try:
@@ -49,9 +51,12 @@ def getLocation(tweet):
 def getUserIcon(tweet):
     return tweet['user']['profile_image_url_https'] 
 
-# will be updated to get sentiment from API
-def getSentiment():
-    return random.randint(0, 1)
+# TEST THIS, RETURNS POLARITY NUMBER FROM 0 to 100 INSTEAD OF DECIMAL
+def getSentiment(tweet):
+    clean_tweet = tweet_cleaner(tweet_cleaner)
+    clean_tweet = TextBlob(clean_tweet)
+    pol = int(round(clean_tweet.polarity*100))
+    return pol
 
 def getText(tweet):
     if 'extended_tweet' in tweet:
