@@ -12,6 +12,7 @@ class Tweet(models.Model):
 	userIcon = models.CharField(max_length=255, null=True)
 	followers_count = models.IntegerField(null=True)
 	tweet_id = models.CharField(max_length=255, null=True)
+	dummy = models.CharField(max_length=1, null=True)
 
 	def _str_(self):
 		return self.text
