@@ -48,9 +48,11 @@ class App extends Component {
     const { error, isLoaded, items} = this.state;
     if (error){
       return <div> Error: {error.message}</div>
-    } else if (!isLoaded){
+    } 
+   else if (!isLoaded){
       return <div>Loading...</div>
-    } else{
+    } 
+    else{
     return (
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -72,13 +74,13 @@ class App extends Component {
             <div className="col-sm-8 text-left"> 
               <h3>Tweets</h3>
               <TweetList tweets={this.state.tweets} />
-              {/* <ul>
+              <ul>
                 {items.map(item => (
                   <li key={item.text}>
                     {item.tweet_id} 
                   </li>
                 ))}
-              </ul> */}
+              </ul>
             </div>
             <div className="col-sm-2 sidenav">
             </div>
