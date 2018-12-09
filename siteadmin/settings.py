@@ -156,7 +156,9 @@ USE_L10N = True
 USE_TZ = True
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000/'
+    'localhost:3000/',
+    'pst-360.herokuapp.com'
+
 )
 
 # Static files (CSS, JavaScript, Images)
