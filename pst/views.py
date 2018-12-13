@@ -19,8 +19,8 @@ def printTweets(request):
 
 @api_view(['GET'])
 def fetch_tweets(request):
-	#fetch all tweet objects
-	tweets = Tweet.objects.all()
+	#fetch all tweet objects in desc order
+	tweets = Tweet.objects.order_by("-date")
 	#serialize the tweets
 	serializer = TweetSerializer(tweets, many=True)
 	return Response(serializer.data)
