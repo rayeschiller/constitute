@@ -157,7 +157,9 @@ USE_TZ = True
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000/',
-    'pst-360.herokuapp.com'
+    'localhost:8000/'
+    'pst-360.herokuapp.com',
+    
 
 )
 
