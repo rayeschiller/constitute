@@ -31,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'pst-360.herokuapp.com']
 
+CORS_ORIGIN_ALLOW_ALL=True
 
 # Application definition
 
