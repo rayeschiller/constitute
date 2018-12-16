@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 
-from pst.views import fetch_tweets, fetch_sexist_words, printTweets
+from pst.views import fetch_tweets, fetch_sexist_words, printTweets, twitterStream
 
 
 urlpatterns = [
@@ -26,7 +26,8 @@ path('admin/', admin.site.urls),
   re_path('home/', TemplateView.as_view(template_name='index.html')),
   path('printTweets/', printTweets),
   path('fetch_tweets/', fetch_tweets),
-  path('fetch_sexist_words/', fetch_sexist_words)
+  path('fetch_sexist_words/', fetch_sexist_words),
+  path('twitterStream/', twitterStream)
 #   re_path('.*', TemplateView.as_view(template_name='index.html')),
 #   url(r'^', TemplateView.as_view(template_name='index.html')),
 

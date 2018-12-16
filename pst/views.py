@@ -7,6 +7,7 @@ from .tweetProcessing import processTweet
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import TweetSerializer, SexistWordSerializer
+from .twitterStreaming import streamTweets
 
 # Create your views here.
 def printTweets(request):
@@ -32,3 +33,7 @@ def fetch_sexist_words(request):
 	words = SexistWord.objects.all()
 	serializer = SexistWordSerializer(words, many=True)
 	return Response(serializer.data)
+
+def twitterStream(request):
+	streamTweets()
+

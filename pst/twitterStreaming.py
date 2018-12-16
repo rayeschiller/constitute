@@ -1,5 +1,5 @@
 import tweepy 
-from streamListener import StreamListener 
+from .streamListener import StreamListener 
 
 def streamTweets():
     consumer_key = 'JPIQgfrt5gTI90PgC2DNoLf44'
