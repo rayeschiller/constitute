@@ -1,21 +1,19 @@
 from .twitterSearch import getTweets
 from .models import Tweet
 import random 
-def processTweets():
-    tweets = getTweets()
-    try:
-        for tweet in tweets:   
-            tweet = Tweet(text = getText(tweet), username = getUsername(tweet), isRetweet=getIsRetweet(tweet), 
-            date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(), 
-            userIcon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), 
-            user_full_name=getUserFullName(tweet))
-            tweet.save()
-            print('tweet saved')
-        return tweets
+def processTweet(tweet):
+    try: 
+        tweet = Tweet(text = getText(tweet), username = getUsername(tweet), isRetweet=getIsRetweet(tweet), 
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(), 
+        userIcon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), 
+        user_full_name=getUserFullName(tweet))
+        tweet.save()
+        print('tweet saved')
+        return tweet
     except Exception as e:
-            print(e)
-            print('tweet not saved')
-            return tweets
+        print(e)
+        print('tweet not saved')
+        return tweet
 
 def getDate(tweet):
     return tweet['created_at']
@@ -74,4 +72,4 @@ def getUserFullName(tweet):
         return "fail"
 
 if __name__ == "__main__":
-    processTweets()
+    processTweet()

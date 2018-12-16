@@ -3,14 +3,16 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Tweet, SexistWord
 from .twitterSearch import getTweets
-from .tweetProcessing import processTweets
+from .tweetProcessing import processTweet
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import TweetSerializer, SexistWordSerializer
 
 # Create your views here.
 def printTweets(request):
-	tweets = processTweets()
+	tweets = getTweets()
+	for tweet in tweets:
+		processTweet(tweet)
 	template = loader.get_template('pst/index.html')
 	context = {
 		'tweets': tweets,
