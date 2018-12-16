@@ -3,7 +3,7 @@ from .tweetProcessing import processTweet
 
 class StreamListener(tweepy.StreamListener): 
     def on_status(self, status):
-        processTweet(status)
+        processTweet(status._json)
         print(status.text)
         print(status.created_at)
 
