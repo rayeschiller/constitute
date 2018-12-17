@@ -1,6 +1,7 @@
 from .twitterSearch import getTweets
 from .models import Tweet
 from textblob import TextBlob 
+import re 
 
 def processTweet(tweet):
     try: 
@@ -48,7 +49,16 @@ def getLocation(tweet):
 def getUserIcon(tweet):
     return tweet['user']['profile_image_url_https'] 
 
+# def clean_tweet(tweet):
+#     '''
+#     Utility function to clean the text in a tweet by removing 
+#     links and special characters using regex.
+#     '''
+#     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+
+
 def getSentiment(tweet):
+   # analysis = TextBlob(clean_tweet(tweet))
     analysis = TextBlob(tweet['text'])
     return analysis.sentiment.polarity
 
