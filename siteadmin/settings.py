@@ -36,6 +36,7 @@ CORS_ORIGIN_ALLOW_ALL=True
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'pst.apps.PstConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'channels'
 ]
 
 
@@ -170,7 +170,7 @@ CORS_ORIGIN_WHITELIST = (
 STATIC_URL = '/static/'
 
 #Channels
-ASGI_APPLICATION = "siteadmin.routing.application"
+ASGI_APPLICATION = "pst.routing.application"
 
 # Configure Django App for Heroku.
 import django_heroku
