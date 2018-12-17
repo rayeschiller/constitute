@@ -1,10 +1,12 @@
 from .twitterSearch import getTweets
 from .models import Tweet
-import random 
+from textblob import TextBlob 
+import re 
+
 def processTweet(tweet):
     try: 
         tweet = Tweet(text = getText(tweet), username = getUsername(tweet), isRetweet=getIsRetweet(tweet), 
-        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(), 
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), 
         userIcon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), 
         user_full_name=getUserFullName(tweet))
         tweet.save()
@@ -47,9 +49,19 @@ def getLocation(tweet):
 def getUserIcon(tweet):
     return tweet['user']['profile_image_url_https'] 
 
-# will be updated to get sentiment from API
-def getSentiment():
-    return random.randint(0, 1)
+# def clean_tweet(tweet):
+#     '''
+#     Utility function to clean the text in a tweet by removing 
+#     links and special characters using regex.
+#     '''
+#     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+
+
+def getSentiment(tweet):
+   # analysis = TextBlob(clean_tweet(tweet))
+    analysis = TextBlob(tweet['text'])
+    return analysis.sentiment.polarity
+
 
 def getText(tweet):
     if 'extended_tweet' in tweet:

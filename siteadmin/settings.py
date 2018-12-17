@@ -170,7 +170,7 @@ CORS_ORIGIN_WHITELIST = (
 STATIC_URL = '/static/'
 
 #Channels
-ASGI_APPLICATION = "pst.routing.application"
+ASGI_APPLICATION = "siteadmin.routing.application"
 
 # Configure Django App for Heroku.
 import django_heroku
