@@ -1,6 +1,6 @@
 # mysite/routing.py
 from channels.routing import ProtocolTypeRouter
-from . import consumers
+
 
 application = ProtocolTypeRouter({
     # (http->django views is added by default)
