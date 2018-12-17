@@ -50,7 +50,6 @@ def getUserIcon(tweet):
 
 def getSentiment(tweet):
     analysis = TextBlob(tweet['text'])
-
     return analysis.sentiment.polarity
 
 
