@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'channels'
 ]
 
 
@@ -160,7 +161,6 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:3000/',
     'localhost:8000/'
     'pst-360.herokuapp.com',
-    
 
 )
 
@@ -169,6 +169,10 @@ CORS_ORIGIN_WHITELIST = (
 
 STATIC_URL = '/static/'
 
+#Channels
+ASGI_APPLICATION = "siteadmin.routing.application"
+
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())
+
