@@ -1,10 +1,11 @@
 from .twitterSearch import getTweets
 from .models import Tweet
-import random 
+from textblob import TextBlob 
+
 def processTweet(tweet):
     try: 
         tweet = Tweet(text = getText(tweet), username = getUsername(tweet), isRetweet=getIsRetweet(tweet), 
-        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(), 
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), 
         userIcon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), 
         user_full_name=getUserFullName(tweet))
         tweet.save()
@@ -47,9 +48,11 @@ def getLocation(tweet):
 def getUserIcon(tweet):
     return tweet['user']['profile_image_url_https'] 
 
-# will be updated to get sentiment from API
-def getSentiment():
-    return random.randint(0, 1)
+def getSentiment(tweet):
+    analysis = TextBlob(tweet['text'])
+
+    return analysis.sentiment.polarity
+
 
 def getText(tweet):
     if 'extended_tweet' in tweet:

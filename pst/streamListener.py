@@ -3,8 +3,8 @@ from .tweetProcessing import processTweet
 
 class StreamListener(tweepy.StreamListener): 
     def on_status(self, status):
-        if status.retweeted_status:
-            return
+        if status.retweeted:
+           return
         processTweet(status._json)
         print(status.text)
         print(status.created_at)
