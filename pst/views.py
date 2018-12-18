@@ -10,7 +10,7 @@ from .serializers import TweetSerializer, SexistWordSerializer
 from .twitterStreaming import streamTweets
 
 # Create your views here.
-def printTweets(request):
+def print_tweets(request):
 	tweets = getTweets()
 	for tweet in tweets:
 		processTweet(tweet)
@@ -34,6 +34,7 @@ def fetch_sexist_words(request):
 	serializer = SexistWordSerializer(words, many=True)
 	return Response(serializer.data)
 
-def twitterStream(request):
-	streamTweets()
+def stream_tweets(request):
+	# streamTweets()
+	return render(request, 'pst/streaming.html', {})
 
