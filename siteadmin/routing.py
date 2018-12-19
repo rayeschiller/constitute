@@ -10,7 +10,7 @@ application = ProtocolTypeRouter({
     # (http->django views is added by default)
      "websocket": AuthMiddlewareStack(
         URLRouter([
-             path('stream_tweets/', TweetConsumer),
+             url(r'^stream', TweetConsumer),
         ])
     ),
 })

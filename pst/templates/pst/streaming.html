@@ -8,4 +8,27 @@
   <body>
    <h2>Streaming Twitter Test</h2>
   </body>
+  <script>
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/stream/');
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        console.log(message);
+        // var newMessage = message + "-newer-"
+        // chatSocket.send(JSON.stringify({
+        //     'message': newMessage
+        // }));
+
+     };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+
+
+</script>
 </html>

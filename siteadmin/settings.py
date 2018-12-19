@@ -172,6 +172,15 @@ STATIC_URL = '/static/'
 #Channels
 ASGI_APPLICATION = "siteadmin.routing.application"
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("redis-server-name", 6379)],
+#         },
+#     },
+# }
+
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())

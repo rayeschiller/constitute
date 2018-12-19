@@ -15,7 +15,10 @@ def streamTweets():
     stream_listener = StreamListener()
     myStream = tweepy.Stream(auth = api.auth, listener=stream_listener)
 
+    print("----test----")
     myStream.filter(track = ['hillary clinton', 'bitch'])
 
+
+    return stream_listener.on_status()
 if __name__ == "__main__":
     streamTweets()

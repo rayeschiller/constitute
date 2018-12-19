@@ -5,12 +5,13 @@ class StreamListener(tweepy.StreamListener):
     def on_status(self, status):
         if status.retweeted:
            return
-        processTweet(status._json)
-        print(status.text)
-        print(status.created_at)
-
-
+        return status
+        # processTweet(status._json)
+        # print(status.text)
+        # print(status.created_at)
+        
     def on_error(self, status_code):
         if status_code == 420:
             return False 
-        
+    
+   

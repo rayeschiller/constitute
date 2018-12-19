@@ -8,6 +8,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import TweetSerializer, SexistWordSerializer
 from .twitterStreaming import streamTweets
+from django.utils.safestring import mark_safe
+import json
 
 # Create your views here.
 def print_tweets(request):
@@ -34,7 +36,11 @@ def fetch_sexist_words(request):
 	serializer = SexistWordSerializer(words, many=True)
 	return Response(serializer.data)
 
-def stream_tweets(request):
-	# streamTweets()
-	return render(request, 'pst/streaming.html', {})
+# def stream_tweets(request):
+# 	# streamTweets()
+# 	return render(request, 'pst/streaming.html', {})
 
+def streaming(request):
+    return render(request, 'pst/streaming.html', {
+
+	})
