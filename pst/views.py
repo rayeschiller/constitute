@@ -6,6 +6,7 @@ from .twitterSearch import getTweets
 from .tweetProcessing import processTweet
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import viewsets
 from .serializers import TweetSerializer, SexistWordSerializer
 from .twitterStreaming import streamTweets
 from django.utils.safestring import mark_safe
@@ -22,24 +23,15 @@ def print_tweets(request):
 	}	
 	return HttpResponse(template.render(context,request))
 
-@api_view(['GET'])
-def fetch_tweets(request):
-	#fetch all tweet objects in desc order
-	tweets = Tweet.objects.order_by("-date")
-	#serialize the tweets
-	serializer = TweetSerializer(tweets, many=True)
-	return Response(serializer.data)
-
-@api_view(['GET'])
-def fetch_sexist_words(request):
-	words = SexistWord.objects.all()
-	serializer = SexistWordSerializer(words, many=True)
-	return Response(serializer.data)
-
-# def stream_tweets(request):
-# 	# streamTweets()
-# 	return render(request, 'pst/streaming.html', {})
-
+class TweetViewSet(viewsets.ModelViewSet):
+	serializer_class = TweetSerializer
+	# queryset = Tweet.objects.all()
+	queryset = Tweet.objects.order_by("-date")
+	
+class SexistWordViewSet(viewsets.ModelViewSet):
+	serialzer_class = SexistWordSerializer
+	queryset = SexistWord.objects.all()
+	
 def streaming(request):
     return render(request, 'pst/streaming.html', {
 

@@ -6,7 +6,7 @@ def getTweets():
 	try:
 		tso = TwitterSearchOrder()
 
-		tso.set_keywords(["bitch", "hillaryclinton"])
+		tso.set_keywords(["senwarren", "bitch"])
 		tso.set_language("en")
 		tso.set_include_entities(False)
 

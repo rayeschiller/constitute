@@ -10,14 +10,11 @@ class TweetConsumer(WebsocketConsumer):
         # Called on connection.
         # To accept the connection call:
         self.accept()
-        # Or accept the connection and specify a chosen subprotocol.
-        # A list of subprotocols specified by the connecting client
-        # will be available in self.scope['subprotocols']
-        # self.accept("subprotocol")
-        streamTweets()
-        # self.send(text_data=json.dumps({
-        #     'message': tweetText
-        # }))
+        # tweet = streamTweets()
+        print(self)
+        self.send(text_data=json.dumps({
+            'message': "tweet"
+        }))
         print("Sent message")
 
     def receive(self, text_data=None, bytes_data=None):
