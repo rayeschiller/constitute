@@ -36,7 +36,7 @@ CORS_ORIGIN_ALLOW_ALL=True
 # Application definition
 
 INSTALLED_APPS = [
-    # 'channels',
+    'channels',
     'pst.apps.PstConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -174,7 +174,7 @@ CORS_ORIGIN_WHITELIST = (
 STATIC_URL = '/static/'
 
 #Channels
-# ASGI_APPLICATION = "siteadmin.routing.application"
+ASGI_APPLICATION = "siteadmin.routing.application"
 
 # CHANNEL_LAYERS = {
 #     "default": {
