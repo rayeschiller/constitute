@@ -15,7 +15,6 @@ def processTweet(tweet):
     except Exception as e:
         print(e)
         print('tweet not saved')
-        return tweet
 
 def getDate(tweet):
     return tweet['created_at']
@@ -58,20 +57,21 @@ def clean_tweet(tweet):
 
 
 def getSentiment(tweet):
-    analysis = TextBlob(clean_tweet(tweet['text']))
+    analysis = TextBlob(clean_tweet(tweet['full_text']))
     return analysis.sentiment.polarity
 
 
 def getText(tweet):
-    if 'extended_tweet' in tweet:
-        tweettext = tweet['extended_tweet']['full_text']
-    elif 'retweeted_status' in tweet:
-        try:
-            tweettext = tweet['retweeted_status']['extended_tweet']['full_text']
-        except:
-            tweettext = tweet['retweeted_status']['text']
+    if 'full_text' in tweet:
+        print(tweet['full_text'])
+        tweettext = tweet['full_text']
+    # elif 'retweeted_status' in tweet:
+    #     try:
+    #         tweettext = tweet['retweeted_status']['extended_tweet']['full_text']
+    #     except:
+    #         tweettext = tweet['retweeted_status']['text']
     else:
-        tweettext = tweet['text']
+        tweettext = "test"
         print('regular tweet')
     return tweettext
 

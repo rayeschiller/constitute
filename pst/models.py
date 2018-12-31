@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Tweet(models.Model):
-	text = models.CharField(max_length=255)
+	text = models.TextField()
 	username = models.CharField(max_length=255)
 	user_full_name = models.CharField(max_length=255, null=True)
 	isRetweet = models.BooleanField()

@@ -9,6 +9,8 @@ def getTweets():
 		tso.set_keywords(["senwarren", "bitch"])
 		tso.set_language("en")
 		tso.set_include_entities(False)
+		querystr = tso.create_search_url()
+		tso.set_search_url(querystr + "&tweet_mode=extended")
 
 		ts = TwitterSearch(
             consumer_key = 'JPIQgfrt5gTI90PgC2DNoLf44',
