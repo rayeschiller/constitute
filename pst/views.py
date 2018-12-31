@@ -29,7 +29,7 @@ class TweetViewSet(viewsets.ModelViewSet):
 	queryset = Tweet.objects.order_by("-date")
 	
 class SexistWordViewSet(viewsets.ModelViewSet):
-	serialzer_class = SexistWordSerializer
+	serializer_class = SexistWordSerializer
 	queryset = SexistWord.objects.all()
 	
 def streaming(request):
