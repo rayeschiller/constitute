@@ -16,19 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
+from rest_framework.routers import DefaultRouter
 
-from pst.views import fetch_tweets, fetch_sexist_words, printTweets, twitterStream
+from pst.views import *
 
+router = DefaultRouter()
+router.register(r'tweets', TweetViewSet)
+router.register(r'sexistwords', SexistWordViewSet)
+urlpatterns = router.urls
 
-urlpatterns = [
-path('admin/', admin.site.urls),
-  # path('api/', include('mynewapp.urls')),
+urlpatterns.extend([
+  path('admin/', admin.site.urls),
   re_path('home/', TemplateView.as_view(template_name='index.html')),
-  path('printTweets/', printTweets),
-  path('fetch_tweets/', fetch_tweets),
-  path('fetch_sexist_words/', fetch_sexist_words),
-  path('twitterStream/', twitterStream)
-#   re_path('.*', TemplateView.as_view(template_name='index.html')),
-#   url(r'^', TemplateView.as_view(template_name='index.html')),
-
-]
+  path('print_tweets/', print_tweets),
+  path('stream_tweets/', streaming)]
+)

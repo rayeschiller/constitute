@@ -36,7 +36,7 @@ CORS_ORIGIN_ALLOW_ALL=True
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
+    # 'channels',
     'pst.apps.PstConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -124,6 +124,10 @@ WEBPACK_LOADER = {
         }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 50
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -170,7 +174,16 @@ CORS_ORIGIN_WHITELIST = (
 STATIC_URL = '/static/'
 
 #Channels
-ASGI_APPLICATION = "pst.routing.application"
+# ASGI_APPLICATION = "siteadmin.routing.application"
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("redis-server-name",6379)],
+#         },
+#     },
+# }
 
 # Configure Django App for Heroku.
 import django_heroku

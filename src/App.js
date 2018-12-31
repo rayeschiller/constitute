@@ -27,15 +27,15 @@ class App extends Component {
   }
 
   componentDidMount(){
-    // fetch(URL + FETCH_TWEETS) 
-    fetch("http://localhost:8000/fetch_tweets/?format=json")
+    // fetch(HOST_NAME + TWEET_ENDPOINT) 
+    fetch("http://localhost:8000/tweets/?format=json")
     .then(res => res.json())
     .then(
       (result) => {
         this.setState({
           isLoaded: true,
           items: result,
-          tweets: result.map(function(tweet){
+          tweets: result.results.map(function(tweet){
             return {"tweetId": tweet.tweet_id};
           })
         });
