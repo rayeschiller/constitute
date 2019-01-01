@@ -5,9 +5,9 @@ import re
 
 def processTweet(tweet):
     try: 
-        tweet = Tweet(text = getText(tweet), username = getUsername(tweet), isRetweet=getIsRetweet(tweet), 
+        tweet = Tweet(text = getText(tweet), username = getUsername(tweet), is_retweet=getIsRetweet(tweet), 
         date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), 
-        userIcon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), 
+        user_icon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), 
         user_full_name=getUserFullName(tweet))
         tweet.save()
         print('tweet saved')

@@ -5,8 +5,8 @@ class StreamListener(tweepy.StreamListener):
     def on_status(self, status):
         if status.retweeted:
            return
-        return status.text
-        # processTweet(status._json)
+        # return status.text
+        processTweet(status._json)
         # print(status.text)
         # print(status.created_at)
         

@@ -5,13 +5,13 @@ class Tweet(models.Model):
 	text = models.TextField()
 	username = models.CharField(max_length=255)
 	user_full_name = models.CharField(max_length=255, null=True)
-	isRetweet = models.BooleanField()
+	is_retweet = models.BooleanField()
 	location = models.CharField(max_length=255)
 	date = models.DateTimeField(auto_now=True)
 	sentiment = models.CharField(max_length=255, null=True)
-	userIcon = models.CharField(max_length=255, null=True)
+	user_icon = models.CharField(max_length=255, null=True)
 	followers_count = models.IntegerField(null=True)
-	tweet_id = models.CharField(max_length=255, null=True)
+	tweet_id = models.CharField(max_length=255, null=True, unique=True)
 
 	def _str_(self):
 		return self.text
@@ -30,7 +30,8 @@ class SexistWord(models.Model):
 	def _str_(self):
 		return self.word
 
-
-
+class TwitterUser(models.Model):
+	username = models.CharField(max_length=255)
+	tweet_count = models.IntegerField(default=0)
 
 	

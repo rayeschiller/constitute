@@ -45,7 +45,7 @@ class App extends Component {
   }
 
   render () {
-    const { error, isLoaded, items} = this.state;
+    const { error, isLoaded} = this.state;
     if (error){
       return <div> Error: {error.message}</div>
     } else if (!isLoaded){
@@ -54,7 +54,7 @@ class App extends Component {
     return (
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <a className="navbar-brand" href="#">Political Sexism on Twitter</a>
+          <a className="navbar-brand" href="/home">Political Sexism on Twitter</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
