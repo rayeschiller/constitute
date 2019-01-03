@@ -1,7 +1,6 @@
 pst/migrations/__pycache__
 .DS_Store
 pst/__pycache__
-pst/migrations/__pycache__
 pst/migrations/__pycache__/
 siteadmin/__pycache__/
 staticfiles/.env
@@ -12,4 +11,3 @@ staticfiles/
 Pipfile
 Pipfile.lock
 node_modules/
-pst/migrations/
