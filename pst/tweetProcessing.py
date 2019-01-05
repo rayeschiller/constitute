@@ -9,12 +9,10 @@ def processTweet(tweet):
     if doesUserExist(tweet):
         tweetCount = Tweet.objects.filter(tweet_id = getTweetId(tweet)).count()
         if tweetCount == 0:
-       
-        
-        twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
-        print(twitterUser.tweet_count)
-        twitterUser.tweet_count += 1
-        twitterUser.save()
+            twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
+            print(twitterUser.tweet_count)
+            twitterUser.tweet_count += 1
+            twitterUser.save()
 
     # user does not exist
     if userCount == 0: 
