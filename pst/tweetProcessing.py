@@ -5,6 +5,18 @@ import re
 
 def processTweet(tweet):
     userCount = TwitterUser.objects.filter(user_id = getUserId(tweet)).count()
+    # user already exists
+    if doesUserExist(tweet):
+        tweetCount = Tweet.objects.filter(tweet_id = getTweetId(tweet)).count()
+        if tweetCount == 0:
+       
+        
+        twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
+        print(twitterUser.tweet_count)
+        twitterUser.tweet_count += 1
+        twitterUser.save()
+
+    # user does not exist
     if userCount == 0: 
         try:
             user = TwitterUser(user_id = tweet['user']['id'], username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
@@ -14,6 +26,12 @@ def processTweet(tweet):
             print(e)
             print('User not saved')
     
+   
+def doesUserExist(tweet):
+    userCount = TwitterUser.objects.filter(user_id=getUserId(tweet)).count()
+    return False if userCount == 0 else True
+   
+def saveTweet(tweet):
     try: 
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
         tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
@@ -23,12 +41,6 @@ def processTweet(tweet):
     except Exception as e:
         print(e)
         print('tweet not saved')
-    #  elif userCount > 0:
-    #     twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
-    #     print(twitterUser.tweet_count)
-    #     twitterUser.tweet_count += 1
-    #     twitterUser.save()
-
 
 def getUserId(tweet):
     return tweet['user']['id']
