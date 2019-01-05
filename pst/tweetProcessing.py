@@ -4,32 +4,41 @@ from textblob import TextBlob
 import re 
 
 def processTweet(tweet):
-    userCount = TwitterUser.objects.filter(user_id = getUserId(tweet)).count()
-    # user already exists
-    if doesUserExist(tweet):
-        tweetCount = Tweet.objects.filter(tweet_id = getTweetId(tweet)).count()
-        if tweetCount == 0:
-            twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
-            print(twitterUser.tweet_count)
-            twitterUser.tweet_count += 1
-            twitterUser.save()
+    userId = getUserId(tweet)
+    tweetId = getTweetId(tweet)
 
-    # user does not exist
-    if userCount == 0: 
-        try:
-            user = TwitterUser(user_id = tweet['user']['id'], username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
-            user.save()
-            print('user saved!!')
-        except Exception as e:
-            print(e)
-            print('User not saved')
-    
+    if userExists(userId) and not tweetExists(tweetId):
+        incrementTweetCountForUser(userId)
+        saveNewTweet(tweet)
+    elif not userExists(tweet):
+        saveNewUser(tweet)
+        saveNewTweet(tweet)
+
+
+def saveNewUser(tweet):
+    try:
+        user = TwitterUser(user_id = tweet['user']['id'], username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
+        user.save()
+        print('User Saved with ID ' + str(user.user_id))
+    except Exception as e:
+        print(e)
+        print('User not saved')
+
+def incrementTweetCountForUser(userId):
+    twitterUser = TwitterUser.objects.get(user_id = userId)
+    twitterUser.tweet_count += 1
+    twitterUser.save()
+    print("Twitter user has been incremented to " + str(twitterUser.tweet_count))
    
-def doesUserExist(tweet):
-    userCount = TwitterUser.objects.filter(user_id=getUserId(tweet)).count()
+def userExists(userId):
+    userCount = TwitterUser.objects.filter(user_id=userId).count()
     return False if userCount == 0 else True
    
-def saveTweet(tweet):
+def tweetExists(tweetId):
+    tweetCount = Tweet.objects.filter(tweet_id = tweetId).count()
+    return False if tweetCount == 0 else True
+
+def saveNewTweet(tweet):
     try: 
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
         tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
@@ -90,7 +99,6 @@ def getSentiment(tweet):
 
 def getText(tweet):
     if 'full_text' in tweet:
-        print(tweet['full_text'])
         tweettext = tweet['full_text']
     # elif 'retweeted_status' in tweet:
     #     try:
@@ -98,8 +106,8 @@ def getText(tweet):
     #     except:
     #         tweettext = tweet['retweeted_status']['text']
     else:
-        tweettext = "test"
-        print('regular tweet')
+        tweettext = ""
+        print('text is null or corrupted')
     return tweettext
 
 
