@@ -1,20 +1,37 @@
 from .twitterSearch import getTweets
-from .models import Tweet
+from .models import Tweet, TwitterUser
 from textblob import TextBlob 
 import re 
 
 def processTweet(tweet):
+    userCount = TwitterUser.objects.filter(user_id = getUserId(tweet)).count()
+    if userCount == 0: 
+        try:
+            user = TwitterUser(user_id = tweet['user']['id'], username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
+            user.save()
+            print('user saved!!')
+        except Exception as e:
+            print(e)
+            print('User not saved')
+    
     try: 
-        tweet = Tweet(text = getText(tweet), username = getUsername(tweet), is_retweet=getIsRetweet(tweet), 
-        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), 
-        user_icon=getUserIcon(tweet), followers_count=getFollowers(tweet), tweet_id=getTweetId(tweet), 
-        user_full_name=getUserFullName(tweet))
+        twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
+        tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), tweet_id=getTweetId(tweet))
         tweet.save()
         print('tweet saved')
-        return tweet
     except Exception as e:
         print(e)
         print('tweet not saved')
+    #  elif userCount > 0:
+    #     twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
+    #     print(twitterUser.tweet_count)
+    #     twitterUser.tweet_count += 1
+    #     twitterUser.save()
+
+
+def getUserId(tweet):
+    return tweet['user']['id']
 
 def getDate(tweet):
     return tweet['created_at']

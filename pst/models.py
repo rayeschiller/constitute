@@ -3,14 +3,16 @@ from django.db import models
 # Create your models here.
 class Tweet(models.Model):
 	text = models.TextField()
-	username = models.CharField(max_length=255)
-	user_full_name = models.CharField(max_length=255, null=True)
+	twitterUser = models.ForeignKey(
+		'TwitterUser',
+		on_delete=models.CASCADE,
+		related_name='twitterUser',
+		default=0
+	)
 	is_retweet = models.BooleanField()
 	location = models.CharField(max_length=255)
 	date = models.DateTimeField(auto_now=True)
 	sentiment = models.CharField(max_length=255, null=True)
-	user_icon = models.CharField(max_length=255, null=True)
-	followers_count = models.IntegerField(null=True)
 	tweet_id = models.CharField(max_length=255, null=True, unique=True)
 
 	def _str_(self):
@@ -31,7 +33,13 @@ class SexistWord(models.Model):
 		return self.word
 
 class TwitterUser(models.Model):
+	user_id = models.CharField(max_length=255, unique=True)
 	username = models.CharField(max_length=255)
 	tweet_count = models.IntegerField(default=0)
+	user_full_name = models.CharField(max_length=255, null=True)
+	user_icon = models.CharField(max_length=255, null=True)
+	followers_count = models.IntegerField(null=True)
 
+	def _str_(self):
+		return self.user_id + self.username
 	
