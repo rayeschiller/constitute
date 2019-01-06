@@ -23,6 +23,7 @@ from pst.views import *
 router = DefaultRouter()
 router.register(r'tweets', TweetViewSet)
 router.register(r'sexistwords', SexistWordViewSet)
+router.register(r'twitterusers', TwitterUserViewSet)
 urlpatterns = router.urls
 
 urlpatterns.extend([
