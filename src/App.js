@@ -28,7 +28,13 @@ class App extends Component {
 
   componentDidMount(){
     // fetch(HOST_NAME + TWEET_ENDPOINT) 
-    fetch("http://localhost:8000/tweets/?format=json")
+    var hostname = "";
+    if (window.location.hostname === "localhost"){
+       hostname = "http://localhost:8000";
+    } else {
+      hostname = "https://pst-360.herokuapp.com"
+    }
+    fetch(hostname + "/tweets/?format=json")
     .then(res => res.json())
     .then(
       (result) => {
@@ -72,13 +78,6 @@ class App extends Component {
             <div className="col-sm-8 text-left"> 
               <h3>Tweets</h3>
               <TweetList tweets={this.state.tweets} />
-              {/* <ul>
-                {items.map(item => (
-                  <li key={item.text}>
-                    {item.tweet_id} 
-                  </li>
-                ))}
-              </ul> */}
             </div>
             <div className="col-sm-2 sidenav">
             </div>

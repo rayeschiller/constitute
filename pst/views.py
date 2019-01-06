@@ -38,5 +38,4 @@ class TwitterUserViewSet(viewsets.ModelViewSet):
 
 def streaming(request):
     return render(request, 'pst/streaming.html', {
-
-	})
+})
