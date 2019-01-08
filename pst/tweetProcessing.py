@@ -29,14 +29,6 @@ def incrementTweetCountForUser(userId):
     twitterUser.tweet_count += 1
     twitterUser.save()
     print("Twitter user has been incremented to " + str(twitterUser.tweet_count))
-   
-def userExists(userId):
-    userCount = TwitterUser.objects.filter(user_id=userId).count()
-    return False if userCount == 0 else True
-   
-def tweetExists(tweetId):
-    tweetCount = Tweet.objects.filter(tweet_id = tweetId).count()
-    return False if tweetCount == 0 else True
 
 def saveNewTweet(tweet):
     try: 
@@ -48,6 +40,14 @@ def saveNewTweet(tweet):
     except Exception as e:
         print(e)
         print('tweet not saved')
+  
+def userExists(userId):
+    userCount = TwitterUser.objects.filter(user_id=userId).count()
+    return False if userCount == 0 else True
+   
+def tweetExists(tweetId):
+    tweetCount = Tweet.objects.filter(tweet_id = tweetId).count()
+    return False if tweetCount == 0 else True
 
 def getUserId(tweet):
     return tweet['user']['id']
@@ -98,16 +98,14 @@ def getSentiment(tweet):
 
 
 def getText(tweet):
-    if 'full_text' in tweet:
+    tweettext = ""
+    if 'retweeted_status' in tweet:
+        tweettext = tweet['retweeted_status']['full_text']
+    elif 'full_text' in tweet:
         tweettext = tweet['full_text']
-    # elif 'retweeted_status' in tweet:
-    #     try:
-    #         tweettext = tweet['retweeted_status']['extended_tweet']['full_text']
-    #     except:
-    #         tweettext = tweet['retweeted_status']['text']
     else:
-        tweettext = ""
-        print('text is null or corrupted')
+        print('text is cannot be found')
+    print("Tweet text saved is " + tweettext)
     return tweettext
 
 

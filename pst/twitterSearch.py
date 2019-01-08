@@ -1,22 +1,28 @@
 from TwitterSearch import *
-from .models import Tweet
+from .config import CONFIG
 
 def getTweets():
-
 	try:
 		tso = TwitterSearchOrder()
 
-		tso.set_keywords(["senwarren", "bitch"])
+		politicians = CONFIG["POLITICIANS"]
+		sexistWords = CONFIG["SEXISTWORDS"]
+		searchTerms = []
+		for word in sexistWords:
+			for politician in politicians:
+				searchTerms.append(word + ' ' + politician)
+		print(searchTerms)
+		tso.set_keywords(politicians, or_operator=True)
 		tso.set_language("en")
 		tso.set_include_entities(False)
 		querystr = tso.create_search_url()
 		tso.set_search_url(querystr + "&tweet_mode=extended")
 
 		ts = TwitterSearch(
-            consumer_key = 'JPIQgfrt5gTI90PgC2DNoLf44',
-            consumer_secret = 'wt1ciclku2cftRrv1WrNY3sidoSbRQ3xSP74fKO1dafT1pVHzn',
-            access_token = '15718225-77FWg39DfjuZIMRv4aqfuiEd3tM9TbmBHIFenF2tQ',
-            access_token_secret = 'qx9uoD5yzsUWeBgzVqIzChO7rruAvNjhomKmqua9nsfpl'
+            consumer_key = CONFIG["CONSUMER_KEY"],
+            consumer_secret = CONFIG["CONSUMER_SECRET"],
+            access_token = CONFIG["ACCESS_TOKEN"],
+            access_token_secret = CONFIG["ACCESS_TOKEN_SECRET"]
             )
 
 		return ts.search_tweets_iterable(tso)
