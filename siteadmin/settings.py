@@ -36,8 +36,8 @@ CORS_ORIGIN_ALLOW_ALL=True
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
     'pst.apps.PstConfig',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -195,6 +195,13 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_RESULT_BACKEND = 'django-cache'
+CELERY_TIMEZONE = 'UTC'
+# CELERY_BEAT_SCHEDULE = {
+#     'fetchTweets': {
+#         'task': 'pst.tasks.fetchTweets',
+#         'schedule': 10.0,
+#     },
+# }
 
 # Configure Django App for Heroku.
 import django_heroku
