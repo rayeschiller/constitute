@@ -6,7 +6,7 @@ from celery import shared_task, task
 def test(arg):
     print(arg)
 
-@task
+@shared_task
 def fetchTweets():
     from .twitterSearch import getTweets
     from .tweetProcessing import processTweet

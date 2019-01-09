@@ -26,10 +26,10 @@ def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(2.0, test.s("hello"), name='add every 10')
    
     # Executes every morning at 7:30 a.m. 
-    sender.add_periodic_task(
-        crontab(hour=20, minute=59),
-        fetchTweets.s(),
-    )
+    # sender.add_periodic_task(
+    #     crontab(hour=20, minute=59),
+    #     fetchTweets.s(),
+    # )
 
 @app.task(bind=True)
 def debug_task(self):
