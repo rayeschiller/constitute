@@ -194,7 +194,7 @@ CELERY_RESULT_BACKEND = 'django-cache'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'EST'
+CELERY_TIMEZONE = 'US/Eastern'
 # CELERY_BEAT_SCHEDULE = {
 #     'fetchTweets': {
 #         'task': 'pst.tasks.fetchTweets',

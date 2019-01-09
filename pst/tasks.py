@@ -13,5 +13,4 @@ def fetchTweets():
     tweets = getTweets()
     for tweet in tweets:
         processTweet(tweet)
-    # print(tweets[0])
-    print("tweet processed")
+    print("tweets processed")
