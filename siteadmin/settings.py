@@ -189,7 +189,7 @@ ASGI_APPLICATION = "siteadmin.routing.application"
 
 # Celery application definition
 # CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_BROKER_URL = os.environ["REDIS_URL"]
+CELERY_BROKER_URL = os.environ.get("REDIS_URL", 'redis://localhost:6379')
 CELERY_RESULT_BACKEND = 'django-cache'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
