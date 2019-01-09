@@ -24,10 +24,12 @@ def setup_periodic_tasks(sender, **kwargs):
 
     # Calls test('hello') every 10 seconds (uncomment to make sure celery is working)
     sender.add_periodic_task(30.0, test.s("celery beat"), name='add every 30')
+    sender.add_periodic_task(
+        crontab(hour=4, minute=19), test.s("--celery crontab timing beat--"), name='add every 30 crontab')
    
     # Executes every morning at 7:30 a.m. 
     sender.add_periodic_task(
-        crontab(hour=23, minute=15),
+        crontab(hour=4, minute=20),
         fetchTweets.s(),
     )
 
