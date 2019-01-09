@@ -2,6 +2,7 @@ from .twitterSearch import getTweets
 from .models import Tweet, TwitterUser
 from textblob import TextBlob 
 import re 
+import logging
 
 def processTweet(tweet):
     userId = getUserId(tweet)
@@ -19,16 +20,18 @@ def saveNewUser(tweet):
     try:
         user = TwitterUser(user_id = tweet['user']['id'], username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
         user.save()
-        print('User Saved with ID ' + str(user.user_id))
+        print('New user Saved with ID ' + str(user.user_id))
     except Exception as e:
-        print(e)
-        print('User not saved')
+        logging.exception('User not saved with error ' + e)
 
 def incrementTweetCountForUser(userId):
-    twitterUser = TwitterUser.objects.get(user_id = userId)
-    twitterUser.tweet_count += 1
-    twitterUser.save()
-    print("Twitter user has been incremented to " + str(twitterUser.tweet_count))
+    try:
+        twitterUser = TwitterUser.objects.get(user_id = userId)
+        twitterUser.tweet_count += 1
+        twitterUser.save()
+        print("Twitter user has been incremented to " + str(twitterUser.tweet_count))
+    except Exception as e:
+        logging.exception('User count not incremented with error ' + e)
 
 def saveNewTweet(tweet):
     try: 
@@ -36,10 +39,9 @@ def saveNewTweet(tweet):
         tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
         date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), tweet_id=getTweetId(tweet))
         tweet.save()
-        print('tweet saved')
+        print('Tweet successfully saved')
     except Exception as e:
-        print(e)
-        print('tweet not saved')
+        logging.exception('tweet not saved with error ' + e )
   
 def userExists(userId):
     userCount = TwitterUser.objects.filter(user_id=userId).count()
@@ -104,8 +106,8 @@ def getText(tweet):
     elif 'full_text' in tweet:
         tweettext = tweet['full_text']
     else:
-        print('text is cannot be found')
-    print("Tweet text saved is " + tweettext)
+        print('Tweet text cannot be found')
+    # print("Tweet text saved is " + tweettext)
     return tweettext
 
 
@@ -113,7 +115,7 @@ def getUserFullName(tweet):
     try:
         return tweet['user']['name']
     except:
-        return "fail"
+        return "Username Error"
 
 if __name__ == "__main__":
    processTweet()

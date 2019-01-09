@@ -1,7 +1,7 @@
 from TwitterSearch import *
 from .config import CONFIG
-
 def getTweets():
+
 	try:
 		tso = TwitterSearchOrder()
 
@@ -11,7 +11,6 @@ def getTweets():
 		for word in sexistWords:
 			for politician in politicians:
 				searchTerms.append(word + ' ' + politician)
-		print(searchTerms)
 		tso.set_keywords(politicians, or_operator=True)
 		tso.set_language("en")
 		tso.set_include_entities(False)
