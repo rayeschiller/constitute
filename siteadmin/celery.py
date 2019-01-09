@@ -23,13 +23,13 @@ def setup_periodic_tasks(sender, **kwargs):
     print('cleery started')
 
     # Calls test('hello') every 10 seconds (uncomment to make sure celery is working)
-    sender.add_periodic_task(2.0, test.s("hello"), name='add every 10')
+    sender.add_periodic_task(30.0, test.s("celery beat"), name='add every 30')
    
     # Executes every morning at 7:30 a.m. 
-    # sender.add_periodic_task(
-    #     crontab(hour=20, minute=59),
-    #     fetchTweets.s(),
-    # )
+    sender.add_periodic_task(
+        crontab(hour=22, minute=50),
+        fetchTweets.s(),
+    )
 
 @app.task(bind=True)
 def debug_task(self):
