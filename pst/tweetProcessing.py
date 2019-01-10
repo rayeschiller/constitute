@@ -38,7 +38,7 @@ def saveNewTweet(tweet):
     try: 
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
         tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
-        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), tweet_id=getTweetId(tweet))
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet))
         tweet.save()
         print('Tweet successfully saved')
     except Exception as e:
@@ -95,10 +95,15 @@ def clean_tweet(tweet):
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
 
-def getSentiment(tweet):
+def getSentimentPolarity(tweet):
     analysis = TextBlob(clean_tweet(tweet['full_text']))
     getSentimentClassification(tweet)
+    getSentimentSubjectivity(analysis)
     return analysis.sentiment.polarity
+
+def getSentimentSubjectivity(analysis): 
+    print(analysis.subjectivity)
+    return analysis.subjectivity
 
 def getSentimentClassification(tweet): 
     analysis = TextBlob(tweet['full_text'], analyzer=NaiveBayesAnalyzer())
