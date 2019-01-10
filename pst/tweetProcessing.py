@@ -1,6 +1,7 @@
 from .twitterSearch import getTweets
 from .models import Tweet, TwitterUser
 from textblob import TextBlob 
+from textblob.sentiments import NaiveBayesAnalyzer
 import re 
 import logging
 
@@ -22,7 +23,7 @@ def saveNewUser(tweet):
         user.save()
         print('New user Saved with ID ' + str(user.user_id))
     except Exception as e:
-        logging.exception('User not saved with error ' + e)
+        print('User not saved with error ' + str(e))
 
 def incrementTweetCountForUser(userId):
     try:
@@ -31,7 +32,7 @@ def incrementTweetCountForUser(userId):
         twitterUser.save()
         print("Twitter user has been incremented to " + str(twitterUser.tweet_count))
     except Exception as e:
-        logging.exception('User count not incremented with error ' + e)
+        print('User count not incremented with error ' + str(e))
 
 def saveNewTweet(tweet):
     try: 
@@ -41,7 +42,7 @@ def saveNewTweet(tweet):
         tweet.save()
         print('Tweet successfully saved')
     except Exception as e:
-        logging.exception('tweet not saved with error ' + e )
+        print('tweet not saved with error ' + str(e))
   
 def userExists(userId):
     userCount = TwitterUser.objects.filter(user_id=userId).count()
@@ -96,8 +97,13 @@ def clean_tweet(tweet):
 
 def getSentiment(tweet):
     analysis = TextBlob(clean_tweet(tweet['full_text']))
+    getSentimentClassification(tweet)
     return analysis.sentiment.polarity
 
+def getSentimentClassification(tweet): 
+    analysis = TextBlob(tweet['full_text'], analyzer=NaiveBayesAnalyzer())
+    print(analysis.sentiment)
+    return analysis.sentiment
 
 def getText(tweet):
     tweettext = ""
