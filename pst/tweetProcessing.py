@@ -102,12 +102,10 @@ def getSentimentPolarity(tweet):
     return analysis.sentiment.polarity
 
 def getSentimentSubjectivity(analysis): 
-    print(analysis.subjectivity)
     return analysis.subjectivity
 
 def getSentimentClassification(tweet): 
     analysis = TextBlob(tweet['full_text'], analyzer=NaiveBayesAnalyzer())
-    print(analysis.sentiment)
     return analysis.sentiment
 
 def getText(tweet):
