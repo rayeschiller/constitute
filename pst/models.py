@@ -9,6 +9,13 @@ class Tweet(models.Model):
 		related_name='twitterUser',
 		default=0
 	)
+	# associatedPolitician = models.ForeignKey(
+	# 	'Politician',
+	# 	on_delete=models.CASCADE, 
+	# 	related_name='politician',
+	# 	default="",
+	# 	null=True
+	# )
 	is_retweet = models.BooleanField()
 	location = models.CharField(max_length=255)
 	date = models.DateTimeField(auto_now=True)
