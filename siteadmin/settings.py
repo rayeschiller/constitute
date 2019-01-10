@@ -188,19 +188,13 @@ ASGI_APPLICATION = "siteadmin.routing.application"
 # }
 
 # Celery application definition
-# CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_BROKER_URL = os.environ.get("REDIS_URL", 'redis://localhost:6379')
 CELERY_RESULT_BACKEND = 'django-cache'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'US/Eastern'
-# CELERY_BEAT_SCHEDULE = {
-#     'fetchTweets': {
-#         'task': 'pst.tasks.fetchTweets',
-#         'schedule': 10.0,
-#     },
-# }
+
 
 # Configure Django App for Heroku.
 import django_heroku
