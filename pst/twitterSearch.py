@@ -11,7 +11,7 @@ def getTweets():
 		for word in sexistWords:
 			for politician in politicians:
 				searchTerms.append(word + ' ' + politician)
-		tso.set_keywords(politicians, or_operator=True)
+		tso.set_keywords(searchTerms, or_operator=True)
 		tso.set_language("en")
 		tso.set_include_entities(False)
 		querystr = tso.create_search_url()
