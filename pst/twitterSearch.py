@@ -28,7 +28,8 @@ def getTweets():
 		return ts.search_tweets_iterable(tso)
 
 	except TwitterSearchException as e:
-		logging.exception("Unable to get new tweets because of"  + str(e)
+		print("Unable to get new tweets")
+		logging.exception(e)
 
-if __name__ == "__main__":
-    getTweets()
+# if __name__ == "__main__":
+#     getTweets()
