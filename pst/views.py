@@ -1,15 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Tweet, SexistWord, TwitterUser
 from .twitterSearch import getTweets
 from .tweetProcessing import processTweet
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import viewsets
-from .serializers import TweetSerializer, SexistWordSerializer, TwitterUserSerializer
+from rest_framework import viewsets, filters
+from .serializers import *
 from .twitterStreaming import streamTweets
-from django.utils.safestring import mark_safe
 import json
 
 # Create your views here.
@@ -26,8 +26,10 @@ def print_tweets(request):
 
 class TweetViewSet(viewsets.ModelViewSet):
 	serializer_class = TweetSerializer
-	# queryset = Tweet.objects.all()
 	queryset = Tweet.objects.order_by("-date")
+	filter_backends = (DjangoFilterBackend,filters.SearchFilter,)
+	filter_fields = ('twitterUser', 'date', 'location', 'sentiment')
+	search_fields = ('twitterUser', 'date', 'location', 'sentiment')
 	
 class SexistWordViewSet(viewsets.ModelViewSet):
 	serializer_class = SexistWordSerializer

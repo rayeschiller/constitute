@@ -1,12 +1,8 @@
 from TwitterSearch import *
 from .config import CONFIG
-<<<<<<< HEAD
-
-=======
 import logging
->>>>>>> 9ca70f0859a53fd8b3d91d5173b139463e20200f
-def getTweets():
 
+def getTweets():
 	try:
 		tso = TwitterSearchOrder()
 
@@ -31,11 +27,7 @@ def getTweets():
 		return ts.search_tweets_iterable(tso)
 
 	except TwitterSearchException as e:
-<<<<<<< HEAD
-		print("Twitter Search Exception " + str(e))
-=======
-		logging.exception("Unable to get new tweets because of"  + str(e)
->>>>>>> 9ca70f0859a53fd8b3d91d5173b139463e20200f
+		logging.exception("Unable to get new tweets because of"  + str(e))
 
 if __name__ == "__main__":
     getTweets()

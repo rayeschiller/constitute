@@ -5,7 +5,7 @@ CONFIG = {
     "ACCESS_TOKEN_SECRET": 'qx9uoD5yzsUWeBgzVqIzChO7rruAvNjhomKmqua9nsfpl',
     # "SEXISTWORDS": ['whore', 'pussy','cunt', 'skank', 'bitch', 'slut', 'rape'],
     # "POLITICIANS": ['HillaryClinton', 'AOC', 'Alexandria Ocasio-Cortez', 'Elizabeth Warren', 'SenWarren', 'ElizabethWarren', 'NancyPelosi', 'Nancy Pelosi']
-    "SEXISTWORDS": ['slut', 'rape'],
+    "SEXISTWORDS": ['slut', 'rape', 'bitch'],
     "POLITICIANS": ['HillaryClinton', 'AOC', 'SenWarren', 'ElizabethWarren', 'NancyPelosi', 'Nancy Pelosi']
 
 

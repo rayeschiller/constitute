@@ -10,8 +10,8 @@ def processTweet(tweet):
     tweetId = getTweetId(tweet)
 
     if userExists(userId) and not tweetExists(tweetId):
-        incrementTweetCountForUser(userId)
         saveNewTweet(tweet)
+        incrementTweetCountForUser(userId)
     elif not userExists(tweet):
         saveNewUser(tweet)
         saveNewTweet(tweet)
@@ -91,8 +91,8 @@ def clean_tweet(tweet):
 
 def getSentimentPolarity(tweet):
     analysis = TextBlob(clean_tweet(tweet['full_text']))
-    getSentimentClassification(tweet)
-    getSentimentSubjectivity(analysis)
+    # getSentimentClassification(tweet)
+    # getSentimentSubjectivity(analysis)
     return analysis.sentiment.polarity
 
 def getSentimentSubjectivity(analysis): 
