@@ -38,7 +38,7 @@ def saveNewTweet(tweet):
     try: 
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
         tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
-        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), tweet_id=getTweetId(tweet))
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet))
         tweet.save()
         print('Tweet successfully saved')
     except Exception as e:
@@ -75,12 +75,6 @@ def getLocation(tweet):
     if tweet['place'] is not None:
         location = tweet['place']['full_name']
         print(tweet['place']['full_name'])
-    # elif tweet['quoted_status']['place']['full_name'] is not None:
-    #     location = tweet['quoted_status']['place']['full_name']
-    # elif tweet['retweeted_status']['place']['full_name'] is not None:
-    #     location = tweet['retweeted_status']['place']['full_name']
-    # else:
-    #     location = ''
     return location
 
             
@@ -95,14 +89,17 @@ def clean_tweet(tweet):
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
 
-def getSentiment(tweet):
+def getSentimentPolarity(tweet):
     analysis = TextBlob(clean_tweet(tweet['full_text']))
     getSentimentClassification(tweet)
+    getSentimentSubjectivity(analysis)
     return analysis.sentiment.polarity
+
+def getSentimentSubjectivity(analysis): 
+    return analysis.subjectivity
 
 def getSentimentClassification(tweet): 
     analysis = TextBlob(tweet['full_text'], analyzer=NaiveBayesAnalyzer())
-    print(analysis.sentiment)
     return analysis.sentiment
 
 def getText(tweet):
