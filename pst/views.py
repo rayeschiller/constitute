@@ -27,9 +27,9 @@ def print_tweets(request):
 class TweetViewSet(viewsets.ModelViewSet):
 	serializer_class = TweetSerializer
 	queryset = Tweet.objects.order_by("-date")
-	filter_backends = (DjangoFilterBackend,filters.SearchFilter,)
+	filter_backends = (DjangoFilterBackend,)
 	filter_fields = ('twitterUser', 'date', 'location', 'sentiment')
-	search_fields = ('twitterUser', 'date', 'location', 'sentiment')
+	# search_fields = ('twitterUser', 'date', 'location', 'sentiment')
 	
 class SexistWordViewSet(viewsets.ModelViewSet):
 	serializer_class = SexistWordSerializer
