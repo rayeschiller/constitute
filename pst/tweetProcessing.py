@@ -29,7 +29,7 @@ def saveNewUser(tweet):
 def incrementTweetCountForUser(userId):
     try:
         twitterUser = TwitterUser.objects.get(user_id = userId)
-        count = Tweet.objects.filter(twitterUser = TwitterUser).count()
+        count = int(Tweet.objects.filter(twitterUser = TwitterUser).count())
         # TwitterUser.objects.annotate(number_of_tweets=Count('twitterUser'))
         print("Twitter count for user id " + str(twitterUser.username) + " is now " + count)
         twitterUser.tweet_count = count
