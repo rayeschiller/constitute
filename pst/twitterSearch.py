@@ -1,4 +1,4 @@
-from TwitterSearch import *
+from TwitterSearch import TwitterSearchOrder, TwitterSearchException
 from .config import CONFIG
 import logging
 

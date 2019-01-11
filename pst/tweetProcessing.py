@@ -120,5 +120,3 @@ def getUserFullName(tweet):
     except:
         return "Username Error"
 
-if __name__ == "__main__":
-   processTweet()
