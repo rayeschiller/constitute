@@ -14,4 +14,4 @@ class SexistWordSerializer(serializers.HyperlinkedModelSerializer):
 class TwitterUserSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = TwitterUser
-		fields = ("pk", "username", "user_id", "tweet_count")
+		fields = ("pk", "username", "user_id", "tweet_count", "followers_count")

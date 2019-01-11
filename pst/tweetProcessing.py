@@ -2,6 +2,7 @@ from .twitterSearch import getTweets
 from .models import Tweet, TwitterUser
 from textblob import TextBlob 
 from textblob.sentiments import NaiveBayesAnalyzer
+from django.db.models import Count
 import re 
 import logging
 
@@ -10,8 +11,8 @@ def processTweet(tweet):
     tweetId = getTweetId(tweet)
 
     if userExists(userId) and not tweetExists(tweetId):
-        incrementTweetCountForUser(userId)
         saveNewTweet(tweet)
+        incrementTweetCountForUser(userId)
     elif not userExists(tweet):
         saveNewUser(tweet)
         saveNewTweet(tweet)
@@ -28,7 +29,10 @@ def saveNewUser(tweet):
 def incrementTweetCountForUser(userId):
     try:
         twitterUser = TwitterUser.objects.get(user_id = userId)
-        twitterUser.tweet_count += 1
+        count = int(Tweet.objects.filter(twitterUser = TwitterUser).count())
+        # TwitterUser.objects.annotate(number_of_tweets=Count('twitterUser'))
+        print("Twitter count for user id " + str(twitterUser.username) + " is now " + count)
+        twitterUser.tweet_count = count
         twitterUser.save()
         print("Twitter user has been incremented to " + str(twitterUser.tweet_count))
     except Exception as e:
@@ -120,5 +124,3 @@ def getUserFullName(tweet):
     except:
         return "Username Error"
 
-if __name__ == "__main__":
-   processTweet()

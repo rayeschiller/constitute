@@ -22,12 +22,11 @@ app.autodiscover_tasks()
 def setup_periodic_tasks(sender, **kwargs):
     print('cleery started')
 
-    # Calls test('hello') every 10 seconds (uncomment to make sure celery is working)
-    sender.add_periodic_task(60.0, test.s("celery beat"), name='add every 30')
+    # Crontab beat every 5 minutes
     sender.add_periodic_task(
-        crontab(hour=0, minute=0), test.s("--celery crontab timing beat--"), name='midnight test crontab')
+        crontab(minute="*/5"), test.s("--celery crontab 5 min beat--"), name='Crontab Beat every 5 Minutes')
    
-    # Executes every morning at 7:30 a.m. 
+    # Executes every hour on the hour
     sender.add_periodic_task(
         crontab(hour='*', minute=0),
         fetchTweets.s(),

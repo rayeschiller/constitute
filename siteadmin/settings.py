@@ -38,6 +38,7 @@ CORS_ORIGIN_ALLOW_ALL=True
 INSTALLED_APPS = [
     'pst.apps.PstConfig',
     'channels',
+    'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,6 +129,7 @@ WEBPACK_LOADER = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'PAGE_SIZE': 25
 }
 
