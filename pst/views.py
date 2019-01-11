@@ -38,6 +38,8 @@ class SexistWordViewSet(viewsets.ModelViewSet):
 class TwitterUserViewSet(viewsets.ModelViewSet):
 	serializer_class = TwitterUserSerializer
 	queryset = TwitterUser.objects.all()
+	filter_backend = (DjangoFilterBackend,)
+	filter_fields = ('tweet_count', 'username', 'followers_count')
 
 def streaming(request):
     return render(request, 'pst/streaming.html', {
