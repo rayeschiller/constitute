@@ -11,8 +11,8 @@ def processTweet(tweet):
     tweetId = getTweetId(tweet)
 
     if userExists(userId) and not tweetExists(tweetId):
-        incrementTweetCountForUser(userId)
         saveNewTweet(tweet)
+        incrementTweetCountForUser(userId)
     elif not userExists(tweet):
         saveNewUser(tweet)
         saveNewTweet(tweet)
