@@ -13,14 +13,14 @@ def processTweet(tweet):
     if userExists(userId) and not tweetExists(tweetId):
         saveNewTweet(tweet)
         incrementTweetCountForUser(userId)
-    elif not userExists(tweet):
+    elif not userExists(userId):
         saveNewUser(tweet)
         saveNewTweet(tweet)
 
 
 def saveNewUser(tweet):
     try:
-        user = TwitterUser(user_id = tweet['user']['id'], username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
+        user = TwitterUser(user_id = getUserId(tweet), username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
         user.save()
         print('New user Saved with ID ' + str(user.user_id))
     except Exception as e:
@@ -30,8 +30,7 @@ def incrementTweetCountForUser(userId):
     try:
         twitterUser = TwitterUser.objects.get(user_id = userId)
         count = int(Tweet.objects.filter(twitterUser = TwitterUser).count())
-        # TwitterUser.objects.annotate(number_of_tweets=Count('twitterUser'))
-        print("Twitter count for user id " + str(twitterUser.username) + " is now " + count)
+        print("Twitter count for user id " + str(twitterUser.pk) + " is now " + count)
         twitterUser.tweet_count = count
         twitterUser.save()
         print("Twitter user has been incremented to " + str(twitterUser.tweet_count))
@@ -49,11 +48,14 @@ def saveNewTweet(tweet):
         print('tweet not saved with error ' + str(e))
   
 def userExists(userId):
+    print("userID " + str(userId))
     userCount = TwitterUser.objects.filter(user_id=userId).count()
+    print("userCount is " + str(userCount))
     return False if userCount == 0 else True
    
 def tweetExists(tweetId):
     tweetCount = Tweet.objects.filter(tweet_id = tweetId).count()
+    print("tweetCount is " + str(tweetCount))
     return False if tweetCount == 0 else True
 
 def getUserId(tweet):
