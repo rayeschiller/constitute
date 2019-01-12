@@ -13,7 +13,7 @@ def fetchTweets():
     from .models import Politician
     politician_ids = Politician.objects.values_list('id', flat=True)
     for politician_id in politician_ids:
-		tweets = getTweets(politician_id)	
-		print("politician id is " + str(politician_id))
-		for tweet in tweets:
-			processTweet(politician_id, tweet)
+	    tweets = getTweets(politician_id)	
+	    print("politician id is " + str(politician_id))
+	    for tweet in tweets:
+		    processTweet(politician_id, tweet)
