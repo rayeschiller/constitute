@@ -1,12 +1,11 @@
-from textblob import Textblob
-from textblob.classifiers import NaiveBayesClassifier
-from textblob import classifiers 
-
-import xlrd
+# from textblob import TextBlob
+# from textblob.classifiers import NaiveBayesClassifier
+# from textblob import classifiers 
 import pandas as pd
 import numpy as np 
 import math
 
+import re 
 
 def getWordList():
 
@@ -16,27 +15,79 @@ def getWordList():
     wordList = df.as_matrix()
 
     wordTraining = list(map(tuple, wordList))
-    
-    print(wordTraining)
 
     classifier = NaiveBayesClassifier(wordTraining)
 
-    dt_classifier = classifiers.DecisionTreeClasifier(wordTraining)
+    dt_classifier = DecisionTreeClassifier(wordTraining)
 
     runSentimentClassifier(classifier)
 
     runSentimentDtClassifier(dt_classifier)
 
 def getTestData():
-    return 'I hate everyone and that bitch'
+    df = pd.read_excel('../../../tweet_sample.xlsx')
+    
+    tweetList = df.as_matrix()
+
+    tweetTraining = list(map(tuple, tweetList))
+    tweetTraining = tweetTraining
+
+    #print(tweetTraining)
+
+    return tweetTraining
+
+def getAccuracy():
+    testing = [
+        ('fuck that stupid woman cunt', 'neg'),
+        ('I am going to set that girly bitch on fire', 'neg'),
+        ('everything about her is amazing', 'pos'),
+        ('bitch on fire', 'neg'),
+        ('bitch', 'neg'),
+        ('dumb bitch', 'neg'),
+        ('old bitch', 'neg'),
+        ("she's a bad bitch", 'pos'),
+        ('what a boss', 'pos'),
+        ('rape', 'neg'),
+        ('i will rape that bitch', 'neg'),
+        ('revenge porn', 'neg')
+        ('that bitch is delusional', 'neg'),
+        ]
+    return testing    
 
 def runSentimentClassifier(classifier): 
-    test = Textblob(getTestData(), classifier=classifier)
-    print(test, test.classify(), test.sentiment)
+    for test in getTestData():
+        print(test)
+        testStr = "".join(test)
+        cleanStr=clean_tweet(testStr)
+        print(cleanStr)
+        cleanStr = TextBlob(cleanStr, classifier=classifier)
+        print(cleanStr.classify(), cleanStr.sentiment)
+        classifier.accuracy(getAccuracy())
+        classifier.update(getAccuracy())
+        print(classifier.accuracy(getAccuracy()))
+    print(classifier.show_informative_features(5))
 
-def runSentimentDtClassifier(dt_classifier): 
-    test = Textblob(getTestData(), classifier=dt_classifier)
-    print(test, test.classify(), test.sentiment)
+def runSentimentDtClassifier(dt_classifier):
+    for test in getTestData(): 
+        print(test)
+        testStr = "".join(test)
+        cleanStr=clean_tweet(testStr)
+        print(cleanStr)
+        cleanStr = TextBlob(cleanStr, classifier=dt_classifier)
+        print(cleanStr.classify(), cleanStr.sentiment)
+
+def clean_tweet(test):
+    '''
+    Utility function to clean the text in a tweet by removing 
+    links and special characters using regex.
+    '''
+    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", test).split())
 
 if __name__ == "__main__":
-    getWordList()    
+    from textblob import TextBlob
+    from textblob.classifiers import NaiveBayesClassifier
+    from textblob.classifiers import DecisionTreeClassifier
+    from textblob import classifiers 
+    getTestData()
+    getWordList()
+ 
