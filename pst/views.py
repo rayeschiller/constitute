@@ -20,7 +20,6 @@ def print_tweets(request):
 	tweets = getTweets(politician_ids[0])
 	for politician_id in politician_ids:
 		getTweets(politician_id)
-		print("politician id is " + str(politician_id))
 		for tweet in tweets:
 			processTweet(politician_id, tweet)
 	template = loader.get_template('pst/index.html')
