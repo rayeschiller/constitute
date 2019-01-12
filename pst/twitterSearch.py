@@ -29,5 +29,5 @@ def getTweets():
 	except TwitterSearchException as e:
 		logging.exception("Unable to get new tweets because of"  + str(e))
 
-if __name__ == "__main__":
-    getTweets()
+# if __name__ == "__main__":
+#     getTweets()
