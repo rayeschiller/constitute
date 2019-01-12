@@ -28,7 +28,7 @@ def setup_periodic_tasks(sender, **kwargs):
    
     # Executes every hour on the hour
     sender.add_periodic_task(
-        crontab(hour='*', minute=0),
+        crontab(hour='*', minute="*/2"),
         fetchTweets.s(),
     )
 
