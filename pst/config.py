@@ -6,7 +6,7 @@ CONFIG = {
     # "SEXISTWORDS": ['whore', 'pussy','cunt', 'skank', 'bitch', 'slut', 'rape'],
     # "POLITICIANS": ['HillaryClinton', 'AOC', 'Alexandria Ocasio-Cortez', 'Elizabeth Warren', 'SenWarren', 'ElizabethWarren', 'NancyPelosi', 'Nancy Pelosi']
     "SEXISTWORDS": ['bitch', 'skank', 'rape'],
-    "POLITICIANS": ['HillaryClinton', 'AOC', 'Ocasio-Cortez', 'SenWarren', 'ElizabethWarren', 'NancyPelosi', 'Nancy Pelosi']
+    # "POLITICIANS": ['HillaryClinton', 'AOC', 'Ocasio-Cortez', 'SenWarren', 'ElizabethWarren', 'NancyPelosi', 'Nancy Pelosi']
 
 
 

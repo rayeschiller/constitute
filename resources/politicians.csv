@@ -1,0 +1,14 @@
+FirstName,LastName,Username,AlternativeName,District,OfficeLevel,PoliticalParty,City,State
+Alexandria,Ocasio-Cortez,AOC,,NY 14,Federal,D,New York,NY
+Ayanna,Pressley,AyannaPressley,,MA 7,Federal,D,Boston,MA
+Nancy,Pelosi,speakerpelosi,,CA 12,Federal,D,San Fransisco,CA
+Elizabeth,Warren,SenWarren,ewarren,MA,Federal,D,,MA
+Kirsten,Gillibrand,SenGillibrand,gillibrandny,NY,Federal,D,,NY
+Kyrsten,Sinema,kyrstensinema,SenatorSinema,AZ 9,Federal,D,,Arizona
+Maxine,Waters,repmaxinewaters,maxinewaters,CA 43,Federal,D,Los Angeles,CA
+Kamala,Harris,KamalaHarris,senkamalaharris,CA,Federal,D,,CA
+Deb,Haaland,RepDebHaaland,Deb4CongressNM,NM CD-1,Federal,D,Albuquerque,NM
+Abigail,Spanberger,SpanbergerVA07,,VA 7,Federal,D,Culpeper,VA
+Marilyn,Mosby,marilynmosbyesq,,,State,D,Baltimore,MD
+Susan,Collins,SenatorCollins,,ME,Federal,R,,ME
+Lisa,Murkowski,lisamurkowski,,AK,Federal,R,,AK

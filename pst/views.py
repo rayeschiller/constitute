@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Tweet, SexistWord, TwitterUser
+from .models import *
 from .twitterSearch import getTweets
 from .tweetProcessing import processTweet
 from rest_framework.decorators import api_view
@@ -12,18 +12,43 @@ from .serializers import *
 from .twitterStreaming import streamTweets
 import json
 from django.db.models import Count
+import csv
 
 # Create your views here.
 def print_tweets(request):
-	tweets = getTweets()
-	# print(tweets)
+	politician_ids = Politician.objects.values_list('id', flat=True)
+	# get list of search terms
+	# for politician_id in politician_ids:
+	testing_id = politician_ids[10]
+	tweets = getTweets(testing_id)	
+	print(testing_id)
 	for tweet in tweets:
-		processTweet(tweet)
+		print("Tweet id is " + str(tweet['id_str']))
+		processTweet(testing_id, tweet)
+
 	template = loader.get_template('pst/index.html')
 	context = {
 		'tweets': tweets,
 	}	
 	return HttpResponse(template.render(context,request))
+
+def load_politicians(request):
+	data = csv.DictReader(open("./resources/politicians.csv"))
+	for row in data:
+		try: 
+			Politician.objects.create(first_name=row['FirstName'], 
+			last_name=row['LastName'], 
+			username=row['Username'],
+			alternativeName = row['AlternativeName'],
+			district = row['District'],
+			office_level = row['OfficeLevel'],
+			political_party = row['PoliticalParty'],
+			city = row['City'],
+			state = row['State'])
+			print('Politicians successfully saved')
+		except Exception as e:
+			print("Politician did not save " + str(e)) 
+	return HttpResponse("hello")
 
 class TweetViewSet(viewsets.ModelViewSet):
 	serializer_class = TweetSerializer
@@ -35,6 +60,10 @@ class TweetViewSet(viewsets.ModelViewSet):
 class SexistWordViewSet(viewsets.ModelViewSet):
 	serializer_class = SexistWordSerializer
 	queryset = SexistWord.objects.all()
+
+class PoliticianViewSet(viewsets.ModelViewSet):
+	serializer_class = PoliticianSerializer
+	queryset = Politician.objects.all()
 
 class TwitterUserViewSet(viewsets.ModelViewSet):
 	serializer_class = TwitterUserSerializer

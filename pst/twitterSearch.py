@@ -1,17 +1,23 @@
 from TwitterSearch import TwitterSearchOrder, TwitterSearchException, TwitterSearch
 from .config import CONFIG
 import logging
+from .models import Politician
 
-def getTweets():
+def getTweets(politician_id):
 	try:
-		tso = TwitterSearchOrder()
 
-		politicians = CONFIG["POLITICIANS"]
+		politician = Politician.objects.get(id=politician_id)
+
+		politician_names = [politician.first_name + " " + politician.last_name, politician.last_name, politician.username]
+		
+		tso = TwitterSearchOrder()			
 		sexistWords = CONFIG["SEXISTWORDS"]
 		searchTerms = []
+
 		for word in sexistWords:
-			for politician in politicians:
+			for politician in politician_names:
 				searchTerms.append(word + ' ' + politician)
+		
 		tso.set_keywords(searchTerms, or_operator=True)
 		tso.set_language("en")
 		tso.set_include_entities(False)

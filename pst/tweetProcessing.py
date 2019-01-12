@@ -1,21 +1,19 @@
-from .twitterSearch import getTweets
-from .models import Tweet, TwitterUser
+from .models import Tweet, TwitterUser, Politician
 from textblob import TextBlob 
 from textblob.sentiments import NaiveBayesAnalyzer
 from django.db.models import Count
 import re 
 import logging
 
-def processTweet(tweet):
+def processTweet(politician_id, tweet):
     userId = getUserId(tweet)
     tweetId = getTweetId(tweet)
-
     if userExists(userId) and not tweetExists(tweetId):
-        saveNewTweet(tweet)
+        saveNewTweet(tweet, politician_id)
         incrementTweetCountForUser(userId)
     elif not userExists(userId):
         saveNewUser(tweet)
-        saveNewTweet(tweet)
+        saveNewTweet(tweet, politician_id)
 
 
 def saveNewUser(tweet):
@@ -29,33 +27,35 @@ def saveNewUser(tweet):
 def incrementTweetCountForUser(userId):
     try:
         twitterUser = TwitterUser.objects.get(user_id = userId)
-        count = int(Tweet.objects.filter(twitterUser = TwitterUser).count())
-        print("Twitter count for user id " + str(twitterUser.pk) + " is now " + count)
+        count = Tweet.objects.filter(twitterUser = twitterUser).count()
+        print("Count is " + str(count))
         twitterUser.tweet_count = count
+        print("tweet count is " + str(twitterUser.tweet_count))
         twitterUser.save()
-        print("Twitter user has been incremented to " + str(twitterUser.tweet_count))
+        # print("Twitter count for user id " + str(twitterUser.pk) + " is incremented to " + str(count))
     except Exception as e:
-        print('User count not incremented with error ' + str(e))
+        print("User " + str(userId) + "count not incremented with error " + str(e))
 
-def saveNewTweet(tweet):
+def saveNewTweet(tweet, politician_id):
     try: 
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
+        politician = Politician.objects.get(id=politician_id)
+        print("--- poltician is--- ")
+        print(politician)
         tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
-        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet))
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet), 
+        politician=politician)
         tweet.save()
         print('Tweet successfully saved')
     except Exception as e:
         print('tweet not saved with error ' + str(e))
   
 def userExists(userId):
-    print("userID " + str(userId))
     userCount = TwitterUser.objects.filter(user_id=userId).count()
-    print("userCount is " + str(userCount))
     return False if userCount == 0 else True
    
 def tweetExists(tweetId):
     tweetCount = Tweet.objects.filter(tweet_id = tweetId).count()
-    print("tweetCount is " + str(tweetCount))
     return False if tweetCount == 0 else True
 
 def getUserId(tweet):
@@ -80,7 +80,6 @@ def getLocation(tweet):
     location = ''
     if tweet['place'] is not None:
         location = tweet['place']['full_name']
-        print(tweet['place']['full_name'])
     return location
 
             
@@ -101,12 +100,12 @@ def getSentimentPolarity(tweet):
     # getSentimentSubjectivity(analysis)
     return analysis.sentiment.polarity
 
-# def getSentimentSubjectivity(analysis): 
-#     return analysis.subjectivity
+def getSentimentSubjectivity(analysis): 
+    return analysis.subjectivity
 
-# def getSentimentClassification(tweet): 
-#     analysis = TextBlob(tweet['full_text'], analyzer=NaiveBayesAnalyzer())
-#     return analysis.sentiment
+def getSentimentClassification(tweet): 
+    analysis = TextBlob(tweet['full_text'], analyzer=NaiveBayesAnalyzer())
+    return analysis.sentiment
 
 def getText(tweet):
     tweettext = ""
