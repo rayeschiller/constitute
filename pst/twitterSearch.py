@@ -9,7 +9,7 @@ def getTweets(politician_id):
 		politician = Politician.objects.get(id=politician_id)
 
 		politician_names = [politician.first_name + " " + politician.last_name, politician.last_name, politician.username]
-		
+		print(politician_names)
 		tso = TwitterSearchOrder()			
 		sexistWords = CONFIG["SEXISTWORDS"]
 		searchTerms = []

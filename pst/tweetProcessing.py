@@ -28,11 +28,9 @@ def incrementTweetCountForUser(userId):
     try:
         twitterUser = TwitterUser.objects.get(user_id = userId)
         count = Tweet.objects.filter(twitterUser = twitterUser).count()
-        print("Count is " + str(count))
         twitterUser.tweet_count = count
-        print("tweet count is " + str(twitterUser.tweet_count))
         twitterUser.save()
-        # print("Twitter count for user id " + str(twitterUser.pk) + " is incremented to " + str(count))
+        print("Twitter count for user id " + str(twitterUser.pk) + " is incremented to " + str(count))
     except Exception as e:
         print("User " + str(userId) + "count not incremented with error " + str(e))
 

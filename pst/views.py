@@ -18,13 +18,11 @@ import csv
 def print_tweets(request):
 	politician_ids = Politician.objects.values_list('id', flat=True)
 	# get list of search terms
-	# for politician_id in politician_ids:
-	testing_id = politician_ids[10]
-	tweets = getTweets(testing_id)	
-	print(testing_id)
-	for tweet in tweets:
-		print("Tweet id is " + str(tweet['id_str']))
-		processTweet(testing_id, tweet)
+	for politician_id in politician_ids:
+		tweets = getTweets(politician_id)	
+		print("politician id is " + str(politician_id))
+		for tweet in tweets:
+			processTweet(politician_id, tweet)
 
 	template = loader.get_template('pst/index.html')
 	context = {
@@ -54,7 +52,7 @@ class TweetViewSet(viewsets.ModelViewSet):
 	serializer_class = TweetSerializer
 	queryset = Tweet.objects.order_by("-date")
 	filter_backends = (DjangoFilterBackend,)
-	filter_fields = ('twitterUser', 'date', 'location', 'sentiment')
+	filter_fields = ('twitterUser', 'politician', 'date', 'location', 'sentiment')
 	# search_fields = ('twitterUser', 'date', 'location', 'sentiment')
 	
 class SexistWordViewSet(viewsets.ModelViewSet):
