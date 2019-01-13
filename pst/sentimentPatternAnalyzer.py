@@ -49,7 +49,7 @@ def getAccuracy():
         ('what a boss', 'pos'),
         ('rape', 'neg'),
         ('i will rape that bitch', 'neg'),
-        ('revenge porn', 'neg')
+        ('revenge porn', 'neg'),
         ('that bitch is delusional', 'neg'),
         ]
     return testing    
