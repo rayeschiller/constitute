@@ -17,6 +17,7 @@ import csv
 # Create your views here.
 def print_tweets(request):
 	politician_ids = Politician.objects.values_list('id', flat=True)
+
 	mock_tweets = getTweets(politician_ids[0])
 	# politician_id = politician_ids[1]
 	for politician_id in politician_ids:
