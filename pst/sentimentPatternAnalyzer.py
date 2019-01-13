@@ -67,6 +67,20 @@ def runSentimentClassifier(classifier):
         print(classifier.accuracy(getAccuracy()))
     print(classifier.show_informative_features(5))
 
+def runSentimentClassifierTest(classifier, text): 
+        print(text)
+        cleanStr=clean_tweet(text)
+        print(cleanStr)
+        cleanStr = TextBlob(cleanStr, classifier=classifier)
+        print(cleanStr.classify(), cleanStr.sentiment)
+        classifier.accuracy(getAccuracy())
+        classifier.update(getAccuracy())
+        print(classifier.accuracy(getAccuracy()))
+        print(classifier.show_informative_features(5))   
+
+def runSentimentClassifierTweets():
+    getWordList()  
+
 def runSentimentDtClassifier(dt_classifier):
     for test in getTestData(): 
         print(test)
