@@ -15,7 +15,7 @@ def processTweet(politician_id, tweet):
         saveNewUser(tweet)
         saveNewTweet(tweet, politician_id)
     else:
-        print("Tweet and User already exists")
+        print("Tweet " + str(tweetId) + " and User " + str(userId) + " already exists")
 
 
 def saveNewUser(tweet):
@@ -32,7 +32,7 @@ def incrementTweetCountForUser(userId):
         count = Tweet.objects.filter(twitterUser = twitterUser).count()
         twitterUser.tweet_count = count
         twitterUser.save()
-        print("Twitter count for user id " + str(twitterUser.pk) + " is incremented to " + str(count))
+        print("Twitter count for user id " + str(userId) + " is incremented to " + str(count))
     except Exception as e:
         print("User " + str(userId) + "count not incremented with error " + str(e))
 
@@ -46,7 +46,7 @@ def saveNewTweet(tweet, politician_id):
         tweet.save()
         print('Tweet ' + str(getTweetId(tweet)) + ' successfully saved')
     except Exception as e:
-        print('Tweet not saved with error ' + str(e))
+        print('Tweet ' + str(getTweetId(tweet)) + ' not saved with error ' + str(e))
   
 def userExists(userId):
     userCount = TwitterUser.objects.filter(user_id=userId).count()
