@@ -44,9 +44,9 @@ def saveNewTweet(tweet, politician_id):
         date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet), 
         politician=politician)
         tweetToSave.save()
-        print("Tweet " + tweetToSave.tweet_id + " successfully saved")
+        print("Tweet " + str(tweetToSave.tweet_id) + " successfully saved")
     except Exception as e:
-        print('Tweet ' + tweetToSave.tweet_id + ' not saved with error ' + str(e))
+        print('Tweet ' + str(tweetToSave.tweet_id) + ' not saved with error ' + str(e))
   
 def userExists(userId):
     userCount = TwitterUser.objects.filter(user_id=userId).count()
