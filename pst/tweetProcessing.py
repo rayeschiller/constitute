@@ -9,9 +9,11 @@ def processTweet(politician_id, tweet):
     userId = getUserId(tweet)
     tweetId = getTweetId(tweet)
     if userExists(userId) and not tweetExists(tweetId):
+        print(" user exists and tweet does not exist")
         saveNewTweet(tweet, politician_id)
         incrementTweetCountForUser(userId)
     elif not userExists(userId):
+        print("user exists")
         saveNewUser(tweet)
         saveNewTweet(tweet, politician_id)
 
@@ -36,10 +38,9 @@ def incrementTweetCountForUser(userId):
 
 def saveNewTweet(tweet, politician_id):
     try: 
+        print("saving new tweet")
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
         politician = Politician.objects.get(id=politician_id)
-        print("--- poltician is--- ")
-        print(politician)
         tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
         date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet), 
         politician=politician)

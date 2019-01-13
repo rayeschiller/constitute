@@ -9,7 +9,7 @@ def getTweets(politician_id):
 		politician = Politician.objects.get(id=politician_id)
 
 		politician_names = [politician.first_name + " " + politician.last_name, politician.last_name, politician.username]
-		print("Getting Tweets for " + str(politician.first_name + politician.last_name))
+		print("Getting Tweets for " + str(politician.first_name + " " + politician.last_name))
 		tso = TwitterSearchOrder()			
 		sexistWords = CONFIG["SEXISTWORDS"]
 		searchTerms = []
@@ -30,6 +30,7 @@ def getTweets(politician_id):
             access_token = CONFIG["ACCESS_TOKEN"],
             access_token_secret = CONFIG["ACCESS_TOKEN_SECRET"]
         )
+		
 		return ts.search_tweets_iterable(tso)
 
 	except TwitterSearchException as e:
