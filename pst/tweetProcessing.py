@@ -40,13 +40,13 @@ def saveNewTweet(tweet, politician_id):
     try: 
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
         politician = Politician.objects.get(id=politician_id)
-        tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
+        tweetToSave = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
         date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet), 
         politician=politician)
-        tweet.save()
-        print('Tweet ' + str(getTweetId(tweet)) + ' successfully saved')
+        tweetToSave.save()
+        print("Tweet " + tweetToSave.tweet_id + " successfully saved")
     except Exception as e:
-        print('Tweet ' + str(getTweetId(tweet)) + ' not saved with error ' + str(e))
+        print('Tweet ' + tweetToSave.tweet_id + ' not saved with error ' + str(e))
   
 def userExists(userId):
     userCount = TwitterUser.objects.filter(user_id=userId).count()
@@ -69,7 +69,7 @@ def getIsRetweet(tweet):
     return 'retweeted_status' in tweet 
 
 def getTweetId(tweet):
-    return tweet['id_str']
+    return tweet['id']
 
 def getFollowers(tweet):
     return tweet['user']['followers_count'] 
