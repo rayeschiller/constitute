@@ -19,6 +19,7 @@ def getTweets(politician_id):
 				searchTerms.append(word + ' ' + politician)
 		
 		tso.set_keywords(searchTerms, or_operator=True)
+		print(searchTerms)
 		tso.set_language("en")
 		tso.set_include_entities(False)
 		querystr = tso.create_search_url()

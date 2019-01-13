@@ -8,10 +8,13 @@ import logging
 def processTweet(politician_id, tweet):
     userId = getUserId(tweet)
     tweetId = getTweetId(tweet)
+    print('inside process tweet')
     if userExists(userId) and not tweetExists(tweetId):
+        print('user and tweet exist')
         saveNewTweet(tweet, politician_id)
         incrementTweetCountForUser(userId)
     elif not userExists(userId):
+        print('user does not exist')
         saveNewUser(tweet)
         saveNewTweet(tweet, politician_id)
 
