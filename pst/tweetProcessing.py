@@ -7,17 +7,15 @@ import logging
 
 def processTweet(politician_id, tweet):
     userId = getUserId(tweet)
-    tweetId = getTweetId(tweet)
-    print('inside process tweet')
-    if userExists(userId) and not tweetExists(tweetId):
-
-        print(" user exists and tweet does not exist")
+    tweetId = getTweetId(tweet) 
+    if userExists(userId) and tweetExists(tweetId) is False:
         saveNewTweet(tweet, politician_id)
         incrementTweetCountForUser(userId)
-    elif not userExists(userId):
-        print("user exists")
+    elif userExists(userId) is False and tweetExists(tweetId) is False:
         saveNewUser(tweet)
         saveNewTweet(tweet, politician_id)
+    else:
+        print("Tweet and User already exists")
 
 
 def saveNewUser(tweet):
@@ -40,16 +38,15 @@ def incrementTweetCountForUser(userId):
 
 def saveNewTweet(tweet, politician_id):
     try: 
-        print("saving new tweet")
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
         politician = Politician.objects.get(id=politician_id)
         tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
         date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet), 
         politician=politician)
         tweet.save()
-        print('Tweet successfully saved')
+        print('Tweet ' + str(getTweetId(tweet)) + ' successfully saved')
     except Exception as e:
-        print('tweet not saved with error ' + str(e))
+        print('Tweet not saved with error ' + str(e))
   
 def userExists(userId):
     userCount = TwitterUser.objects.filter(user_id=userId).count()

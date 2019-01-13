@@ -17,9 +17,7 @@ import csv
 # Create your views here.
 def print_tweets(request):
 	politician_ids = Politician.objects.values_list('id', flat=True)
-
 	mock_tweets = getTweets(politician_ids[0])
-	# politician_id = politician_ids[1]
 	for politician_id in politician_ids:
 		tweets = getTweets(politician_id)
 		for tweet in tweets:
@@ -52,7 +50,7 @@ class TweetViewSet(viewsets.ModelViewSet):
 	serializer_class = TweetSerializer
 	queryset = Tweet.objects.order_by("-date")
 	filter_backends = (DjangoFilterBackend,)
-	filter_fields = ('twitterUser', 'politician', 'date', 'location', 'sentiment')
+	filter_fields = ('twitterUser', 'tweet_id', 'politician', 'date', 'location', 'sentiment')
 	# search_fields = ('twitterUser', 'date', 'location', 'sentiment')
 	
 class SexistWordViewSet(viewsets.ModelViewSet):
