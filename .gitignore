@@ -11,4 +11,3 @@ staticfiles/
 Pipfile
 Pipfile.lock
 node_modules/
-pst/config.py
