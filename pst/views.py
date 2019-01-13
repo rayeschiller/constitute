@@ -31,14 +31,18 @@ def print_tweets(request):
 	return HttpResponse(template.render(context,request))
 
 def load_politicians(request):
+	print('inside load politicians')
 	data = csv.DictReader(open("./resources/politicians.csv"))
 	for row in data:
 		# if politician is not already in the database
 		try:
 			first_name = row['FirstName']
 			last_name=row['LastName']
+			print('firstname: ' + first_name + ' lastname ' + last_name)
 			politican_count = Politician.objects.filter(first_name=first_name, last_name=last_name).count()
+			print('poliitician count for ' + last_name + ' is ' + politican_count)
 			if(politican_count == 0):
+				print('adding new politician')
 				Politician.objects.create(first_name=first_name, 
 				last_name=last_name, 
 				username=row['Username'],
