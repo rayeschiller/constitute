@@ -31,17 +31,22 @@ def print_tweets(request):
 def load_politicians(request):
 	data = csv.DictReader(open("./resources/politicians.csv"))
 	for row in data:
-		try: 
-			Politician.objects.create(first_name=row['FirstName'], 
-			last_name=row['LastName'], 
-			username=row['Username'],
-			alternativeName = row['AlternativeName'],
-			district = row['District'],
-			office_level = row['OfficeLevel'],
-			political_party = row['PoliticalParty'],
-			city = row['City'],
-			state = row['State'])
-			print('Politicians successfully saved')
+		# if politician is not already in the database
+		try:
+			first_name = row['FirstName']
+			last_name=row['LastName']
+			politican_count = Politician.objects.filter(first_name=first_name, last_name=last_name).count()
+			if(politican_count == 0):
+				Politician.objects.create(first_name=first_name, 
+				last_name=last_name, 
+				username=row['Username'],
+				alternativeName = row['AlternativeName'],
+				district = row['District'],
+				office_level = row['OfficeLevel'],
+				political_party = row['PoliticalParty'],
+				city = row['City'],
+				state = row['State'])
+				print('Politician' + last_name + ' successfully saved')
 		except Exception as e:
 			print("Politician did not save " + str(e)) 
 	return HttpResponse("hello")
