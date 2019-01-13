@@ -17,15 +17,16 @@ import csv
 # Create your views here.
 def print_tweets(request):
 	politician_ids = Politician.objects.values_list('id', flat=True)
+
+	mock_tweets = getTweets(politician_ids[0])
+	# politician_id = politician_ids[1]
 	for politician_id in politician_ids:
 		tweets = getTweets(politician_id)
-		for tweet in tweets: 
-			getTweets(politician_id)
-			for tweet in tweets:
-				processTweet(politician_id, tweet)
+		for tweet in tweets:
+			processTweet(politician_id, tweet)
 	template = loader.get_template('pst/index.html')
 	context = {
-		'tweets': tweets,
+		'tweets': mock_tweets,
 	}	
 	return HttpResponse(template.render(context,request))
 
