@@ -27,10 +27,10 @@ def getTweets(politician_id):
 		tso.set_search_url(querystr + "&tweet_mode=extended")
 
 		ts = TwitterSearch(
-            consumer_key = os.environ.get("CONSUMER_KEY", CONFIG['CONSUMER_KEY']),
-            consumer_secret = os.environ.get("CONSUMER_SECRET", CONFIG['CONSUMER_SECRET']),
-            access_token = os.environ.get("ACCESS_TOKEN", CONFIG['ACCESS_TOKEN']),
-            access_token_secret = os.environ.get("ACCESS_TOKEN_SECRET", CONFIG['ACCESS_TOKEN'])
+            consumer_key = os.environ.get('CONSUMER_KEY', CONFIG['CONSUMER_KEY']),
+            consumer_secret = os.environ.get('CONSUMER_SECRET', CONFIG['CONSUMER_SECRET']),
+            access_token = os.environ.get('ACCESS_TOKEN', CONFIG['ACCESS_TOKEN']),
+            access_token_secret = os.environ.get('ACCESS_TOKEN_SECRET', CONFIG['ACCESS_TOKEN_SECRET'])
         )
 		
 		return ts.search_tweets_iterable(tso)
