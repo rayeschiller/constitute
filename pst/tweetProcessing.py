@@ -1,6 +1,7 @@
 from .models import Tweet, TwitterUser, Politician
 from textblob import TextBlob 
 from textblob.sentiments import NaiveBayesAnalyzer
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from django.db.models import Count
 import re 
 import logging
@@ -41,7 +42,7 @@ def saveNewTweet(tweet, politician_id):
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
         politician = Politician.objects.get(id=politician_id)
         tweetToSave = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
-        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet), 
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), tweet_id=getTweetId(tweet), 
         politician=politician)
         tweetToSave.save()
         print("Tweet " + str(tweetToSave.tweet_id) + " successfully saved")
@@ -91,19 +92,23 @@ def clean_tweet(tweet):
     '''
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
+def clean_tweet_vader(tweet):
+    '''
+    Utility function to clean the text in a tweet by removing 
+    links and special characters using regex.
+    '''
+    return ' '.join(re.sub("(@)", " ", tweet).split())
 
-def getSentimentPolarity(tweet):
-    analysis = TextBlob(clean_tweet(tweet['full_text']))
-    # getSentimentClassification(tweet)
-    # getSentimentSubjectivity(analysis)
-    return analysis.sentiment.polarity
 
-def getSentimentSubjectivity(analysis): 
-    return analysis.subjectivity
+def getSentiment(tweet):
+    analyser = SentimentIntensityAnalyzer()
+    vaderAnalysis = analyser.polarity_scores(clean_tweet_vader(getText(tweet)))
+    print(vaderAnalysis['compound'])
+    return vaderAnalysis['compound']
 
-def getSentimentClassification(tweet): 
-    analysis = TextBlob(tweet['full_text'], analyzer=NaiveBayesAnalyzer())
-    return analysis.sentiment
+def getSentimentSubjectivity(tweet): 
+    analysis = TextBlob(clean_tweet(getText(tweet)))
+    return analysis.subjectivity 
 
 def getText(tweet):
     tweettext = ""
