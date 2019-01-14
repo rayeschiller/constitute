@@ -108,12 +108,12 @@ def clean_tweet(test):
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", test).split())
 
 if __name__ == "__main__":
-    from textblob import TextBlob
-    from textblob.classifiers import NaiveBayesClassifier
-    from textblob.classifiers import DecisionTreeClassifier
-    from textblob import classifiers 
-    import nltk
-    from textblob.sentiments import NaiveBayesAnalyzer
-    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+    # from textblob import TextBlob
+    # from textblob.classifiers import NaiveBayesClassifier
+    # from textblob.classifiers import DecisionTreeClassifier
+    # from textblob import classifiers 
+    # import nltk
+    # from textblob.sentiments import NaiveBayesAnalyzer
+    # from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
     getWordList()
  
