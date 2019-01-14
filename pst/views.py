@@ -5,7 +5,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 from .twitterSearch import getTweets
 from .tweetProcessing import processTweet
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets, filters
 from .serializers import *
@@ -54,8 +53,9 @@ def load_politicians(request):
 class TweetViewSet(viewsets.ModelViewSet):
 	serializer_class = TweetSerializer
 	queryset = Tweet.objects.order_by("-date")
-	filter_backends = (DjangoFilterBackend,)
+	filter_backends = (DjangoFilterBackend,filters.OrderingFilter)
 	filter_fields = ('twitterUser', 'tweet_id', 'politician', 'date', 'location', 'sentiment')
+	ordering_fields = ('politician', 'date', 'sentiment')
 	# search_fields = ('twitterUser', 'date', 'location', 'sentiment')
 	
 class SexistWordViewSet(viewsets.ModelViewSet):

@@ -40,7 +40,7 @@ def incrementTweetCountForUser(userId):
         twitterUser.save()
         # print("Twitter count for user id " + str(userId) + " is incremented to " + str(count))
     except Exception as e:
-        print("User " + str(userId) + "count not incremented with error " + str(e))
+        print("User " + str(userId) + " count not incremented with error " + str(e))
 
 def saveNewTweet(tweet, politician_id):
     try: 
