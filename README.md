@@ -6,3 +6,7 @@ In order to have everything working, you need the following processes:
 3. React server - > npm start
 4. Redis -> Redis-server
 5. Celery -> celery -A siteadmin worker -l info -B
+
+Heroku local port: 5000
+Django server port: 8000
+React js port: 3000
