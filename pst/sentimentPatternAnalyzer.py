@@ -1,6 +1,10 @@
-# from textblob import TextBlob
-# from textblob.classifiers import NaiveBayesClassifier
-# from textblob import classifiers 
+from textblob import TextBlob
+from textblob.classifiers import NaiveBayesClassifier
+from textblob.classifiers import DecisionTreeClassifier
+from textblob import classifiers 
+from textblob.sentiments import NaiveBayesAnalyzer
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+import nltk
 import pandas as pd
 import numpy as np 
 import math
@@ -16,7 +20,13 @@ def getWordList():
 
     wordTraining = list(map(tuple, wordList))
 
+    # nltk.download('movie_reviews')
+    # nltk.download('punkt')
+
     classifier = NaiveBayesClassifier(wordTraining)
+    #classifier = NaiveBayesAnalyzer
+
+    print(classifier)
 
     dt_classifier = DecisionTreeClassifier(wordTraining)
 
@@ -56,12 +66,12 @@ def getAccuracy():
 
 def runSentimentClassifier(classifier): 
     for test in getTestData():
-        print(test)
         testStr = "".join(test)
+        print(testStr)
         cleanStr=clean_tweet(testStr)
         print(cleanStr)
         cleanStr = TextBlob(cleanStr, classifier=classifier)
-        print(cleanStr.classify(), cleanStr.sentiment)
+        cleanStr.classify(), cleanStr.sentiment
         classifier.accuracy(getAccuracy())
         classifier.update(getAccuracy())
         print(classifier.accuracy(getAccuracy()))
@@ -102,6 +112,9 @@ if __name__ == "__main__":
     from textblob.classifiers import NaiveBayesClassifier
     from textblob.classifiers import DecisionTreeClassifier
     from textblob import classifiers 
-    getTestData()
+    import nltk
+    from textblob.sentiments import NaiveBayesAnalyzer
+    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+    #getTestData()
     getWordList()
  

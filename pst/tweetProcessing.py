@@ -2,6 +2,7 @@ from .twitterSearch import getTweets
 from .models import Tweet, TwitterUser
 from textblob import TextBlob 
 from textblob.sentiments import NaiveBayesAnalyzer
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from django.db.models import Count
 import re 
 import logging
@@ -42,7 +43,7 @@ def saveNewTweet(tweet):
     try: 
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
         tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
-        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentimentPolarity(tweet), tweet_id=getTweetId(tweet))
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), tweet_id=getTweetId(tweet))
         tweet.save()
         print('Tweet successfully saved')
     except Exception as e:
@@ -92,19 +93,23 @@ def clean_tweet(tweet):
     '''
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
+def clean_tweet_vader(tweet):
+    '''
+    Utility function to clean the text in a tweet by removing 
+    links and special characters using regex.
+    '''
+    return ' '.join(re.sub("(@)", " ", tweet).split())
 
-def getSentimentPolarity(tweet):
+
+def getSentiment(tweet):
+    analyser = SentimentIntensityAnalyzer()
+    vaderAnalysis = analyser.polarity_scores(clean_tweet_vader(tweet['full_text']))
+    print(vaderAnalysis['compound'])
+    return vaderAnalysis['compound']
+
+def getSentimentSubjectivity(tweet): 
     analysis = TextBlob(clean_tweet(tweet['full_text']))
-    # getSentimentClassification(tweet)
-    # getSentimentSubjectivity(analysis)
-    return analysis.sentiment.polarity
-
-# def getSentimentSubjectivity(analysis): 
-#     return analysis.subjectivity
-
-# def getSentimentClassification(tweet): 
-#     analysis = TextBlob(tweet['full_text'], analyzer=NaiveBayesAnalyzer())
-#     return analysis.sentiment
+    return analysis.subjectivity 
 
 def getText(tweet):
     tweettext = ""
