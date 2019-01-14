@@ -69,8 +69,9 @@ def getUserId(tweet):
 
 def getDate(tweet):    
     # TODO: fix this date field from timezone error
-    convertedDate = time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y'))   
-    return convertedDate
+    # convertedDate = time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y'))   
+    # return convertedDate
+    return tweet['created_at']
 
 def getUsername(tweet):
     return tweet['user']['screen_name']
