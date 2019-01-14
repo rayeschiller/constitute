@@ -71,7 +71,7 @@ def runSentimentClassifier(classifier):
         cleanStr=clean_tweet(testStr)
         print(cleanStr)
         cleanStr = TextBlob(cleanStr, classifier=classifier)
-        cleanStr.classify(), cleanStr.sentiment
+        #cleanStr.classify(), cleanStr.sentiment
         classifier.accuracy(getAccuracy())
         classifier.update(getAccuracy())
         print(classifier.accuracy(getAccuracy()))
