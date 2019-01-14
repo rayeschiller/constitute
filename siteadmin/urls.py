@@ -17,18 +17,19 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
-
 from pst.views import *
 
 router = DefaultRouter()
 router.register(r'tweets', TweetViewSet)
 router.register(r'sexistwords', SexistWordViewSet)
 router.register(r'twitterusers', TwitterUserViewSet)
+router.register(r'politicians', PoliticianViewSet)
 urlpatterns = router.urls
 
 urlpatterns.extend([
   path('admin/', admin.site.urls),
   re_path('home/', TemplateView.as_view(template_name='index.html')),
   path('print_tweets/', print_tweets),
+  path('load_politicians/', load_politicians),
   path('stream_tweets/', streaming)]
 )

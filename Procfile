@@ -1,3 +1,3 @@
 release: python manage.py migrate
-web: gunicorn siteadmin.wsgi --log-file -
+web: newrelic-admin run-program gunicorn siteadmin.wsgi --log-file -
 worker: celery worker --app=siteadmin --beat

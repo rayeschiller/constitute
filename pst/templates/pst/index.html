@@ -1,7 +1,8 @@
 <ul>
 	{% for tweet in tweets %}
-		<li>User: @{{tweet.user.screen_name}}</li>
-		<li>Tweet: {{tweet.full_text}}</li>
-		<li>Created At: {{tweet.created_at}}</li>
+		<li>User: @{{tweet.twitterUser_id}}</li>
+		<li>Tweet: {{tweet.text}}</li>
+		<li>Created At: {{tweet.date}}</li>
+		<li>Sentiment: {{tweet.sentiment}}</li>
 	{% endfor %} 
 </ul>

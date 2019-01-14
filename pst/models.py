@@ -9,13 +9,13 @@ class Tweet(models.Model):
 		related_name='twitterUser',
 		default=0
 	)
-	# associatedPolitician = models.ForeignKey(
-	# 	'Politician',
-	# 	on_delete=models.CASCADE, 
-	# 	related_name='politician',
-	# 	default="",
-	# 	null=True
-	# )
+	politician = models.ForeignKey(
+		'Politician',
+		on_delete=models.CASCADE, 
+		related_name='politician',
+		default="",
+		null=True
+	)
 	is_retweet = models.BooleanField()
 	location = models.CharField(max_length=255)
 	date = models.DateTimeField(auto_now=True)
@@ -26,9 +26,38 @@ class Tweet(models.Model):
 		return self.text
 
 class Politician(models.Model):
+	FEDERAL = 'Federal'
+	STATE = 'State'
+	LOCAL = 'Local'
+	OFFICE_LEVEL_CHOICES = (
+		(FEDERAL, 'Federal'),
+		(STATE, 'State'),
+		(LOCAL, 'Local'),
+	)
+	DEMOCRAT = 'Democrat'
+	REPUBLICAN = 'Republican'
+	POLITICAL_PARTY_CHOICES = (
+		(DEMOCRAT, 'Democrat'),
+		(REPUBLICAN, 'Republican')
+	)
+	MALE = 'Male'
+	FEMALE = 'Female'
+	OTHER = 'Other'
+	GENDER_CHOICES = (
+		(MALE, 'Male'),
+		(FEMALE, 'Female'),
+		(OTHER, 'Other')
+	)
 	first_name = models.CharField(max_length=255)
 	last_name = models.CharField(max_length=255)
-	username = models.CharField(max_length=255)
+	username = models.CharField(max_length=255, unique=True)
+	alternativeName = models.CharField(max_length=255, null=True)
+	district = models.CharField(max_length=255, null=True)
+	office_level = models.CharField(max_length=255, choices=OFFICE_LEVEL_CHOICES, null=True)
+	political_party = models.CharField(max_length=255, choices=POLITICAL_PARTY_CHOICES, null=True)
+	city = models.CharField(max_length=255, null=True)
+	state = models.CharField(max_length=255, null=True)
+	gender = models.CharField(max_length=20, choices=GENDER_CHOICES, null=True)
 
 	def __str__(self):
 		return self.first_name + self.last_name
@@ -46,8 +75,6 @@ class TwitterUser(models.Model):
 	user_full_name = models.CharField(max_length=255, null=True)
 	user_icon = models.CharField(max_length=255, null=True)
 	followers_count = models.IntegerField(null=True)
-	# tweetCount = Tweet.objects.annotate(num_tweets = Count('twitterUser'))
 
 	def __str__(self):
 		return self.user_id + self.username 
-	
