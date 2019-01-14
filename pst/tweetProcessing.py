@@ -90,8 +90,7 @@ def getUserIcon(tweet):
 
 def clean_tweet(tweet, isVaderTweet):
     '''
-    Utility function to clean the text in a tweet by removing 
-    links and special characters using regex.
+    Utility function to clean the text in a tweet by removing links and special characters using regex.
     '''
     if not isVaderTweet:
         return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
@@ -100,12 +99,12 @@ def clean_tweet(tweet, isVaderTweet):
 
 def getSentiment(tweet):
     analyser = SentimentIntensityAnalyzer()
-    vaderAnalysis = analyser.polarity_scores(clean_tweet(getText(tweet), True))
+    vaderAnalysis = analyser.polarity_scores(clean_tweet(getText(tweet), isVaderTweet=True))
     print(vaderAnalysis['compound'])
     return vaderAnalysis['compound']
 
 def getSentimentSubjectivity(tweet): 
-    analysis = TextBlob(clean_tweet(getText(tweet), False))
+    analysis = TextBlob(clean_tweet(getText(tweet), isVaderTweet=False))
     return analysis.subjectivity 
 
 def getText(tweet):
