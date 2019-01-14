@@ -95,7 +95,7 @@ def clean_tweet(tweet):
 def clean_tweet_vader(tweet):
     '''
     Utility function to clean the text in a tweet by removing 
-    links and special characters using regex.
+    @
     '''
     return ' '.join(re.sub("(@)", " ", tweet).split())
 
