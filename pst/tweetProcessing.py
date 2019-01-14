@@ -6,6 +6,8 @@ from django.db.models import Count
 import re 
 import logging
 import time
+import datetime
+import pytz 
 
 def processTweet(politician_id, tweet):
     userId = getUserId(tweet)
@@ -65,8 +67,9 @@ def tweetExists(tweetId):
 def getUserId(tweet):
     return tweet['user']['id']
 
-def getDate(tweet):
-    convertedDate = time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y'))
+def getDate(tweet):    
+    # TODO: fix this date field from timezone error
+    convertedDate = time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y'))   
     return convertedDate
 
 def getUsername(tweet):
