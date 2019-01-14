@@ -12,7 +12,7 @@ def getTweets(politician_id):
 		politician_names = [politician.first_name + " " + politician.last_name, politician.last_name, politician.username]
 	
 		tso = TwitterSearchOrder()			
-		sexistWords = ['bitch', 'skank', 'rape']
+		sexistWords = CONFIG['SEXISTWORDS']
 		searchTerms = []
 
 		for word in sexistWords:

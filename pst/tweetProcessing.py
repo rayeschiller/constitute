@@ -80,34 +80,28 @@ def getLocation(tweet):
     if tweet['place'] is not None:
         location = tweet['place']['full_name']
     return location
-
             
 def getUserIcon(tweet):
     return tweet['user']['profile_image_url_https'] 
 
-def clean_tweet(tweet):
+def clean_tweet(tweet, isVaderTweet):
     '''
     Utility function to clean the text in a tweet by removing 
     links and special characters using regex.
     '''
-    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
-
-def clean_tweet_vader(tweet):
-    '''
-    Utility function to clean the text in a tweet by removing 
-    links and special characters using regex.
-    '''
-    return ' '.join(re.sub("(@)", " ", tweet).split())
-
+    if not isVaderTweet:
+        return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+    if isVaderTweet:
+        return ' '.join(re.sub("(@)", " ", tweet).split())
 
 def getSentiment(tweet):
     analyser = SentimentIntensityAnalyzer()
-    vaderAnalysis = analyser.polarity_scores(clean_tweet_vader(getText(tweet)))
+    vaderAnalysis = analyser.polarity_scores(clean_tweet(getText(tweet), True))
     print(vaderAnalysis['compound'])
     return vaderAnalysis['compound']
 
 def getSentimentSubjectivity(tweet): 
-    analysis = TextBlob(clean_tweet(getText(tweet)))
+    analysis = TextBlob(clean_tweet(getText(tweet), False))
     return analysis.subjectivity 
 
 def getText(tweet):
