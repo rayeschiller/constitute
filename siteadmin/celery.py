@@ -34,7 +34,7 @@ def setup_periodic_tasks(sender, **kwargs):
     )
 
     sender.add_periodic_task(
-        crontab(hour='*', minute="15,45"),
+        crontab(hour='*', minute="15"),
         fetchAllTweets.s(),
         name="Fetch all tweets"
     )
