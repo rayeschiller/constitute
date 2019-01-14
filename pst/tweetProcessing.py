@@ -5,6 +5,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from django.db.models import Count
 import re 
 import logging
+import time
 
 def processTweet(politician_id, tweet):
     userId = getUserId(tweet)
@@ -21,7 +22,9 @@ def processTweet(politician_id, tweet):
 
 def saveNewUser(tweet):
     try:
-        user = TwitterUser(user_id = getUserId(tweet), username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
+        user = TwitterUser(user_id = getUserId(tweet), username=getUsername(tweet), 
+        tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), 
+        followers_count = getFollowers(tweet))
         user.save()
         print('New user Saved with ID ' + str(user.user_id))
     except Exception as e:
@@ -61,7 +64,8 @@ def getUserId(tweet):
     return tweet['user']['id']
 
 def getDate(tweet):
-    return tweet['created_at']
+    convertedDate = time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y'))
+    return convertedDate
 
 def getUsername(tweet):
     return tweet['user']['screen_name']

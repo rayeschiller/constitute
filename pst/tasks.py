@@ -7,12 +7,15 @@ def test(arg):
     print(arg)
 
 @shared_task
-def fetchTweets():
-    from .twitterSearch import getTweets
-    from .tweetProcessing import processTweet
+def fetchSexistTweets():
+    from .fetchTweets import fetchTweets
     from .models import Politician
     politician_ids = Politician.objects.values_list('id', flat=True)
-    for politician_id in politician_ids:
-	    tweets = getTweets(politician_id)	
-	    for tweet in tweets:
-		    processTweet(politician_id, tweet)
+    fetchTweets(politician_ids, True)
+
+@shared_task
+def fetchAllTweets():
+    from .fetchTweets import fetchTweets
+    from .models import Politician
+    politician_ids = Politician.objects.values_list('id', flat=True)
+    fetchTweets(politician_ids, False)

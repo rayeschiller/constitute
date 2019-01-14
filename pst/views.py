@@ -13,18 +13,17 @@ from .twitterStreaming import streamTweets
 import json
 from django.db.models import Count
 import csv
+from .fetchTweets import fetchTweets
 
 # Create your views here.
 def print_tweets(request):
 	politician_ids = Politician.objects.values_list('id', flat=True)
-	mock_tweets = getTweets(politician_ids[0])
-	for politician_id in politician_ids:
-		tweets = getTweets(politician_id)
-		for tweet in tweets:
-			processTweet(politician_id, tweet)
+	fetchTweets(politician_ids, searchOnlySexistWords=True)
+
+	tweetsForUi = Tweet.objects.all().filter(politician=politician_ids[0])
 	template = loader.get_template('pst/index.html')
 	context = {
-		'tweets': mock_tweets,
+		'tweets': tweetsForUi,
 	}	
 	return HttpResponse(template.render(context,request))
 
