@@ -18,7 +18,7 @@ class Tweet(models.Model):
 	)
 	is_retweet = models.BooleanField()
 	location = models.CharField(max_length=255)
-	date = models.DateTimeField()
+	date = models.DateTimeField(auto_now=True)
 	sentiment = models.CharField(max_length=255, null=True)
 	tweet_id = models.CharField(max_length=255, null=True, unique=True)
 
