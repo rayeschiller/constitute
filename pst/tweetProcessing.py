@@ -102,12 +102,12 @@ def clean_tweet_vader(tweet):
 
 def getSentiment(tweet):
     analyser = SentimentIntensityAnalyzer()
-    vaderAnalysis = analyser.polarity_scores(clean_tweet_vader(tweet['full_text']))
+    vaderAnalysis = analyser.polarity_scores(clean_tweet_vader(getText(tweet)))
     print(vaderAnalysis['compound'])
     return vaderAnalysis['compound']
 
 def getSentimentSubjectivity(tweet): 
-    analysis = TextBlob(clean_tweet(tweet['full_text']))
+    analysis = TextBlob(clean_tweet(getText(tweet)))
     return analysis.subjectivity 
 
 def getText(tweet):
