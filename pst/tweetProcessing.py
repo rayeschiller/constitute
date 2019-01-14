@@ -13,11 +13,13 @@ def processTweet(politician_id, tweet):
     if userExists(userId) and tweetExists(tweetId) is False:
         saveNewTweet(tweet, politician_id)
         incrementTweetCountForUser(userId)
+        return True
     elif userExists(userId) is False and tweetExists(tweetId) is False:
         saveNewUser(tweet)
         saveNewTweet(tweet, politician_id)
+        return True
     else:
-        print("Tweet " + str(tweetId) + " and User " + str(userId) + " already exists")
+        return False
 
 
 def saveNewUser(tweet):
@@ -26,7 +28,7 @@ def saveNewUser(tweet):
         tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), 
         followers_count = getFollowers(tweet))
         user.save()
-        print('New user Saved with ID ' + str(user.user_id))
+        # print('New user Saved with ID ' + str(user.user_id))
     except Exception as e:
         print('User not saved with error ' + str(e))
 
@@ -36,7 +38,7 @@ def incrementTweetCountForUser(userId):
         count = Tweet.objects.filter(twitterUser = twitterUser).count()
         twitterUser.tweet_count = count
         twitterUser.save()
-        print("Twitter count for user id " + str(userId) + " is incremented to " + str(count))
+        # print("Twitter count for user id " + str(userId) + " is incremented to " + str(count))
     except Exception as e:
         print("User " + str(userId) + "count not incremented with error " + str(e))
 
@@ -48,7 +50,7 @@ def saveNewTweet(tweet, politician_id):
         date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), tweet_id=getTweetId(tweet), 
         politician=politician)
         tweetToSave.save()
-        print("Tweet " + str(tweetToSave.tweet_id) + " successfully saved")
+        # print("New tweet " + str(tweetToSave.tweet_id) + " successfully saved")
     except Exception as e:
         print('Tweet ' + str(tweetToSave.tweet_id) + ' not saved with error ' + str(e))
   
@@ -100,7 +102,7 @@ def clean_tweet(tweet, isVaderTweet):
 def getSentiment(tweet):
     analyser = SentimentIntensityAnalyzer()
     vaderAnalysis = analyser.polarity_scores(clean_tweet(getText(tweet), isVaderTweet=True))
-    print(vaderAnalysis['compound'])
+    # print(vaderAnalysis['compound'])
     return vaderAnalysis['compound']
 
 def getSentimentSubjectivity(tweet): 

@@ -19,4 +19,4 @@ class TwitterUserSerializer(serializers.HyperlinkedModelSerializer):
 class PoliticianSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Politician
-		fields = ("pk", "first_name", "last_name", "username", "alternativeName", "district", "office_level", "political_party")
+		fields = ("pk", "first_name", "last_name", "username", "alternativeName", "district", "office_level", "political_party", "gender")

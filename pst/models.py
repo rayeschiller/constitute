@@ -40,6 +40,14 @@ class Politician(models.Model):
 		(DEMOCRAT, 'Democrat'),
 		(REPUBLICAN, 'Republican')
 	)
+	MALE = 'Male'
+	FEMALE = 'Female'
+	OTHER = 'Other'
+	GENDER_CHOICES = (
+		(MALE, 'Male'),
+		(FEMALE, 'Female'),
+		(OTHER, 'Other')
+	)
 	first_name = models.CharField(max_length=255)
 	last_name = models.CharField(max_length=255)
 	username = models.CharField(max_length=255, unique=True)
@@ -49,6 +57,7 @@ class Politician(models.Model):
 	political_party = models.CharField(max_length=255, choices=POLITICAL_PARTY_CHOICES, null=True)
 	city = models.CharField(max_length=255, null=True)
 	state = models.CharField(max_length=255, null=True)
+	gender = models.CharField(max_length=20, choices=GENDER_CHOICES, null=True)
 
 	def __str__(self):
 		return self.first_name + self.last_name

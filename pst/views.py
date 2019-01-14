@@ -44,11 +44,12 @@ def load_politicians(request):
 				office_level = row['OfficeLevel'],
 				political_party = row['PoliticalParty'],
 				city = row['City'],
-				state = row['State'])
-				print('Politician' + last_name + ' successfully saved')
+				state = row['State'],
+				gender = row['Gender'])
+				print('Politician ' + last_name + ' successfully saved')
 		except Exception as e:
 			print("Politician did not save " + str(e)) 
-	return HttpResponse("hello")
+	return HttpResponse("Politicians Saved")
 
 class TweetViewSet(viewsets.ModelViewSet):
 	serializer_class = TweetSerializer
@@ -64,6 +65,8 @@ class SexistWordViewSet(viewsets.ModelViewSet):
 class PoliticianViewSet(viewsets.ModelViewSet):
 	serializer_class = PoliticianSerializer
 	queryset = Politician.objects.all()
+	filter_backends = (DjangoFilterBackend,)
+	filter_fields = ('id',)
 
 class TwitterUserViewSet(viewsets.ModelViewSet):
 	serializer_class = TwitterUserSerializer
