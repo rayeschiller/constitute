@@ -30,6 +30,13 @@ def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(
         crontab(hour='*', minute="0,30"),
         fetchSexistTweets.s(),
+        name='Fetch sexist tweets'
+    )
+
+    sender.add_periodic_task(
+        crontab(hour='*', minute="15,45"),
+        fetchAllTweets.s(),
+        name="Fetch all tweets"
     )
 
 @app.task(bind=True)
