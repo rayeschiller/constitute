@@ -1,5 +1,4 @@
-from .twitterSearch import getTweets
-from .models import Tweet, TwitterUser
+from .models import Tweet, TwitterUser, Politician
 from textblob import TextBlob 
 from textblob.sentiments import NaiveBayesAnalyzer
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -7,21 +6,22 @@ from django.db.models import Count
 import re 
 import logging
 
-def processTweet(tweet):
+def processTweet(politician_id, tweet):
     userId = getUserId(tweet)
-    tweetId = getTweetId(tweet)
-
-    if userExists(userId) and not tweetExists(tweetId):
-        saveNewTweet(tweet)
+    tweetId = getTweetId(tweet) 
+    if userExists(userId) and tweetExists(tweetId) is False:
+        saveNewTweet(tweet, politician_id)
         incrementTweetCountForUser(userId)
-    elif not userExists(tweet):
+    elif userExists(userId) is False and tweetExists(tweetId) is False:
         saveNewUser(tweet)
-        saveNewTweet(tweet)
+        saveNewTweet(tweet, politician_id)
+    else:
+        print("Tweet " + str(tweetId) + " and User " + str(userId) + " already exists")
 
 
 def saveNewUser(tweet):
     try:
-        user = TwitterUser(user_id = tweet['user']['id'], username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
+        user = TwitterUser(user_id = getUserId(tweet), username=getUsername(tweet), tweet_count = 1, user_full_name = getUserFullName(tweet), user_icon = getUserIcon(tweet), followers_count = getFollowers(tweet))
         user.save()
         print('New user Saved with ID ' + str(user.user_id))
     except Exception as e:
@@ -30,24 +30,24 @@ def saveNewUser(tweet):
 def incrementTweetCountForUser(userId):
     try:
         twitterUser = TwitterUser.objects.get(user_id = userId)
-        count = int(Tweet.objects.filter(twitterUser = TwitterUser).count())
-        # TwitterUser.objects.annotate(number_of_tweets=Count('twitterUser'))
-        print("Twitter count for user id " + str(twitterUser.username) + " is now " + count)
+        count = Tweet.objects.filter(twitterUser = twitterUser).count()
         twitterUser.tweet_count = count
         twitterUser.save()
-        print("Twitter user has been incremented to " + str(twitterUser.tweet_count))
+        print("Twitter count for user id " + str(userId) + " is incremented to " + str(count))
     except Exception as e:
-        print('User count not incremented with error ' + str(e))
+        print("User " + str(userId) + "count not incremented with error " + str(e))
 
-def saveNewTweet(tweet):
+def saveNewTweet(tweet, politician_id):
     try: 
         twitterUser = TwitterUser.objects.get(user_id = getUserId(tweet))
-        tweet = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
-        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), tweet_id=getTweetId(tweet))
-        tweet.save()
-        print('Tweet successfully saved')
+        politician = Politician.objects.get(id=politician_id)
+        tweetToSave = Tweet(text = getText(tweet), twitterUser = twitterUser, is_retweet=getIsRetweet(tweet), 
+        date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet), tweet_id=getTweetId(tweet), 
+        politician=politician)
+        tweetToSave.save()
+        print("Tweet " + str(tweetToSave.tweet_id) + " successfully saved")
     except Exception as e:
-        print('tweet not saved with error ' + str(e))
+        print('Tweet ' + str(tweetToSave.tweet_id) + ' not saved with error ' + str(e))
   
 def userExists(userId):
     userCount = TwitterUser.objects.filter(user_id=userId).count()
@@ -70,7 +70,7 @@ def getIsRetweet(tweet):
     return 'retweeted_status' in tweet 
 
 def getTweetId(tweet):
-    return tweet['id_str']
+    return tweet['id']
 
 def getFollowers(tweet):
     return tweet['user']['followers_count'] 
@@ -79,7 +79,6 @@ def getLocation(tweet):
     location = ''
     if tweet['place'] is not None:
         location = tweet['place']['full_name']
-        print(tweet['place']['full_name'])
     return location
 
             

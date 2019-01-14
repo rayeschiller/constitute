@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import Tweet, SexistWord, TwitterUser
+from .models import *
 
 class TweetSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Tweet
-		fields = ("pk", "text", "twitterUser", "is_retweet", "location", "date", "sentiment", "tweet_id")
+		fields = ("pk", "text", "is_retweet", "location", "date", "sentiment", "tweet_id", "twitterUser", "politician")
 
 class SexistWordSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
@@ -15,3 +15,8 @@ class TwitterUserSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = TwitterUser
 		fields = ("pk", "username", "user_id", "tweet_count", "followers_count")
+
+class PoliticianSerializer(serializers.HyperlinkedModelSerializer):
+	class Meta:
+		model = Politician
+		fields = ("pk", "first_name", "last_name", "username", "alternativeName", "district", "office_level", "political_party")

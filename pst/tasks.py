@@ -10,7 +10,9 @@ def test(arg):
 def fetchTweets():
     from .twitterSearch import getTweets
     from .tweetProcessing import processTweet
-    tweets = getTweets()
-    for tweet in tweets:
-        processTweet(tweet)
-    print("tweets processed")
+    from .models import Politician
+    politician_ids = Politician.objects.values_list('id', flat=True)
+    for politician_id in politician_ids:
+	    tweets = getTweets(politician_id)	
+	    for tweet in tweets:
+		    processTweet(politician_id, tweet)
