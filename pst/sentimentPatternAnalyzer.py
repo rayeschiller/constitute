@@ -115,6 +115,5 @@ if __name__ == "__main__":
     import nltk
     from textblob.sentiments import NaiveBayesAnalyzer
     from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-    #getTestData()
     getWordList()
  
