@@ -58,8 +58,8 @@ class App extends Component {
       return <div>Loading...</div>
     } else{
     return (
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light">
+     <div className="container">
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
           <a className="navbar-brand" href="/home">Political Sexism on Twitter</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -71,7 +71,9 @@ class App extends Component {
             </div>
           </div>
         </nav>
-        <div className="container-fluid text-center">    
+        <div className="container-fluid text-center">
+        <p>Test for landing</p>
+
           <div className="row content">
             <div className="col-sm-2 sidenav">
             </div>
@@ -82,7 +84,7 @@ class App extends Component {
             <div className="col-sm-2 sidenav">
             </div>
           </div>
-        </div>
+       </div>
         </div>
       
     )
