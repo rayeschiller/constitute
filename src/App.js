@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
+import logoFinal from './logoFinal.png';
+//import Img from 'react-image'
+
+console.log(logoFinal)
 
 const TweetList = (props) => {
   return (
@@ -9,6 +13,9 @@ const TweetList = (props) => {
 
   ); 
 }
+
+var test = document.getElementById('logo');
+test = logoFinal;
 
 class App extends Component {
   
@@ -58,9 +65,13 @@ class App extends Component {
       return <div>Loading...</div>
     } else{
     return (
+    
      <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-          <a className="navbar-brand" href="/home">Political Sexism on Twitter</a>
+        <div className="container">
+          <a className="navbar-brand pull-left" href="/home">
+          <div>
+          <img src={require('./logoFinal.png')} width='100' margintop='-7' /></div></a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -70,10 +81,10 @@ class App extends Component {
               <a className="nav-item nav-link" href="#">By State</a>
             </div>
           </div>
+          </div>
         </nav>
         <div className="container-fluid text-center">
-        <p>Test for landing</p>
-
+  
           <div className="row content">
             <div className="col-sm-2 sidenav">
             </div>
@@ -85,6 +96,7 @@ class App extends Component {
             </div>
           </div>
        </div>
+       
         </div>
       
     )
