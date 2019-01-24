@@ -4,6 +4,8 @@ import {Tweet} from 'react-twitter-widgets';
 
 
 const TweetList = (props) => {
+  console.log('tweet list props');
+  console.log(props)
   return (
     <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweet_id} {...tweet}/>)}
     </div>
@@ -16,6 +18,8 @@ class Tweets extends Component {
 
   constructor(props) {
     super(props)
+    console.log("tweet props");
+    console.log(props);
     this.state = {
       error: null,
       isLoaded: false,
@@ -25,6 +29,7 @@ class Tweets extends Component {
   }
 
   componentDidMount() {
+    console.log("fetching the hostname");
     // fetch(HOST_NAME + TWEET_ENDPOINT) 
     var hostname = "";
     if (window.location.hostname === "localhost"){
@@ -32,6 +37,7 @@ class Tweets extends Component {
     } else {
       hostname = "https://pst-360.herokuapp.com"
     }
+    console.log(hostname);
     fetch(hostname + "/tweets/?format=json")
     .then(res => res.json())
     .then(
@@ -43,6 +49,7 @@ class Tweets extends Component {
             return {"tweetId": tweet.tweet_id};
           })
         });
+        console.log("got result!");
         console.log(result);
       }
     )  

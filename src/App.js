@@ -7,12 +7,12 @@ import Home from './components/Home';
 
 import {
   Route,
-  Link,
-  Switch,
-  Redirect
+  Switch
 } from 'react-router-dom';
 
 const TweetList = (props) => {
+  console.log('tweet list props');
+  console.log(props);
   return (
     <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweet_id} {...tweet}/>)}
     </div>
@@ -21,52 +21,9 @@ const TweetList = (props) => {
 }
 
 class App extends Component {
-  
-  constructor(props) {
-    super(props)
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: [],
-      tweets: [],
-    };
 
-    console.log("*****");
-    console.log("inside App constructor");
-    console.log("*****");
-  }
-
-  // componentDidMount(){
-  //   // fetch(HOST_NAME + TWEET_ENDPOINT) 
-  //   var hostname = "";
-  //   if (window.location.hostname === "localhost"){
-  //      hostname = "http://localhost:8000";
-  //   } else {
-  //     hostname = "https://pst-360.herokuapp.com"
-  //   }
-  //   fetch(hostname + "/tweets/?format=json")
-  //   .then(res => res.json())
-  //   .then(
-  //     (result) => {
-  //       this.setState({
-  //         isLoaded: true,
-  //         items: result,
-  //         tweets: result.results.map(function(tweet){
-  //           return {"tweetId": tweet.tweet_id};
-  //         })
-  //       });
-  //       console.log(result);
-  //     }
-  //   )  
-  // }
 
   render () {
-    const { error, isLoaded} = this.state;
-    if (error){
-      return <div> Error: {error.message}</div>
-    } else if (!isLoaded){
-      return <div>Loading...</div>
-    } else{
     return (
     
      <div className="container">
@@ -81,7 +38,7 @@ class App extends Component {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
-              <a className="nav-item nav-link" href="/tweets">Tweets</a>
+              <a className="nav-item nav-link" href="/appTweets">Tweets</a>
             </div>
           </div>
           </div>
@@ -90,7 +47,7 @@ class App extends Component {
        <div className="App-intro">
         <Switch>
           <Route path="/home" component={Home}/>
-          <Route path="/tweets" component={Tweets}/>
+          <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
         </Switch>
         </div>
 
@@ -100,6 +57,5 @@ class App extends Component {
       
     )
   }
-}
 }
 export default App
