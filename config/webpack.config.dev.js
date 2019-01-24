@@ -131,16 +131,6 @@ module.exports = {
         include: paths.appSrc,
       },
       {
-        test: /\.(png|jp(e*)g|svg)$/,  
-        use: [{
-            loader: 'url-loader',
-            options: { 
-                limit: 8000, // Convert images < 8kb to base64 strings
-                name: 'images/[hash]-[name].[ext]'
-            } 
-        }]
-      },
-      {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
         // back to the "file" loader at the end of the loader list.

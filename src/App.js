@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
 import logoFinal from './logoFinal.png';
-//import Img from 'react-image'
-
-console.log(logoFinal)
 
 const TweetList = (props) => {
   return (
@@ -13,9 +10,6 @@ const TweetList = (props) => {
 
   ); 
 }
-
-var test = document.getElementById('logo');
-test = logoFinal;
 
 class App extends Component {
   

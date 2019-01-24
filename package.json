@@ -102,7 +102,7 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "file-loader": "^1.1.5",
+    "file-loader": "^1.1.11",
     "webpack-bundle-tracker": "^0.3.0"
   }
 }
