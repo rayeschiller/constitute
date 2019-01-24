@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
+import logoFinal from './logoFinal.png';
 
 const TweetList = (props) => {
   return (
@@ -58,9 +59,13 @@ class App extends Component {
       return <div>Loading...</div>
     } else{
     return (
+    
      <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-          <a className="navbar-brand" href="/home">Political Sexism on Twitter</a>
+        <div className="container">
+          <a className="navbar-brand pull-left" href="/home">
+          <div>
+          <img src={logoFinal} width='100' margintop='-7' /></div></a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -70,21 +75,21 @@ class App extends Component {
               <a className="nav-item nav-link" href="#">By State</a>
             </div>
           </div>
+          </div>
         </nav>
         <div className="container-fluid text-center">
-        <p>Test for landing</p>
-
+  
           <div className="row content">
             <div className="col-sm-2 sidenav">
             </div>
             <div className="col-sm-8 text-left"> 
-              <h3>Tweets</h3>
               <TweetList tweets={this.state.tweets} />
             </div>
             <div className="col-sm-2 sidenav">
             </div>
           </div>
        </div>
+       
         </div>
       
     )
