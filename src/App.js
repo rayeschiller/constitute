@@ -71,7 +71,7 @@ class App extends Component {
         <div className="container">
           <a className="navbar-brand pull-left" href="/home">
           <div>
-          <img src={require('./logoFinal.png')} width='100' margintop='-7' /></div></a>
+          <img src={logoFinal} width='100' margintop='-7' /></div></a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
