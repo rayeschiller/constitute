@@ -3,8 +3,6 @@ import './App.css'
 import {Tweet} from 'react-twitter-widgets';
 import logoFinal from './logoFinal.png';
 
-console.log(logoFinal)
-
 const TweetList = (props) => {
   return (
     <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweet_id} {...tweet}/>)}
@@ -12,9 +10,6 @@ const TweetList = (props) => {
 
   ); 
 }
-
-var test = document.getElementById('logo');
-test = logoFinal;
 
 class App extends Component {
   
