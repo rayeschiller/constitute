@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Tweet} from 'react-twitter-widgets';
+import './styles.css'
 
 
 
@@ -63,8 +64,8 @@ render () {
     return <div>Loading...</div>
   } else{
   return (
-  <div className="container-fluid text-center">
-  
+  <div className="container-fluid text-center tweets">
+  <h2 className="tweetHeader">Trending Tweets</h2>
   <div className="row content">
     <div className="col-sm-2 sidenav">
     </div>
