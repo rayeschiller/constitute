@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
 import logoFinal from './logoFinal.png';
-//import Img from 'react-image'
 
 console.log(logoFinal)
 
@@ -89,7 +88,6 @@ class App extends Component {
             <div className="col-sm-2 sidenav">
             </div>
             <div className="col-sm-8 text-left"> 
-              <h3>Tweets</h3>
               <TweetList tweets={this.state.tweets} />
             </div>
             <div className="col-sm-2 sidenav">
