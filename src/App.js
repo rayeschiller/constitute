@@ -5,6 +5,8 @@ import logoFinal from './logoFinal.png';
 import Tweets from './components/Tweets';
 import Home from './components/Home';
 
+import Helmet from 'react-helmet';
+
 import {
   Route,
   Switch
@@ -25,9 +27,9 @@ class App extends Component {
 
   render () {
     return (
-    
      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+      <Helmet bodyAttributes={{style: 'background-color : #b3cccc'}}/>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div className="container">
           <a className="navbar-brand pull-left" href="/home">
           <div>
