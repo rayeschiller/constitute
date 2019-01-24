@@ -63,10 +63,15 @@ render () {
     return <div>Loading...</div>
   } else{
   return (
+    
   <div className="container-fluid text-center">
   
   <div className="row content">
     <div className="col-sm-2 sidenav">
+    <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
     </div>
     <div className="col-sm-8 text-left"> 
       <TweetList tweets={this.state.tweets} />
