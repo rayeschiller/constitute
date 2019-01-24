@@ -2,6 +2,15 @@ import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
 import logoFinal from './logoFinal.png';
+import Tweets from './components/Tweets';
+import Home from './components/Home';
+
+import {
+  Route,
+  Link,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 
 const TweetList = (props) => {
   return (
@@ -27,29 +36,29 @@ class App extends Component {
     console.log("*****");
   }
 
-  componentDidMount(){
-    // fetch(HOST_NAME + TWEET_ENDPOINT) 
-    var hostname = "";
-    if (window.location.hostname === "localhost"){
-       hostname = "http://localhost:8000";
-    } else {
-      hostname = "https://pst-360.herokuapp.com"
-    }
-    fetch(hostname + "/tweets/?format=json")
-    .then(res => res.json())
-    .then(
-      (result) => {
-        this.setState({
-          isLoaded: true,
-          items: result,
-          tweets: result.results.map(function(tweet){
-            return {"tweetId": tweet.tweet_id};
-          })
-        });
-        console.log(result);
-      }
-    )  
-  }
+  // componentDidMount(){
+  //   // fetch(HOST_NAME + TWEET_ENDPOINT) 
+  //   var hostname = "";
+  //   if (window.location.hostname === "localhost"){
+  //      hostname = "http://localhost:8000";
+  //   } else {
+  //     hostname = "https://pst-360.herokuapp.com"
+  //   }
+  //   fetch(hostname + "/tweets/?format=json")
+  //   .then(res => res.json())
+  //   .then(
+  //     (result) => {
+  //       this.setState({
+  //         isLoaded: true,
+  //         items: result,
+  //         tweets: result.results.map(function(tweet){
+  //           return {"tweetId": tweet.tweet_id};
+  //         })
+  //       });
+  //       console.log(result);
+  //     }
+  //   )  
+  // }
 
   render () {
     const { error, isLoaded} = this.state;
@@ -71,24 +80,21 @@ class App extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <a className="nav-item nav-link active" href="#">Home <span className="sr-only">(current)</span></a>
-              <a className="nav-item nav-link" href="#">By State</a>
+              <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
+              <a className="nav-item nav-link" href="/tweets">Tweets</a>
             </div>
           </div>
           </div>
         </nav>
-        <div className="container-fluid text-center">
-  
-          <div className="row content">
-            <div className="col-sm-2 sidenav">
-            </div>
-            <div className="col-sm-8 text-left"> 
-              <TweetList tweets={this.state.tweets} />
-            </div>
-            <div className="col-sm-2 sidenav">
-            </div>
-          </div>
-       </div>
+
+       <div className="App-intro">
+        <Switch>
+          <Route path="/home" component={Home}/>
+          <Route path="/tweets" component={Tweets}/>
+        </Switch>
+        </div>
+
+
        
         </div>
       
