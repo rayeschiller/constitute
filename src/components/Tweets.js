@@ -67,9 +67,9 @@ render () {
   <div className="container-fluid text-center tweets">
   <h2 className="tweetHeader">Trending Tweets</h2>
   <div className="row content">
-    <div className="col-sm-2 sidenav">
+    <div className="col-sm-3 sidenav">
     </div>
-    <div className="col-sm-8 text-left"> 
+    <div className="col-sm-7 text-left"> 
       <TweetList tweets={this.state.tweets} />
     </div>
     <div className="col-sm-2 sidenav">

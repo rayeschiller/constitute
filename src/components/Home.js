@@ -6,6 +6,9 @@ const Home = () => (
   <div>
       <Helmet bodyAttributes={{style: 'background-color : #b3cccc'}}/>
       <h1 className='homeHeader'>HOME</h1>
+      <div>
+      test
+    </div>
   </div>
 );
 

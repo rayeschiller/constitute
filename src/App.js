@@ -12,15 +12,6 @@ import {
   Switch
 } from 'react-router-dom';
 
-const TweetList = (props) => {
-  console.log('tweet list props');
-  console.log(props);
-  return (
-    <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweet_id} {...tweet}/>)}
-    </div>
-
-  ); 
-}
 
 class App extends Component {
 
