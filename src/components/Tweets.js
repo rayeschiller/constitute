@@ -16,6 +16,10 @@ const TweetList = (props) => {
 
 class Tweets extends Component {
 
+  handleClick(){
+    console.log('LOL')
+  }
+
   constructor(props) {
     super(props)
     console.log("tweet props");
@@ -65,7 +69,7 @@ render () {
   return (
     
   <div className="container-fluid text-center">
-  
+    <button onClick={this.handleClick.bind(this)}>Click me!</button>  
   <div className="row content">
     <div className="col-sm-2 sidenav">
     <a href="#">About</a>
