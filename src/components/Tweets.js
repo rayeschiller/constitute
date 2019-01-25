@@ -61,6 +61,9 @@ class Tweets extends Component {
     )  
   }
 
+  //<button onClick={this.handleClick.bind(this)}>Click me!</button>  
+  
+
 render () {
   const { error, isLoaded} = this.state;
   if (error){
@@ -70,7 +73,16 @@ render () {
   } else{
   return (
   <div className="container-fluid text-center tweets">
-  <button onClick={this.handleClick.bind(this)}>Click me!</button>  
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" onClick={this.handleClick.bind(this)}>Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div> 
   <h2 className="tweetHeader">Trending Tweets</h2>
   <div className="row content">
     <div className="col-sm-3 sidenav">
