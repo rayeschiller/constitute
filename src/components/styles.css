@@ -1,11 +1,116 @@
 .homeHeader {
-    margin-top: 150px;
+    margin-top: 75px;
     text-align: center;
 }
 .tweets {
-    margin-top: 80px;
     text-align: center;
 }
 .tweetHeader {
     text-align: center;
 }
+
+/*header style*/
+.header{
+    background-image: url('pst-home-image.jpeg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+   }
+
+   .overlay{
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(244, 244, 244, 0.79);
+   }
+
+   .description{
+    position: absolute;
+    top: 30%;
+    margin: auto;
+    padding: 2em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.description h1{
+ color:maroon ;
+ font-size: 3.5em;
+}
+.description p{
+ color:#666;
+ font-size: 20px;
+ width: 50%;
+ line-height: 1.5;
+}
+.description button{
+ border:1px  solid #F97300;
+ background:#F97300;
+ color:#fff;
+}
+
+.about{
+    margin: 4em 0;
+    padding: 1em;
+    position: relative;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   }
+   .about h1{
+    color:maroon;
+    margin: 2em;
+    text-align: center
+   }
+   .about img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%
+   }
+   .about span{
+    display: block;
+    color: #888;
+    position: absolute;
+    left: 115px;
+   }
+   .about .desc{
+    padding: 2em;
+    border-left:4px solid maroon;
+   }
+   .about .desc h3{
+    color:crimson;
+   }
+   .about .desc p{
+    line-height:2;
+    color:#888;
+   }
+
+   .about h3 img{
+       width: 20%;
+   }
+
+   .team{
+    margin: 4em 0;
+    position: relative;  
+   }
+   .team h1{
+    color:#F97300;
+    margin: 2em; 
+   }
+   .team .item{
+    position: relative;
+   }
+   .team .des{
+    background: #F97300;
+    color: #fff;
+    text-align: center;
+    border-bottom-left-radius: 93%;
+    transition:.3s ease-in-out;
+   }
+
+   .container-team {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(244, 244, 244, 0.79);
+   }
