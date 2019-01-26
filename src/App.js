@@ -4,6 +4,7 @@ import {Tweet} from 'react-twitter-widgets';
 import logoFinal from './logoFinal.png';
 import Tweets from './components/Tweets';
 import Home from './components/Home';
+import Map from './components/Map';
 
 import Helmet from 'react-helmet';
 
@@ -33,6 +34,7 @@ class App extends Component {
               <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
               <a className="nav-item nav-link" href="/appTweets">Tweets</a>
               <a className="nav-item nav-link" href="/vis">Top Words</a>
+              <a className="nav-item nav-link" href="/maps">Maps</a>
             </div>
           </div>
           </div>
@@ -43,6 +45,7 @@ class App extends Component {
           <Route path="/home" component={Home}/>
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path='/vis' component={() => { window.location = 'http://localhost:8080/'; return null;} }/>
+          <Route path="/maps" component={Map}/>
         </Switch>
         </div>
 
