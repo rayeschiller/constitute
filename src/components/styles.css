@@ -115,6 +115,31 @@
        padding: 0 auto;
    }
 
+   .twitter-widget-holder {
+    max-height:400px; 
+    max-width:320px; 
+    padding:20px; 
+    background:#fff; 
+    border-radius:3px; 
+    box-shadow:2px 2px 3px rgba(0,0,0,.1);
+
+   }
+
+   .jumbotron {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height:600px; 
+    max-width: 100%;
+   }
+
+   .pics {
+       margin-bottom: 10px;
+       max-width: 150px !important;
+   }
+
+   .tweet-list {
+       margin-top: -10px;
+   }
    .circular {
     width: 300px;
     height: 300px;
