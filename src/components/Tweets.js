@@ -133,7 +133,7 @@ render () {
           <option value="28">Bernie Sanders</option>
         </select>
     </div>
-    <div className="col-sm-7 text-left"> 
+    <div className="col-sm-7 text-left tweet-list"> 
       <TweetList tweets={this.state.tweets} />
     </div>
     <div className="col-sm-2 sidenav">

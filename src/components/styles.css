@@ -134,5 +134,9 @@
 
    .pics {
        margin-bottom: 10px;
-       max-width: 190px;
+       max-width: 150px !important;
+   }
+
+   .tweet-list {
+       margin-top: -10px;
    }

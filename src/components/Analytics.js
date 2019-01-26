@@ -111,37 +111,37 @@ class Analytics extends Component {
   } else{
         return (
             <div class="container-fluid">
-            <div className="jumbotron">
-                <center><h1>Trending Sexist Tweets</h1>
-                    <TweetList tweets={this.state.tweets} width="280" data-chrome="transparent noscrollbar" />
-                </center>
-            </div>
-            <div className="container">
-            <div className="row">
-                <div className="col-sm">
-                    <img value="1" src={AOC} className="img-fluid pics" 
-                    onClick={this.handleClick.bind(this)}/>
+                <div className="jumbotron">
+                    <center><h1>Trending Sexist Tweets</h1>
+                        <TweetList tweets={this.state.tweets} width="280" data-chrome="transparent noscrollbar" />
+                    </center>
                 </div>
-                <div className="col-sm">
-                    <img value="2" src={Pressley} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
-                </div>
-                <div className="col-sm">
-                    <img value="4" src={Warren} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
-                </div>
-            </div>
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm">
-                        <img value="8" src={Harris} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm col-auto">
+                            <img value="1" src={AOC} className="img-fluid pics" 
+                            onClick={this.handleClick.bind(this)}/>
+                        </div>
+                        <div className="col-sm col-auto">
+                            <img value="2" src={Pressley} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                        </div>
+                        <div className="col-sm col-auto">
+                            <img value="4" src={Warren} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                        </div>
                     </div>
-                    <div className="col-sm">
-                        <img value="5" src={Gillibrand} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+              
+                    <div className="row">
+                        <div className="col-sm col-auto">
+                            <img value="8" src={Harris} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                        </div>
+                        <div className="col-sm col-auto">
+                            <img value="5" src={Gillibrand} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                        </div>
+                        <div className="col-sm col-auto">
+                            <img value="12" src={Collins} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                        </div>
                     </div>
-                    <div className="col-sm">
-                        <img value="12" src={Collins} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
-                    </div>
-                </div>
-                </div>
+            
             </div>
 
 
