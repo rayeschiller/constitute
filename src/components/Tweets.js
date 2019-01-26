@@ -110,9 +110,12 @@ render () {
   } else{
   return (
   <div className="container-fluid text-center tweets">
-<div>
-        <select className="browser-default custom-select" onChange={this.onDropdownSelected.bind(this)}>
-          <option>Choose your option</option>
+
+  <h2 className="tweetHeader">Trending Tweets</h2>
+  <div className="row content">
+    <div className="col-sm-3 sidenav">
+    <select className="browser-default custom-select" onChange={this.onDropdownSelected.bind(this)}>
+          <option>Choose politician</option>
           <option value="1">Alexandria Ocasio-Cortez</option>
           <option value="2">Ayanna Pressley</option>
           <option value="3">Nancy Pelosi</option>
@@ -126,24 +129,9 @@ render () {
           <option value="11">Marilyn Mosby</option>
           <option value="12">Susan Collins</option>
           <option value="13">Lisa Murkowski</option>
-          <option value="14">Chuck Schumer</option>
-          <option value="15">Bernie Sanders</option>
+          <option value="27">Chuck Schumer</option>
+          <option value="28">Bernie Sanders</option>
         </select>
-      </div>
-
-  {/* <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button> */}
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" onClick={this.handleClick.bind(this)}>Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-{/* </div>  */}
-  <h2 className="tweetHeader">Trending Tweets</h2>
-  <div className="row content">
-    <div className="col-sm-3 sidenav">
     </div>
     <div className="col-sm-7 text-left"> 
       <TweetList tweets={this.state.tweets} />

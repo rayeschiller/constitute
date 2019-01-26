@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Tweet } from 'react-twitter-widgets';
+import './styles.css'
 import AOC from './AOC.jpg'
 import Pressley from './images/AyannaPressley.jpg'
 import Haaland from './images/DebHaaland.jpg'
@@ -32,8 +33,8 @@ class Analytics extends Component {
         }
 
 
-        console.log(hostname + `/tweets/?politicians=${pk}&sort=-sentiment&format=json`);
-        fetch(hostname + `/tweets/?politicians=${pk}&sort=-sentiment&format=json`)
+        console.log(hostname + `/tweets/?politician=${pk}&sort=-sentiment&format=json`);
+        fetch(hostname + `/tweets/?politician=${pk}&sort=-sentiment&format=json`)
         .then(res => res.json())
         .then(
         (result) => {
@@ -82,9 +83,8 @@ class Analytics extends Component {
         } else {
           hostname = "https://pst-360.herokuapp.com"
         }
-
         console.log(hostname);
-        fetch(hostname + "/tweets/?sort=sentiment&format=json")
+        fetch(hostname + "/tweets/?format=json")
         .then(res => res.json())
         .then(
           (result) => {
@@ -92,7 +92,6 @@ class Analytics extends Component {
               isLoaded: true,
               items: result,
               tweets: result.results.map(function(tweet){
-                  console.log(tweet.sentiment);
                 return {"tweetId": tweet.tweet_id};
               })
             });
@@ -111,41 +110,45 @@ class Analytics extends Component {
     return <div>Loading...</div>
   } else{
         return (
+            <div class="container-fluid">
             <div className="jumbotron">
-            <div className="container-fluid">
-                <img value="1" src={AOC} className="img-fluid" 
-                onClick={this.handleClick.bind(this)}/>
-            </div>
-            <div className="container-fluid">
-                <img value="2" src={Pressley} className="img-fluid" onClick={this.handleClick.bind(this)} />
-            </div>
-            <div className="container-fluid">
-                <img value="9" src={Haaland} className="img-fluid" onClick={this.handleClick.bind(this)} />
-            </div>
-            <div className="container-fluid">
-                <img value="8" src={Harris} className="img-fluid" onClick={this.handleClick.bind(this)} />
-            </div>
-            <div className="container-fluid">
-                <img value="5" src={Gillibrand} className="img-fluid" onClick={this.handleClick.bind(this)} />
-            </div>
-            <div className="container-fluid">
-                <img value="12" src={Collins} className="img-fluid" onClick={this.handleClick.bind(this)} />
-            </div>
-            <div className="container-fluid">
-                <img value="4" src={Warren} className="img-fluid" onClick={this.handleClick.bind(this)} />
+                <center><h1>Trending Sexist Tweets</h1>
+                    <TweetList tweets={this.state.tweets} width="280" data-chrome="transparent noscrollbar" />
+                </center>
             </div>
             <div className="container">
-            <center><h1>Trending Sexist Tweets</h1>
-            <TweetList tweets={this.state.tweets} />
-            </center>
+            <div className="row">
+                <div className="col-sm">
+                    <img value="1" src={AOC} className="img-fluid pics" 
+                    onClick={this.handleClick.bind(this)}/>
+                </div>
+                <div className="col-sm">
+                    <img value="2" src={Pressley} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                </div>
+                <div className="col-sm">
+                    <img value="4" src={Warren} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                </div>
             </div>
-            
-            <div className="container-fluid">
-                <img src={AOC} className="img-fluid" />
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm">
+                        <img value="8" src={Harris} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                    </div>
+                    <div className="col-sm">
+                        <img value="5" src={Gillibrand} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                    </div>
+                    <div className="col-sm">
+                        <img value="12" src={Collins} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                    </div>
+                </div>
+                </div>
             </div>
 
-        </div>
-        )
+
+            </div>
+
+       
+        );
     }
 }
 }
