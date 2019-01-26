@@ -27,15 +27,20 @@
 <body>
     <h3>Tweet Count by Politician</h3>
     <script type="text/javascript" charset="utf-8">
-    
+        var hostname = "";
+        if (window.location.hostname === "localhost"){
+        hostname = "http://localhost:8000";
+        } else {
+        hostname = "https://pst-360.herokuapp.com"
+        }
         function dblclick(d){
             console.log(d.data.pk);
-            window.location.assign("http://localhost:8000/data_viz/" + d.data.pk, '_blank');
+            window.location.assign(hostname +"/data_viz/" + d.data.pk, '_blank');
         }
 
         $(document).ready(function(){
-            $.getJSON('http://localhost:8000/politicians/?format=json', function(politicians_data) {
-            $.getJSON('http://localhost:8000/tweets/?format=json', function(tweet_data) {                
+            $.getJSON(hostname + '/politicians/?format=json', function(politicians_data) {
+            $.getJSON(hostname + '/tweets/?format=json', function(tweet_data) {                
                 var width = 1000 //max size of the bubbles
                 var height =800
                 // var color = d3.scaleOrdinal(d3.schemeAccent);
