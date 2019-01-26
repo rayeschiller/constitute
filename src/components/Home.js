@@ -7,6 +7,7 @@ import aboutImg from './about-img.jpg'
 import rina from './rina.jpg'
 import jules from './jules.jpg'
 import nat from './nat.jpg'
+import Chart from './Chart'
 
 class Home extends Component {
   
@@ -53,6 +54,10 @@ We want to: Use sexist words along with most prominent female politicians of the
   </div>
   </div>
 
+  <div>
+  <Chart></Chart>
+</div>
+
 <div className="team">
     <h1 className="text-center">Our Team</h1>
   <div className="row">
@@ -63,7 +68,7 @@ We want to: Use sexist words along with most prominent female politicians of the
     <div className="des">
       Natalie
      </div>
-    <div className="text-muted">Manager</div>
+    <div className="text-muted">Natalie is a full stack software engineer at JP Morgan in Asset and Wealth Management. She graduated from Colby College in Maine with a major in mathematics. Her interests include politics, coding and mathematics.</div>
    </div>
    <div className="col-lg-4 col-md-4 col-sm-12 item">
    <div className='circular'>
@@ -72,7 +77,7 @@ We want to: Use sexist words along with most prominent female politicians of the
     <div className="des">
        Rina
      </div>
-    <div className="text-muted">Rina Schiller is a software engineer in the investment bank at JPMorgan Chase. She graduated from Hunter college in NYC with a major in digital media and minors in computer science and gender studies. She is very passionate about politics, gender equality, technology, and short hair.</div>
+    <div className="text-muted">Rina is a software engineer at JPMorgan Chase. She graduated from Hunter college in NYC with a major in digital media and minors in computer science and gender studies. She is very passionate about politics, gender equality, technology, and short hair.</div>
    </div>
    <div className="col-lg-4 col-md-4 col-sm-12 item">
    <div className='circular'>
@@ -81,13 +86,13 @@ We want to: Use sexist words along with most prominent female politicians of the
     <div className="des">
       Jules
      </div>
-    <div className="text-muted">Front End Developer</div>
+    <div className="text-muted">Jules is a developer a JP Morgan. She graduated from Baruch College with a degree in Information Systems, English, NYC Studies, and International Relations. She is passionate about creating inclusive spaces to discuss gender inequities.</div>
    </div>
   </div>
 </div>
 
 <nav class="navbar fixed-bottom navbar-light bg-dark">
-  <a class="navbar-brand" href="#">Together we can effect change!</a>
+  <a class="navbar-brand" href="#">Together we can affect change!</a>
 </nav>
 </div>
     )

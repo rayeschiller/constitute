@@ -4,6 +4,8 @@ import {Tweet} from 'react-twitter-widgets';
 import logoFinal from './logoFinal.png';
 import Tweets from './components/Tweets';
 import Home from './components/Home';
+import Analytics from './components/Analytics';
+import Map from './components/Map';
 
 import Helmet from 'react-helmet';
 
@@ -12,15 +14,23 @@ import {
   Switch
 } from 'react-router-dom';
 
+const TweetList = (props) => {
+  console.log('tweet list props');
+  console.log(props);
+  return (
+    <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweet_id} {...tweet}/>)}
+    </div>
+
+  ); 
+}
+
 
 class App extends Component {
-
 
   render () {
     return (
      <div className="container">
-      <Helmet bodyAttributes={{style: 'background-color : #b3cccc'}}/>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
         <div className="container">
           <a className="navbar-brand pull-left" href="/home">
           <div>
@@ -32,6 +42,9 @@ class App extends Component {
             <div className="navbar-nav">
               <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
               <a className="nav-item nav-link" href="/appTweets">Tweets</a>
+              <a className="nav-item nav-link" href="/analytics">Analytics</a>
+              <a className="nav-item nav-link" href="/vis">Top Words</a>
+              <a className="nav-item nav-link" href="/maps">Maps</a>
             </div>
           </div>
           </div>
@@ -41,6 +54,10 @@ class App extends Component {
         <Switch>
           <Route path="/home" component={Home}/>
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
+          <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
+          <Route path="/analytics" component={Analytics} />
+          <Route path='/vis' component={() => { window.location = 'http://localhost:8080/'; return null;} }/>
+          <Route path="/maps" component={Map}/>
         </Switch>
         </div>
 
