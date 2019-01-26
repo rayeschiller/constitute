@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
@@ -13,6 +13,8 @@ import json
 from django.db.models import Count
 import csv
 from .fetchTweets import fetchTweets
+import json
+
 
 # Create your views here.
 def print_tweets(request):
@@ -25,6 +27,15 @@ def print_tweets(request):
 		'tweets': tweetsForUi,
 	}	
 	return HttpResponse(template.render(context,request))
+
+def data_viz_tweets(request):
+	template = loader.get_template('pst/dataviz.html')
+	politicianQuerySet = Politician.objects.annotate(num_tweets=Count('politician'))
+	
+	context = {
+		'politicianTweetCount': politicianQuerySet,
+	}	
+	return HttpResponse(template.render(context, request))
 
 def load_politicians(request):
 	data = csv.DictReader(open("./resources/politicians.csv"))
@@ -48,6 +59,16 @@ def load_politicians(request):
 				print('Politician ' + last_name + ' successfully saved')
 		except Exception as e:
 			print("Politician did not save " + str(e)) 
+  	
+	politicians = Politician.objects.all()
+	for politician in politicians:
+		if politician.tweet_count is None or politician.tweet_count == 0:
+			try:
+				count = Tweet.objects.filter(politician = politician).count()
+				politician.tweet_count = count
+				politician.save()
+			except:
+				print("Politician " + str(politician.last_name) + " was not saved")
 	return HttpResponse("Politicians Saved")
 
 class TweetViewSet(viewsets.ModelViewSet):
@@ -65,8 +86,9 @@ class SexistWordViewSet(viewsets.ModelViewSet):
 class PoliticianViewSet(viewsets.ModelViewSet):
 	serializer_class = PoliticianSerializer
 	queryset = Politician.objects.all()
-	filter_backends = (DjangoFilterBackend,)
+	filter_backends = (DjangoFilterBackend,filters.OrderingFilter)
 	filter_fields = ('id',)
+	ordering_fields = ('state', 'tweet_count')
 
 class TwitterUserViewSet(viewsets.ModelViewSet):
 	serializer_class = TwitterUserSerializer
