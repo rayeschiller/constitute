@@ -24,10 +24,16 @@
             }
         </style>
 </head>
+<a href="javascript:history.back()" style="float: right; padding: 10px;"><h3> Back</h3><i class="fa fa-arrow-left"></i></a>
 <body>
     <h3>Tweet Count by Politician</h3>
     <script type="text/javascript" charset="utf-8">
-    
+        if (window.location.hostname === "localhost"){
+          hostname = "http://localhost:8000";
+        } else {
+          hostname = "https://pst-360.herokuapp.com"
+        }
+        
         function dblclick(d){
             console.log(d.data.pk);
             window.location.assign("http://localhost:8000/data_viz/" + d.data.pk, '_blank');

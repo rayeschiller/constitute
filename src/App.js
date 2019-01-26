@@ -44,7 +44,8 @@ class App extends Component {
               <a className="nav-item nav-link" href="/appTweets">Tweets</a>
               <a className="nav-item nav-link" href="/analytics">Analytics</a>
               <a className="nav-item nav-link" href="/vis">Top Words</a>
-              <a className="nav-item nav-link" href="/maps">Maps</a>
+              {/* <a className="nav-item nav-link" href="/maps">Maps</a> */}
+              <a className="nav-item nav-link" href="/politicians">Politician Breakdown</a>
             </div>
           </div>
           </div>
@@ -57,7 +58,8 @@ class App extends Component {
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/analytics" component={Analytics} />
           <Route path='/vis' component={() => { window.location = 'http://localhost:8080/'; return null;} }/>
-          <Route path="/maps" component={Map}/>
+          {/* <Route path="/maps" component={Map}/> */}
+          <Route path='/politicians' component={() => { window.location = 'http://localhost:8000/data_viz/'; return null;} }/>
         </Switch>
         </div>
 
