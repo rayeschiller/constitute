@@ -46,7 +46,7 @@ class Chart extends Component {
 				color: "#7f7f7f",
 				name: "Negative",
 				showInLegend: true,
-				indexLabel: "{y}%",
+				indexLabel: "{y}",
 				indexLabelFontColor: "white",
 				yValueFormatString: "#,###'%'",
 				dataPoints: [
