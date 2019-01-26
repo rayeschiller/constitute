@@ -32,5 +32,6 @@ urlpatterns.extend([
   path('print_tweets/', print_tweets),
   path('load_politicians/', load_politicians),
   path('stream_tweets/', streaming),
-  path('data_viz/', data_viz_tweets)]
+  path('data_viz/', data_viz_tweets),
+  re_path(r'^data_viz/(?P<pk>\d+)/$', data_viz_details, name='data_viz_details'),]
 )

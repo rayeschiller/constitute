@@ -1,9 +1,10 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
         <!-- <script src="{% static 'd3/d3.min.js' %}"></script>  -->
         <!-- <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>  -->
+        <!-- <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script> -->
         <script src="../../static/d3/d3.min.js"></script>
         <script src="../../static/js/jquery-3.3.1.min.js"></script>
         <style>
@@ -37,18 +38,23 @@
                 return politician_counts;
         }
         
+        function dblclick(d){
+            console.log(d.data.pk);
+            window.location.assign("http://localhost:8000/data_viz/" + d.data.pk, '_blank');
+        }
+
         $(document).ready(function(){
             $.getJSON('http://localhost:8000/politicians/?format=json', function(politicians_data) {
             $.getJSON('http://localhost:8000/tweets/?format=json', function(tweet_data) {                
                 var width = 1000 //max size of the bubbles
                 var height =800
-                // var color = d3.scaleOrdinal(d3.schemeCategory20);
+                // var color = d3.scaleOrdinal(d3.schemeAccent);
                 var scale = d3.scaleLinear()
                     .domain([100, 3000])
                     .range([50, 300]);
                 var color = d3.scaleLinear()
-                    .domain([0,20]) //map colors based on value
-                    .range(['#47DFFF', 'green' ]); //color category
+                    .domain([0,5]) //map colors based on value
+                    .range(['green', '#47DFFF']); //color category
                 var politiciansData = {};
                 politiciansData['children'] = politicians_data.results;
                
@@ -83,6 +89,9 @@
                     .attr("transform", function(d) {
                         return "translate(" + d.x + "," + d.y + ")";
                     });
+                
+                node.append("a")
+                 .attr("xlink:href", "http://en.wikipedia.org");                
 
                 node.append("title")
                     .text(function(d) { return d.data.pk; });
@@ -93,12 +102,13 @@
                         return color(i);
                     })
                     .on("mouseover", function(d){ 
+                        console.log(d.data)
                         div.transition()		
                             .duration(200)		
                             .style("opacity", .9);		
-                        div	.html(d.data.first_name + " " + d.data.last_name 
-                            + "<br/>"  + d.data.tweet_count
-                            + "<br/" + d.data.political_party
+                        div.html(d.data.first_name + " " + d.data.last_name 
+                            + "<br/>"  + d.data.tweet_count + " tweets"
+                            + "<br/>" + d.data.political_party
                             + "<br/>"  + d.data.office_level
                             )
                             
@@ -109,7 +119,9 @@
                         div.transition()		
                             .duration(500)		
                             .style("opacity", 0);	
-                    });
+                    })
+                    .on("dblclick", dblclick);
+                
                 
                 node.append("text")
                     .attr("dy", ".2em")
@@ -134,12 +146,7 @@
                         return d.r/5;
                     })
                     .attr("fill", "black");
-
-
-                
-                    
             }); 
-
             });
         })
     </script>

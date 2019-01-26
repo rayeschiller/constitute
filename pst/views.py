@@ -37,6 +37,13 @@ def data_viz_tweets(request):
 	}	
 	return HttpResponse(template.render(context, request))
 
+def data_viz_details(request, pk):
+	template = loader.get_template('pst/datavizdetails.html')
+	context = {
+		'pk': pk,
+	}	
+	return HttpResponse(template.render(context, request))
+
 def load_politicians(request):
 	data = csv.DictReader(open("./resources/politicians.csv"))
 	for row in data:
