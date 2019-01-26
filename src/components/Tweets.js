@@ -112,7 +112,7 @@ render () {
   <div className="container-fluid text-center tweets">
 
   <h2 className="tweetHeader">Trending Tweets</h2>
-  <div className="row content">
+  <div className="row">
     <div className="col-sm-3 sidenav">
     <select className="browser-default custom-select" onChange={this.onDropdownSelected.bind(this)}>
           <option>Choose politician</option>

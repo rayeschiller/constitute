@@ -34,7 +34,7 @@ class Analytics extends Component {
 
 
         console.log(hostname + `/tweets/?politician=${pk}&sort=-sentiment&format=json`);
-        fetch(hostname + `/tweets/?politician=${pk}&sort=-sentiment&format=json`)
+        fetch(hostname + `/tweets/?politician=${pk}&ordering=-sentiment&format=json`)
         .then(res => res.json())
         .then(
         (result) => {
@@ -84,7 +84,7 @@ class Analytics extends Component {
           hostname = "https://pst-360.herokuapp.com"
         }
         console.log(hostname);
-        fetch(hostname + "/tweets/?format=json")
+        fetch(hostname + "/tweets/?ordering=-sentiment&format=json")
         .then(res => res.json())
         .then(
           (result) => {
