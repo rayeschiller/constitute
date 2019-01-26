@@ -73,16 +73,25 @@ render () {
   } else{
   return (
   <div className="container-fluid text-center tweets">
-  <div class="dropdown">
+<div>
+        <select className="browser-default custom-select">
+          <option>Choose your option</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+      </div>
+
+  {/* <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Dropdown button
-  </button>
+  </button> */}
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" onClick={this.handleClick.bind(this)}>Action</a>
     <a class="dropdown-item" href="#">Another action</a>
     <a class="dropdown-item" href="#">Something else here</a>
   </div>
-</div> 
+{/* </div>  */}
   <h2 className="tweetHeader">Trending Tweets</h2>
   <div className="row content">
     <div className="col-sm-3 sidenav">
