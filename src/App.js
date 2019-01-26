@@ -42,7 +42,7 @@ class App extends Component {
         <Switch>
           <Route path="/home" component={Home}/>
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
-          <Route path='/vis' component={() => { window.location = 'http://localhost:8000/'; return null;} }/>
+          <Route path='/vis' component={() => { window.location = 'http://localhost:8080/'; return null;} }/>
         </Switch>
         </div>
 
