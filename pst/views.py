@@ -40,12 +40,12 @@ def data_viz_tweets(request):
 def data_viz_details(request, pk):
 	template = loader.get_template('pst/datavizdetails.html')
 	politician = Politician.objects.filter(pk = pk)
-	print(politician.first_name)
+	print(politician[0].first_name)
 	if politician.count() is 0:
 		print("Error finding politician")
 		politician = "Politician missing or could not be found"
 	context = {
-		'politician': politician,
+		'politician': politician[0],
 	}	
 	return HttpResponse(template.render(context, request))
 
