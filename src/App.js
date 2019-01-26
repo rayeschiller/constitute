@@ -59,7 +59,7 @@ class App extends Component {
           <Route path="/analytics" component={Analytics} />
           <Route path='/vis' component={() => { window.location = 'http://localhost:8080/'; return null;} }/>
           {/* <Route path="/maps" component={Map}/> */}
-          <Route path='/politicians' component={() => { window.location = 'http://localhost:8000/data_viz/'; return null;} }/>
+          <Route path='/politicians' component={() => { window.location = 'http://pst-360.herokuapp.com/data_viz/'; return null;} }/>
         </Switch>
         </div>
 

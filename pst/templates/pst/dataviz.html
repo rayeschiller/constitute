@@ -37,7 +37,7 @@
         }
         function dblclick(d){
             console.log(d.data.pk);
-            window.location.assign(hostname +"/data_viz/" + d.data.pk, '_blank');
+            window.location.assign("http://localhost:8000/data_viz/" + d.data.pk, '_blank');
         }
 
         $(document).ready(function(){
