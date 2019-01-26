@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import {Tweet} from 'react-twitter-widgets';
-
+import { Tweet } from 'react-twitter-widgets';
+import AOC from './AOC.jpg'
+import Pressley from './images/AyannaPressley.jpg'
+import Haaland from './images/DebHaaland.jpg'
+import Harris from './images/KamalaHarris.jpg'
+import Gillibrand from './images/KirstenGillibrand.jpg'
+import Collins from './images/SusanCollins.jpg'
+import Warren from './images/ElizabethWarren.jpg'
 
 const TweetList = (props) => {
     console.log('tweet list props');
@@ -13,6 +19,36 @@ const TweetList = (props) => {
   }
 
 class Analytics extends Component {
+
+    handleClick(e) {
+        const pk = e.target.getAttribute('value')
+        console.log(pk);
+
+        var hostname = "";
+        if (window.location.hostname === "localhost"){
+        hostname = "http://localhost:8000";
+        } else {
+        hostname = "https://pst-360.herokuapp.com"
+        }
+
+
+        console.log(hostname + `/tweets/?politicians=${pk}&sort=-sentiment&format=json`);
+        fetch(hostname + `/tweets/?politicians=${pk}&sort=-sentiment&format=json`)
+        .then(res => res.json())
+        .then(
+        (result) => {
+            this.setState({
+            isLoaded: true,
+            items: result,
+            tweets: result.results.map(function(tweet){
+                return {"tweetId": tweet.tweet_id};
+            })
+            });
+            console.log("got result!");
+            console.log(result);
+        }
+        )  
+    }
 
     constructor(props) {
         super(props)
@@ -76,11 +112,38 @@ class Analytics extends Component {
   } else{
         return (
             <div className="jumbotron">
+            <div className="container-fluid">
+                <img value="1" src={AOC} className="img-fluid" 
+                onClick={this.handleClick.bind(this)}/>
+            </div>
+            <div className="container-fluid">
+                <img value="2" src={Pressley} className="img-fluid" onClick={this.handleClick.bind(this)} />
+            </div>
+            <div className="container-fluid">
+                <img value="9" src={Haaland} className="img-fluid" onClick={this.handleClick.bind(this)} />
+            </div>
+            <div className="container-fluid">
+                <img value="8" src={Harris} className="img-fluid" onClick={this.handleClick.bind(this)} />
+            </div>
+            <div className="container-fluid">
+                <img value="5" src={Gillibrand} className="img-fluid" onClick={this.handleClick.bind(this)} />
+            </div>
+            <div className="container-fluid">
+                <img value="12" src={Collins} className="img-fluid" onClick={this.handleClick.bind(this)} />
+            </div>
+            <div className="container-fluid">
+                <img value="4" src={Warren} className="img-fluid" onClick={this.handleClick.bind(this)} />
+            </div>
             <div className="container">
-            <center><h1></h1>
+            <center><h1>Trending Sexist Tweets</h1>
             <TweetList tweets={this.state.tweets} />
             </center>
             </div>
+            
+            <div className="container-fluid">
+                <img src={AOC} className="img-fluid" />
+            </div>
+
         </div>
         )
     }
