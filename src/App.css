@@ -1,1 +1,15 @@
 .container-fluid { padding-top: 90px; }
+
+.navbar { 
+    background: grey!important;
+    height: 70px;
+    font-size: 20px;
+}
+
+.nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
+
+.nav-link{ margin-right: 1em !important;}
+
+.nav-link:hover{color:mediumseagreen!important; }
+
+.navbar-collapse{ justify-content: flex-end;}

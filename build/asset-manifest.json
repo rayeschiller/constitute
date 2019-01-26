@@ -1,7 +1,17 @@
 {
+<<<<<<< HEAD
   "main.css": "static/css/main.e1d956bc.css",
   "main.css.map": "static/css/main.e1d956bc.css.map",
   "main.js": "static/js/main.a693c1bb.js",
   "main.js.map": "static/js/main.a693c1bb.js.map",
   "static/media/logoFinal.png": "static/media/logoFinal.fb830421.png"
+=======
+  "main.css": "static/css/main.570caabb.css",
+  "main.css.map": "static/css/main.570caabb.css.map",
+  "main.js": "static/js/main.56516910.js",
+  "main.js.map": "static/js/main.56516910.js.map",
+  "static/media/about-img.jpg": "static/media/about-img.2c4d79c1.jpg",
+  "static/media/logoFinal.png": "static/media/logoFinal.fb830421.png",
+  "static/media/pst-home-image.jpeg": "static/media/pst-home-image.9f295464.jpeg"
+>>>>>>> 214028e8964ce61a8f19f4ca80fe94ee4d735ed0
 }

@@ -88,7 +88,7 @@ class TweetViewSet(viewsets.ModelViewSet):
 	queryset = Tweet.objects.order_by("-date")
 	filter_backends = (DjangoFilterBackend,filters.OrderingFilter)
 	filter_fields = ('twitterUser', 'tweet_id', 'politician', 'date', 'location', 'sentiment')
-	ordering_fields = ('politician', 'date', 'sentiment')
+	ordering_fields = ('politician', 'date', '-sentiment')
 	# search_fields = ('twitterUser', 'date', 'location', 'sentiment')
 	
 class SexistWordViewSet(viewsets.ModelViewSet):
