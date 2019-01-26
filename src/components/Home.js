@@ -4,13 +4,16 @@ import './styles.css'
 import $ from 'jquery'
 import logoFinal from './../logoFinal.png'
 import aboutImg from './about-img.jpg'
+import rina from './rina.jpg'
+import jules from './jules.jpg'
+import nat from './nat.jpg'
+import Chart from './Chart'
 
 class Home extends Component {
   
   componentDidMount () {
     $(document).ready(function(){
       $('.header').height($(window).height());
-      $('.team').height($(window).height());
      })
   }
 
@@ -43,47 +46,54 @@ class Home extends Component {
       <img src={logoFinal}/>
     </h3>
     <p>
-       ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+The goal of Political Sexism on Twitter (PST) is to raise awareness of online rhetoric towards female politicians and how that feeds into public perception during election cycles and effects outcomes.
+We want to: Use sexist words along with most prominent female politicians of the 2020 election cycle to create mappings and visualizations of the the candidates receiving the most online negatively as well as the words being and imagery being used to describe them. Compare against their male counterparts, and raise public awareness. 
     </p>
    </div>
   </div>
   </div>
 
-<div className="team">
+  <div>
+  <Chart></Chart>
+</div>
 
- <div className="container-team"></div>
+<div className="team">
     <h1 className="text-center">Our Team</h1>
   <div className="row">
    <div className="col-lg-4 col-md-4 col-sm-12 item">
-    <img src="images/team-2.jpg" className="img-fluid" alt="team"/>
+   <div className='circular'>
+    <img src={nat} className="img-fluid" alt="team"/>
+    </div>
     <div className="des">
-      Sara
+      Natalie
      </div>
-    <span className="text-muted">Manager</span>
+    <div className="text-muted">Natalie is a full stack software engineer at JP Morgan in Asset and Wealth Management. She graduated from Colby College in Maine with a major in mathematics. Her interests include politics, coding and mathematics.</div>
    </div>
    <div className="col-lg-4 col-md-4 col-sm-12 item">
-    <img src="images/team-3.jpg" className="img-fluid" alt="team"/>
+   <div className='circular'>
+    <img src={rina} className="img-fluid" alt="team"/>
+    </div>
     <div className="des">
-       Chris
+       Rina
      </div>
-    <span className="text-muted">S.enginner</span>
+    <div className="text-muted">Rina is a software engineer at JPMorgan Chase. She graduated from Hunter college in NYC with a major in digital media and minors in computer science and gender studies. She is very passionate about politics, gender equality, technology, and short hair.</div>
    </div>
    <div className="col-lg-4 col-md-4 col-sm-12 item">
-    <img src="images/team-2.jpg" className="img-fluid" alt="team"/>
+   <div className='circular'>
+    <img src={jules} className="img-fluid" alt="team"/>
+    </div>
     <div className="des">
-      Layla 
+      Jules
      </div>
-    <span className="text-muted">Front End Developer</span>
+    <div className="text-muted">Jules is a developer a JP Morgan. She graduated from Baruch College with a degree in Information Systems, English, NYC Studies, and International Relations. She is passionate about creating inclusive spaces to discuss gender inequities.</div>
    </div>
   </div>
 </div>
 
-
+<nav class="navbar fixed-bottom navbar-light bg-dark">
+  <a class="navbar-brand" href="#">Together we can affect change!</a>
+</nav>
 </div>
     )
   }
