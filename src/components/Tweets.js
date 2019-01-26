@@ -16,6 +16,10 @@ const TweetList = (props) => {
 
 class Tweets extends Component {
 
+  handleClick() {
+    console.log('torture')
+  }
+
   onDropdownSelected(e) {
     console.log('selected');
     console.log(e.target.value);
@@ -126,6 +130,11 @@ render () {
           <option value="15">Bernie Sanders</option>
         </select>
       </div>
+
+  {/* <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button> */}
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" onClick={this.handleClick.bind(this)}>Action</a>
     <a class="dropdown-item" href="#">Another action</a>
