@@ -102,7 +102,12 @@
             map = new google.maps.Map(document.getElementById("map-container"), mapOptions);    
         }
         google.maps.event.addDomListener(window, 'load', init_map);
- 
+        coords = {lat: -25.363, lng: 131.044};
+        // coords2 = {42.283079,"-87.95313"}
+        // var glocation = new google.maps.LatLng(coords2[0], coords2[1])   
+        // put a marker in the location
+        var marker = new google.maps.Marker({position: coords, map: map });
+        marker.setMap(map);
 
 });
 </script>
