@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>{{politician.first_name}} {{politician.last_name}} Details</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -8,8 +8,102 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="../../static/d3/d3.min.js"></script>
 <script src="../../static/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        var data = [];
+        data.push(
+        {   'tweetType': 'negative',
+            'count': '{{negativeTweets}}'},
+        {   'tweetType': 'positive',
+            'count': '{{positiveTweets}}'}, 
+        {   'tweetType': 'neutral',
+            'count': '{{neutralTweets}}'})
+        
+        console.log(data);
+        var width = 300,
+            height = 300,
+            radius = Math.min(width, height) / 2;
+        
+        var color = d3.scaleOrdinal()
+            .range([ "#cc2816", "#075d9a", "#68605f"]);
+        
+        var div = d3.select("body").append("div")	
+                .attr("class", "tooltip")				
+                .style("opacity", 0);
+
+        var pie = d3.pie()
+            .value(function(d) { return d.count; })(data);
+            
+        var arc = d3.arc()
+                .outerRadius(height/2)
+                .innerRadius(height/4)
+                .padAngle(0.03)
+                .cornerRadius(1)
+        
+
+        var labelArc = d3.arc()
+            .outerRadius(radius - 40)
+            .innerRadius(radius - 40);
+    
+        var svg = d3.select("#pie")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(" + width/2 + "," + height/2 +")"); // Moving the center point. 1/2 the width and 1/2 the height    
+
+        var g = svg.selectAll("arc")
+            .data(pie)
+            .enter().append("g")
+            .attr("class", "arc");
+        
+        g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d) { return color(d.data.tweetType);})
+            .on("mouseover", function(d) { 
+                div.transition()		
+                    .duration(200)		
+                    .style("opacity", .9);		
+                div.html(d.data.count + " tweets")
+                    .style("left", (d3.event.pageX) + "px")		
+                    .style("top", (d3.event.pageY - 28) + "px");	
+                })					
+            .on("mouseout", function(d) {		
+                div.transition()		
+                    .duration(500)		
+                    .style("opacity", 0);	
+            });
+        
+        g.append("text")
+    	    .attr("transform", function(d) {                    //set the label's origin to the center of the arc
+                //we have to make sure to set these before calling arc.centroid
+                d.innerRadius = 0;
+                d.outerRadius = radius;
+                return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+            })
+        .attr("dy", ".50em")
+        .style("text-anchor", "middle")
+        .text(function(d) {
+            return d.data.tweetType;
+        });
+
+});
+</script>
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    padding: 10px;
+    color: white;
+    font: 12px sans-serif;
+    background: rgb(73, 58, 58);
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
 </style>
 <body class="w3-light-grey">
 
@@ -24,53 +118,20 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container">
-          <img src="/w3images/avatar_hat.jpg" style="width:100%" alt="Avatar">
-          <div class="w3-display-bottomleft w3-container w3-text-black">
+          <!-- {% load static %} <img src="{% static "img/Warren.jpg" %}" style="width:100%" alt="Avatar"> -->
+          {% load static %} <img src="{% static '/'|add:politician.image_url %}" style="width:100%" alt="Avatar">
+          
+          <div class="w3-display-bottomleft w3-container w3-text-black w3-white">
             <h2>{{politician.first_name}} {{politician.last_name}}</h2>
           </div>
         </div>
         <div class="w3-container">
-          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Designer</p>
-          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>London, UK</p>
-          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>ex@mail.com</p>
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>1224435534</p>
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>{{politician.office_level}}</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>{{politician.state}}</p>
+          <p><i class="fa fa-twitter fa-fw w3-margin-right w3-large w3-text-teal"></i>@{{politician.username}}</p>
+          {% if politician.alternativeName %}<p><i class="fa fa-twitter fa-fw w3-margin-right w3-large w3-text-teal"></i>@{{politician.alternativeName}}</p>{% endif %}
           <hr>
 
-          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
-          <p>Adobe Photoshop</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:90%">90%</div>
-          </div>
-          <p>Photography</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:80%">
-              <div class="w3-center w3-text-white">80%</div>
-            </div>
-          </div>
-          <p>Illustrator</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:75%">75%</div>
-          </div>
-          <p>Media</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">50%</div>
-          </div>
-          <br>
-
-          <p class="w3-large w3-text-theme"><b><i class="fa fa-globe fa-fw w3-margin-right w3-text-teal"></i>Languages</b></p>
-          <p>English</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
-          </div>
-          <p>Spanish</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-teal" style="height:24px;width:55%"></div>
-          </div>
-          <p>German</p>
-          <div class="w3-light-grey w3-round-xlarge">
-            <div class="w3-round-xlarge w3-teal" style="height:24px;width:25%"></div>
-          </div>
-          <br>
         </div>
       </div><br>
 
@@ -81,45 +142,21 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <div class="w3-twothird">
     
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Work Experience</h2>
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Analytics</h2>
         <div class="w3-container">
-          <h5 class="w3-opacity"><b>Front End Developer / w3schools.com</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2015 - <span class="w3-tag w3-teal w3-round">Current</span></h6>
-          <p>Lorem ipsum dolor sit amet. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
-          <hr>
+        <div id="pie"></div>
+        <hr>
         </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Web Developer / something.com</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Mar 2012 - Dec 2014</h6>
-          <p>Consectetur adipisicing elit. Praesentium magnam consectetur vel in deserunt aspernatur est reprehenderit sunt hic. Nulla tempora soluta ea et odio, unde doloremque repellendus iure, iste.</p>
-          <hr>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Graphic Designer / designsomething.com</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jun 2010 - Mar 2012</h6>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p><br>
-        </div>
+        
       </div>
 
       <div class="w3-container w3-card w3-white">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education</h2>
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Repeat Offenders</h2>
         <div class="w3-container">
-          <h5 class="w3-opacity"><b>W3Schools.com</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Forever</h6>
-          <p>Web Development! All I need to know in one place</p>
+          <div id="repeatOffenders"></div>
           <hr>
         </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>London Business School</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2013 - 2015</h6>
-          <p>Master Degree</p>
-          <hr>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>School of Coding</b></h5>
-          <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2010 - 2013</h6>
-          <p>Bachelor Degree</p><br>
-        </div>
+       
       </div>
 
     <!-- End Right Column -->

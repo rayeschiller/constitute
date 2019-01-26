@@ -59,6 +59,7 @@ class Politician(models.Model):
 	state = models.CharField(max_length=255, null=True)
 	gender = models.CharField(max_length=20, choices=GENDER_CHOICES, null=True)
 	tweet_count = models.IntegerField(default=0, null=True)
+	image_url = models.CharField(max_length=255, null=True)
 	def __str__(self):
 		return self.first_name + self.last_name
 

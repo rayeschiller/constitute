@@ -24,20 +24,9 @@
         </style>
 </head>
 <body>
-<p>D3 PST Viz!</p>
+    <h3>Tweet Count by Politician</h3>
     <script type="text/javascript" charset="utf-8">
-        function getPoliticianTweetCount(){
-            var politician_counts = []
-                "{% for politician in politicianTweetCount %}"
-                    politician_counts.push({
-                        "pk": "{{politician.pk}}",
-                        "count": "{{politician.num_tweets}}",
-                        "name": "{{politician.last_name}}"
-                    })
-                "{% endfor %}"                      
-                return politician_counts;
-        }
-        
+    
         function dblclick(d){
             console.log(d.data.pk);
             window.location.assign("http://localhost:8000/data_viz/" + d.data.pk, '_blank');
