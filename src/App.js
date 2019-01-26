@@ -32,6 +32,7 @@ class App extends Component {
             <div className="navbar-nav">
               <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
               <a className="nav-item nav-link" href="/appTweets">Tweets</a>
+              <a className="nav-item nav-link" href="/vis">Top Words</a>
             </div>
           </div>
           </div>
@@ -41,6 +42,7 @@ class App extends Component {
         <Switch>
           <Route path="/home" component={Home}/>
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
+          <Route path='/vis' component={() => { window.location = 'http://localhost:8000/'; return null;} }/>
         </Switch>
         </div>
 

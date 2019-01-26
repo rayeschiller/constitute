@@ -106,6 +106,7 @@
   },
   "devDependencies": {
     "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
     "url-loader": "^0.6.2",
     "webpack-bundle-tracker": "^0.3.0"
   }
