@@ -4,6 +4,7 @@ import {Tweet} from 'react-twitter-widgets';
 import logoFinal from './logoFinal.png';
 import Tweets from './components/Tweets';
 import Home from './components/Home';
+import Analytics from './components/Analytics';
 
 import {
   Route,
@@ -38,6 +39,7 @@ class App extends Component {
             <div className="navbar-nav">
               <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
               <a className="nav-item nav-link" href="/appTweets">Tweets</a>
+              <a className="nav-item nav-link" href="/analytics">Analytics</a>
             </div>
           </div>
           </div>
@@ -48,6 +50,7 @@ class App extends Component {
           <Route path="/home" component={Home}/>
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
+          <Route path="/analytics" component={Analytics} />
         </Switch>
         </div>
 
