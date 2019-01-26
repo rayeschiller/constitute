@@ -6,9 +6,23 @@
         </style>
 </head>
 <body>
-<p>D3 PST for PK {{pk}}!</p>
+<p>D3 PST for PK {{politician}}!</p>
     <script type="text/javascript" charset="utf-8">
-    
+        function getPolitician(){
+            var politician = []
+                "{% for object in politician %}"
+                    politician.push({
+                        "pk": "{{politician.pk}}",
+                        "first_name": "{{politician.first_name}}",
+                        "last_name": "{{politician.last_name}}"
+                    })
+                "{% endfor %}"                      
+                return politician;
+        }
+
+         $(document).ready(function(){
+            console.log(getPolitician())
+         });
     </script>
 </body>
 </html>
