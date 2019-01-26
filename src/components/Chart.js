@@ -9,7 +9,7 @@ class Chart extends Component {
 	render() {
 		const options = {
 			title: {
-				text: "Tweet Classificial by Politician"
+				text: "Tweet Classification by Politician"
 			},
 			toolTip: {
 				shared: true
