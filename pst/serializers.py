@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from django.core.serializers.json import DjangoJSONEncoder
 
 class TweetSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
@@ -19,4 +20,4 @@ class TwitterUserSerializer(serializers.HyperlinkedModelSerializer):
 class PoliticianSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Politician
-		fields = ("pk", "first_name", "last_name", "username", "alternativeName", "district", "office_level", "political_party", "gender")
+		fields = ("pk", "first_name", "last_name", "username", "tweet_count", "alternativeName", "district", "office_level", "political_party", "gender")

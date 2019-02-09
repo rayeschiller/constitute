@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<title>{{politician.first_name}} {{politician.last_name}} Details</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="../../static/d3/d3.min.js"></script>
+<script src="../../static/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBiWXWkBEsSpN4viAXNSEDyFlKHOJ8SGu4&sensor=false"></script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        var data = [];
+        data.push(
+        {   'tweetType': 'negative',
+            'count': '{{negativeTweets}}'},
+        {   'tweetType': 'positive',
+            'count': '{{positiveTweets}}'}, 
+        {   'tweetType': 'neutral',
+            'count': '{{neutralTweets}}'})
+        
+        console.log(data);
+        var width = 300,
+            height = 300,
+            radius = Math.min(width, height) / 2;
+        
+        var color = d3.scaleOrdinal()
+            .range([ "#cc2816", "#075d9a", "#68605f"]);
+        
+        var div = d3.select("body").append("div")	
+                .attr("class", "tooltip")				
+                .style("opacity", 0);
+
+        var pie = d3.pie()
+            .value(function(d) { return d.count; })(data);
+            
+        var arc = d3.arc()
+                .outerRadius(height/2)
+                .innerRadius(height/4)
+                .padAngle(0.03)
+                .cornerRadius(1)
+        
+
+        var labelArc = d3.arc()
+            .outerRadius(radius - 40)
+            .innerRadius(radius - 40);
+    
+        var svg = d3.select("#pie")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(" + width/2 + "," + height/2 +")"); // Moving the center point. 1/2 the width and 1/2 the height    
+
+        var g = svg.selectAll("arc")
+            .data(pie)
+            .enter().append("g")
+            .attr("class", "arc");
+        
+        g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d) { return color(d.data.tweetType);})
+            .on("mouseover", function(d) { 
+                div.transition()		
+                    .duration(200)		
+                    .style("opacity", .9);		
+                div.html(d.data.count + " tweets")
+                    .style("left", (d3.event.pageX) + "px")		
+                    .style("top", (d3.event.pageY - 28) + "px");	
+                })					
+            .on("mouseout", function(d) {		
+                div.transition()		
+                    .duration(500)		
+                    .style("opacity", 0);	
+            });
+        
+        g.append("text")
+    	    .attr("transform", function(d) {                    //set the label's origin to the center of the arc
+                //we have to make sure to set these before calling arc.centroid
+                d.innerRadius = 0;
+                d.outerRadius = radius;
+                return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+            })
+        .attr("dy", ".50em")
+        .style("text-anchor", "middle")
+        .text(function(d) {
+            return d.data.tweetType;
+        });
+    });
+    
+        // ---INITALIZE MAP---
+        var map; //make map global variable
+        function init_map(){
+            //create map on center of US
+            var test = new google.maps.LatLng(38, -90)
+            var dummy = new google.maps.LatLng(40, -80)
+            var dummy1 = new google.maps.LatLng(30, -100)
+            var dummy2 = new google.maps.LatLng(41, -71)
+            var dummy3 = new google.maps.LatLng(50, -90)
+            var minZoomLevel =4
+            var var_location = new google.maps.LatLng(39, -95)
+            
+            var mapOptions = {
+            center: var_location,
+            zoom: minZoomLevel
+            };
+            map = new google.maps.Map(document.getElementById("map-container"), mapOptions);    
+            
+             var marker = new google.maps.Marker({
+                position: test,
+                title:"Hello World!",
+                visible: true
+            });
+            marker.setMap(map);
+
+            var marker = new google.maps.Marker({
+                position: dummy,
+                title:"Hello World!",
+                visible: true
+            });
+            marker.setMap(map);
+
+            var marker = new google.maps.Marker({
+                position: dummy1,
+                title:"Hello World!",
+                visible: true
+            });
+            marker.setMap(map);
+
+            var marker = new google.maps.Marker({
+                position: dummy2,
+                title:"Hello World!",
+                visible: true
+            });
+            marker.setMap(map);
+
+            var marker = new google.maps.Marker({
+                position: dummy3,
+                title:"Hello World!",
+                visible: true
+            });
+            marker.setMap(map);
+        }
+        google.maps.event.addDomListener(window, 'load', init_map);
+        coords = {lat: -25.363, lng: 131.044};
+        
+        // coords2 = {42.283079,"-87.95313"}
+        // var glocation = new google.maps.LatLng(coords2[0], coords2[1])   
+        // put a marker in the location
+        // var marker = new google.maps.Marker({position: coords, map: map });
+        // marker.setMap(map);
+
+
+</script>
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    padding: 10px;
+    color: white;
+    font: 14px sans-serif;
+    background: rgb(73, 58, 58);
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+</style>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <!-- {% load static %} <img src="{% static "img/Warren.jpg" %}" style="width:100%" alt="Avatar"> -->
+          {% load static %} <img src="{% static '/'|add:politician.image_url %}" style="width:100%" alt="Avatar">
+          
+          <div class="w3-display-bottomleft w3-container w3-text-black w3-white">
+            <h2>{{politician.first_name}} {{politician.last_name}}</h2>
+          </div>
+        </div>
+        <div class="w3-container">
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>{{politician.office_level}}</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>{{politician.state}}</p>
+          <p><i class="fa fa-twitter fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="https://twitter.com/{{politician.username}}">@{{politician.username}}</a></p>
+          {% if politician.alternativeName %}<p><i class="fa fa-twitter fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="https://twitter.com/{{politician.alternativeName}}">@{{politician.alternativeName}}</a></p>{% endif %}
+          <hr>
+
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Sentiment Levels</h2>
+        <div class="w3-container">
+        <div align="center" id="pie"></div>
+        <hr>
+        </div>
+        
+      </div>
+
+      <div class="w3-container w3-card w3-white">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Tweet Map</h2>
+        <div class="w3-container">
+                <div id = "map-container" style="height: 300px; margin-bottom: 10px" ><br><br>
+          <hr>
+        </div>
+       
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+
+</body>
+</html>
