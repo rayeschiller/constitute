@@ -59,9 +59,16 @@ class App extends Component {
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/analytics" component={Analytics} />
-          <Route path='/vis' component={() => { window.location = 'http://localhost:8080/'; return null;} }/>
+          {/* <Route path='/vis' component={() => { window.location = 'http://localhost:8080/'; return null;} }/> */}
           {/* <Route path="/maps" component={Map}/> */}
-          <Route path='/politicians' component={() => { window.location = 'http://pst-360.herokuapp.com/data_viz/'; return null;} }/>
+          <Route path='/vis' component={() => { 
+            var hostname = "";
+            if (window.location.hostname === "localhost"){
+              hostname = "http://localhost:8000";
+            } else {
+              hostname = "https://pst-360.herokuapp.com"
+            }
+            window.location = hostname + '/data_viz/'; return null;} }/>
         </Switch>
         </div>
 
