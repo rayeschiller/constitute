@@ -30,7 +30,7 @@ urlpatterns.extend([
   path('admin/', admin.site.urls),
   re_path('home/', TemplateView.as_view(template_name='index.html')),
   re_path('appTweets/', TemplateView.as_view(template_name='index.html')),
-  re_path('genderTweets/', TemplateView.as_view(template_name='index.html')),
+  re_path('analytics/', TemplateView.as_view(template_name='index.html')),
   path('print_tweets/', print_tweets),
   path('load_politicians/', load_politicians),
   path('stream_tweets/', streaming),
