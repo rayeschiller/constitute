@@ -9,9 +9,11 @@ import Map from './components/Map';
 
 import Helmet from 'react-helmet';
 
+
 import {
   Route,
-  Switch
+  Switch,
+  BrowserRouter,
 } from 'react-router-dom';
 
 const TweetList = (props) => {
@@ -53,6 +55,7 @@ class App extends Component {
 
        <div className="App-intro">
         <Switch>
+          <BrowserRouter>
           <Route path="/home" component={Home}/>
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
@@ -60,6 +63,7 @@ class App extends Component {
           <Route path='/vis' component={() => { window.location = 'http://localhost:8080/'; return null;} }/>
           {/* <Route path="/maps" component={Map}/> */}
           <Route path='/politicians' component={() => { window.location = 'http://pst-360.herokuapp.com/data_viz/'; return null;} }/>
+          </BrowserRouter>
         </Switch>
         </div>
 
