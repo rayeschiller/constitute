@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
-import logoFinal from './logoFinal.png';
+import logoFinal from './components/images/logoFinal.png';
 import Tweets from './components/Tweets';
 import Home from './components/Home';
 import Analytics from './components/Analytics';

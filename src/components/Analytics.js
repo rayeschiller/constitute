@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tweet } from 'react-twitter-widgets';
 import './styles.css'
-import AOC from './AOC.jpg'
+import AOC from './images/AOC.jpg'
 import Pressley from './images/AyannaPressley.jpg'
 import Haaland from './images/DebHaaland.jpg'
 import Harris from './images/KamalaHarris.jpg'

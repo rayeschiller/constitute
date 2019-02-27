@@ -11,7 +11,7 @@
 
 /*header style*/
 .header{
-    background-image: url('pst-home-image.jpeg');
+    background-image: url('../components/images/pst-home-image.jpeg');
     background-attachment: fixed;
     background-size: cover;
     background-position: center;

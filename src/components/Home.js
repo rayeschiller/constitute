@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import './styles.css'
 import $ from 'jquery'
-import logoFinal from './../logoFinal.png'
-import aboutImg from './about-img.jpg'
-import rina from './rina.jpg'
-import jules from './jules.jpg'
-import nat from './nat.jpg'
+import logoFinal from './images/logoFinal.png'
+import aboutImg from './images/about-img.jpg'
+import rina from './images/rina.jpg'
+import jules from './images/jules.jpg'
+import nat from './images/nat.jpg'
 import Chart from './Chart'
 
 class Home extends Component {
