@@ -41,14 +41,14 @@ class App extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
+            <ul className="navbar-nav">
+              <li> <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a></li>
               <a className="nav-item nav-link" href="/appTweets">Tweets</a>
-              <a className="nav-item nav-link" href="/analytics">Analytics</a>
+              <a className="nav-item nav-link" href="/analytics">Worst Tweets</a>
               <a className="nav-item nav-link" href="/vis">Top Words</a>
               {/* <a className="nav-item nav-link" href="/maps">Maps</a> */}
               <a className="nav-item nav-link" href="/politicians">Politician Breakdown</a>
-            </div>
+            </ul>
           </div>
           </div>
         </nav>

@@ -111,6 +111,7 @@ class Analytics extends Component {
   } else{
         return (
             <div class="container-fluid">
+            <div class="page-header"><h1>Our Most Sexist Tweets</h1></div>
                 <div className="jumbotron">
                     <center><h1>Trending Sexist Tweets</h1>
                         <TweetList tweets={this.state.tweets} width="280" data-chrome="transparent noscrollbar" />

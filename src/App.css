@@ -5,6 +5,9 @@
     height: 70px;
     font-size: 20px;
 }
+.sidenav {
+    position: fixed;
+}
 
 .nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
 
