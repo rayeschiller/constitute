@@ -110,17 +110,17 @@ render () {
   } else{
   return (
   <div className="container-fluid text-center tweets">
-  {/* <h2 className="tweetHeader">Trending Tweets</h2> */}
   <br/>
   <div className="row">
     <div className="col-sm-3 sidenav">
-    <div class="container">
-      <h2 className="tweetHeader">Currently Trending Tweets</h2>
+    <div class="container tweetContainer" >
+      <h2 className="tweetHeader"><strong>Currently Trending Tweets</strong></h2>
       <br/>
     </div>
     <div class="container">
     <h6 color="grey">Choose Politician:</h6> 
-    <div class="list-group">
+    <br/>
+    <div class="list-group list-group-flush">
       <button type="button" value="1" class="list-group-item list-group-item-action" onClick={this.onDropdownSelected.bind(this)}>
         Alexandria Ocasio Cortez
       </button>
