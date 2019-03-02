@@ -10,14 +10,20 @@ import Collins from './images/SusanCollins.jpg'
 import Warren from './images/ElizabethWarren.jpg'
 
 const TweetList = (props) => {
-    console.log('tweet list props');
-    console.log(props)
+    // console.log('tweet list props');
+    // console.log(props)
     return (
       <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweet_id} {...tweet}/>)}
       </div>
   
     ); 
   }
+
+  const Images = (props) => {
+      
+  }
+
+//   const Politicians = props => props.politicians.map(politician => )
 
 class Analytics extends Component {
 
@@ -45,16 +51,16 @@ class Analytics extends Component {
                 return {"tweetId": tweet.tweet_id};
             })
             });
-            console.log("got result!");
-            console.log(result);
+            // console.log("got result!");
+            // console.log(result);
         }
         )  
     }
 
     constructor(props) {
         super(props)
-        console.log("tweet props");
-        console.log(props);
+        // console.log("tweet props");
+        // console.log(props);
         
         var hostname = "";
         if (window.location.hostname === "localhost"){
@@ -69,13 +75,15 @@ class Analytics extends Component {
           isLoaded: false,
           items: [],
           tweets: [],
+          itemsPoliticans: [],
+          politicians: [],
         };
       }
 
 
 
     componentDidMount() {
-        console.log("fetching the hostname");
+        // console.log("fetching the hostname");
         // fetch(HOST_NAME + TWEET_ENDPOINT) 
         var hostname = "";
         if (window.location.hostname === "localhost"){
@@ -83,7 +91,7 @@ class Analytics extends Component {
         } else {
           hostname = "https://pst-360.herokuapp.com"
         }
-        console.log(hostname);
+        // console.log(hostname);
         fetch(hostname + "/tweets/?ordering=-sentiment&format=json")
         .then(res => res.json())
         .then(
@@ -95,12 +103,27 @@ class Analytics extends Component {
                 return {"tweetId": tweet.tweet_id};
               })
             });
-            console.log("got result!");
-            console.log(result);
           }
-        )  
+        ) 
+        fetch(hostname + "/politicians/?format=json")
+        .then(test => test.json())
+        .then (
+            (resultPoly) => {
+                this.setState({
+                    isLoaded: true,
+                    itemsPoliticans: resultPoly,
+                    politicians: resultPoly.results.map(politician => {
+                        var politicianName = politician.last_name
+                        // var politiciansTest = {}
+                        // politiciansTest[politicianName] = politician.pk 
+                        // console.log(politiciansTest)
+                        return {[politicianName] : politician.pk}
+                    })
+                });
+                console.log(this.state.politicians)
+            }   
+        )
       }
-
 
     render() {
         const { error, isLoaded} = this.state;
@@ -110,7 +133,7 @@ class Analytics extends Component {
     return <div>Loading...</div>
   } else{
         return (
-            <div class="container-fluid">
+            <div className="container-fluid">
                 <div className="jumbotron">
                     <center><h1>Trending Sexist Tweets</h1>
                         <TweetList tweets={this.state.tweets} width="280" data-chrome="transparent noscrollbar" />
@@ -119,11 +142,11 @@ class Analytics extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm col-auto">
-                            <img value="1" src={AOC} className="img-fluid pics" 
+                            <img value='1' src={AOC} className="img-fluid pics" 
                             onClick={this.handleClick.bind(this)}/>
                         </div>
                         <div className="col-sm col-auto">
-                            <img value="2" src={Pressley} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                            <img value={this.state.politicians[1].Pressley} src={Pressley} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
                         </div>
                         <div className="col-sm col-auto">
                             <img value="4" src={Warren} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
