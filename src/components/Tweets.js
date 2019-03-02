@@ -110,10 +110,38 @@ render () {
   } else{
   return (
   <div className="container-fluid text-center tweets">
-  <h2 className="tweetHeader">Trending Tweets</h2>
+  {/* <h2 className="tweetHeader">Trending Tweets</h2> */}
+  <br/>
   <div className="row">
     <div className="col-sm-3 sidenav">
-    <select className="browser-default custom-select" onChange={this.onDropdownSelected.bind(this)}>
+    <div class="container">
+      <h2 className="tweetHeader">Currently Trending Tweets</h2>
+      <br/>
+    </div>
+    <div class="container">
+    <h6 color="grey">Choose Politician:</h6> 
+    <div class="list-group">
+      <button type="button" value="1" class="list-group-item list-group-item-action" onClick={this.onDropdownSelected.bind(this)}>
+        Alexandria Ocasio Cortez
+      </button>
+      <button type="button" class="list-group-item list-group-item-action" value="2" onClick={this.onDropdownSelected.bind(this)}>Ayanna Pressley </button>
+      <button type="button" class="list-group-item list-group-item-action" value="3" onClick={this.onDropdownSelected.bind(this)}>Nancy Pelosi</button>
+      <button type="button" class="list-group-item list-group-item-action" value="4" onClick={this.onDropdownSelected.bind(this)}>Elizabeth Warren</button>
+      <button type="button" class="list-group-item list-group-item-action" value="5" onClick={this.onDropdownSelected.bind(this)}>Kirsten Gillibrand</button>
+      <button type="button" class="list-group-item list-group-item-action" value="6" onClick={this.onDropdownSelected.bind(this)}>Kyrsten Sinema</button>
+      <button type="button" class="list-group-item list-group-item-action" value="7" onClick={this.onDropdownSelected.bind(this)}>Maxine Waters</button>
+      <button type="button" class="list-group-item list-group-item-action" value="8" onClick={this.onDropdownSelected.bind(this)}>Kamala Harris</button>
+      <button type="button" class="list-group-item list-group-item-action" value="9" onClick={this.onDropdownSelected.bind(this)}>Deb Haaland</button>
+      <button type="button" class="list-group-item list-group-item-action" value="10" onClick={this.onDropdownSelected.bind(this)}>Abigail Spanberger</button>
+      <button type="button" class="list-group-item list-group-item-action" alue="11" onClick={this.onDropdownSelected.bind(this)}>Marilyn Mosby</button>
+      <button type="button" class="list-group-item list-group-item-action" value="12" onClick={this.onDropdownSelected.bind(this)}>Susan Collins</button>
+      <button type="button" class="list-group-item list-group-item-action" value="13" onClick={this.onDropdownSelected.bind(this)}>Lisa Murkowski</button>
+      <button type="button" class="list-group-item list-group-item-action" value="27" onClick={this.onDropdownSelected.bind(this)}>Chuck Schumer</button>
+      <button type="button" class="list-group-item list-group-item-action" value="28" onClick={this.onDropdownSelected.bind(this)}>Bernie Sanders</button>
+    
+    
+    </div>
+    {/* <select className="browser-default custom-select" onChange={this.onDropdownSelected.bind(this)}>
           <option>Choose politician</option>
           <option value="1">Alexandria Ocasio-Cortez</option>
           <option value="2">Ayanna Pressley</option>
@@ -130,7 +158,8 @@ render () {
           <option value="13">Lisa Murkowski</option>
           <option value="27">Chuck Schumer</option>
           <option value="28">Bernie Sanders</option>
-        </select>
+        </select> */}
+    </div>
     </div>
     <div className="col-sm-7 text-left tweet-list"> 
       <TweetList tweets={this.state.tweets} />
