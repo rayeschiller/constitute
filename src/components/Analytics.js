@@ -19,9 +19,14 @@ const TweetList = (props) => {
     ); 
   }
 
+
   const Images = (props) => {
-      
+      console.log(props.politician)
+      return (
+          <div></div>
+      )
   }
+    
 
 //   const Politicians = props => props.politicians.map(politician => )
 
@@ -76,7 +81,7 @@ class Analytics extends Component {
           items: [],
           tweets: [],
           itemsPoliticans: [],
-          politicians: [],
+          politicians: [] ,
         };
       }
 
@@ -114,10 +119,7 @@ class Analytics extends Component {
                     itemsPoliticans: resultPoly,
                     politicians: resultPoly.results.map(politician => {
                         var politicianName = politician.last_name
-                        // var politiciansTest = {}
-                        // politiciansTest[politicianName] = politician.pk 
-                        // console.log(politiciansTest)
-                        return {[politicianName] : politician.pk}
+                        return this.state.politicians.push({[politicianName] : politician.pk})
                     })
                 });
                 console.log(this.state.politicians)
@@ -141,27 +143,28 @@ class Analytics extends Component {
                 </div>
                 <div className="container">
                     <div className="row">
+                    <Images politicians={this.state.politician}></Images>
                         <div className="col-sm col-auto">
-                            <img value='1' src={AOC} className="img-fluid pics" 
+                            <img value={this.state.politicians[0].OcasioCortez} src={AOC} className="img-fluid pics" 
                             onClick={this.handleClick.bind(this)}/>
                         </div>
                         <div className="col-sm col-auto">
                             <img value={this.state.politicians[1].Pressley} src={Pressley} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
                         </div>
                         <div className="col-sm col-auto">
-                            <img value="4" src={Warren} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                            <img value="4" src={this.state.politicians[2].Warren} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
                         </div>
                     </div>
               
                     <div className="row">
                         <div className="col-sm col-auto">
-                            <img value="8" src={Harris} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                            <img value={this.state.politicians[3].Harris} src={Harris} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
                         </div>
                         <div className="col-sm col-auto">
-                            <img value="5" src={Gillibrand} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                            <img value={this.state.politicians[4].Gillibrand} src={Gillibrand} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
                         </div>
                         <div className="col-sm col-auto">
-                            <img value="12" src={Collins} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
+                            <img value={this.state.politicians[5].Collins} src={Collins} className="img-fluid pics" onClick={this.handleClick.bind(this)} />
                         </div>
                     </div>
             
