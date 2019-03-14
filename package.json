@@ -64,8 +64,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "postinstall": "npm run build"
+    "test": "node scripts/test.js --env=jsdom"
   },
   "engines": {
     "node": "8.12.0",
@@ -118,5 +117,6 @@
     "html-loader": "^0.5.5",
     "url-loader": "^0.6.2",
     "webpack-bundle-tracker": "^0.3.0"
-  }
+  },
+  "heroku-run-build-script": true
 }
