@@ -20,6 +20,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+STATIC_URL = '/static/'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -27,7 +32,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 SECRET_KEY = '$qejs(-&epj2g#763!ff1g=)1l4*@@16bc^cw&vy&rzy1!06o_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False,
+DEBUG = True,
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'pst-360.herokuapp.com']
 
@@ -66,6 +71,7 @@ MIDDLEWARE = [
 
 STATICFILES_DIRS = [
   os.path.join(BASE_DIR, 'build/static'),
+  os.path.join(BASE_DIR, 'static'),
 ]
 
 ROOT_URLCONF = 'siteadmin.urls'
@@ -172,10 +178,7 @@ CORS_ORIGIN_WHITELIST = (
 
 )
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
 
 #Channels
 ASGI_APPLICATION = "siteadmin.routing.application"
