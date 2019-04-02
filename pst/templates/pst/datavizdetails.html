@@ -41,7 +41,6 @@
                 .padAngle(0.03)
                 .cornerRadius(1)
         
-
         var labelArc = d3.arc()
             .outerRadius(radius - 40)
             .innerRadius(radius - 40);
@@ -145,11 +144,6 @@
         google.maps.event.addDomListener(window, 'load', init_map);
         coords = {lat: -25.363, lng: 131.044};
         
-        // coords2 = {42.283079,"-87.95313"}
-        // var glocation = new google.maps.LatLng(coords2[0], coords2[1])   
-        // put a marker in the location
-        // var marker = new google.maps.Marker({position: coords, map: map });
-        // marker.setMap(map);
 
 
 </script>
@@ -183,7 +177,8 @@ div.tooltip {
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container">
           <!-- {% load static %} <img src="{% static "img/Warren.jpg" %}" style="width:100%" alt="Avatar"> -->
-          {% load static %} <img src="{% static '/'|add:politician.image_url %}" style="width:100%" alt="Avatar">
+          {% load static %} 
+          <img src="{% static '/'|add:politician.image_url %}" style="width:100%" alt="Avatar">
           
           <div class="w3-display-bottomleft w3-container w3-text-black w3-white">
             <h2>{{politician.first_name}} {{politician.last_name}}</h2>
