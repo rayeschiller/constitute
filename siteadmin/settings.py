@@ -71,7 +71,6 @@ MIDDLEWARE = [
 
 STATICFILES_DIRS = [
   os.path.join(BASE_DIR, 'build/static'),
-  os.path.join(BASE_DIR, 'static'),
 ]
 
 ROOT_URLCONF = 'siteadmin.urls'
