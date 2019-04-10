@@ -8,23 +8,25 @@ class Cloud extends Component {
     constructor() {
         super()
         this.hostname = hostname()
+        this.dblclick = this.dblclick.bind(this)
     }
 
     componentDidMount() {
-        this.politicianBubbles()
+        this.politicianBubbles(this.hostname, this.dblclick)
      }
      componentDidUpdate() {
-        this.politicianBubbles()
+        this.politicianBubbles(this.hostname, this.dblclick)
      }
 
-    dblclick = (d) => {
-        console.log(d.data.pk);
-        return window.location.assign(hostname + "/data_viz/" + d.data.pk, '_blank');
+    dblclick (d) {
+        console.log(d.data.pk + 'CLICLED');
+        console.log('__________________')
+        return window.location.assign(this.hostname + "/data_viz/" + d.data.pk, '_blank');
     }
 
-    politicianBubbles () {
-        $.getJSON(this.hostname + '/politicians/?format=json', function(politicians_data) {
-            $.getJSON(this.hostname + '/tweets/?format=json', function(tweet_data) {    
+    politicianBubbles (hostname, dblclick) {
+        $.getJSON(hostname + '/politicians/?format=json', function(politicians_data) {
+            $.getJSON(hostname + '/tweets/?format=json', function(tweet_data) {    
                 console.log(hostname)            
                 const width = 1000 //max size of the bubbles
                 const height =800
@@ -97,7 +99,7 @@ class Cloud extends Component {
                             .duration(500)		
                             .style("opacity", 0);	
                     })
-                    .on("dblclick", this.dblclick);
+                    .on("dblclick", dblclick);
                 
                 
                 node.append("text")
