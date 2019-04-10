@@ -6,6 +6,7 @@ import Tweets from './components/Tweets';
 import Home from './components/Home';
 import Analytics from './components/Analytics';
 import Map from './components/Map';
+import Cloud from './components/politician_count_cloud'
 
 import Helmet from 'react-helmet';
 
@@ -43,6 +44,7 @@ class App extends Component {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
+              <a className="nav-item nav-link" href="/cloud">Cloud</a>
               <a className="nav-item nav-link" href="/appTweets">Tweets</a>
               <a className="nav-item nav-link" href="/analytics">Analytics</a>
               <a className="nav-item nav-link" href="/vis">Top Words</a>
@@ -56,6 +58,7 @@ class App extends Component {
        <div className="App-intro">
         <Switch>
           <Route path="/home" component={Home}/>
+          <Route path="/cloud" render={(props)=> <Cloud></Cloud>} />
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/analytics" component={Analytics} />
