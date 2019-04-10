@@ -12,10 +12,10 @@ class Cloud extends Component {
     }
 
     componentDidMount() {
-        this.politicianBubbles(this.hostname, this.dblclick)
+        this.politicianBubbles(this.hostname)
      }
      componentDidUpdate() {
-        this.politicianBubbles(this.hostname, this.dblclick)
+        this.politicianBubbles(this.hostname)
      }
 
     dblclick (d) {
@@ -24,7 +24,7 @@ class Cloud extends Component {
         return window.location.assign(this.hostname + "/data_viz/" + d.data.pk, '_blank');
     }
 
-    politicianBubbles (hostname, dblclick) {
+    politicianBubbles (hostname) {
         $.getJSON(hostname + '/politicians/?format=json', function(politicians_data) {
             $.getJSON(hostname + '/tweets/?format=json', function(tweet_data) {    
                 console.log(hostname)            
@@ -99,7 +99,7 @@ class Cloud extends Component {
                             .duration(500)		
                             .style("opacity", 0);	
                     })
-                    .on("dblclick", dblclick);
+                    .on("dblclick", this.dblclick);
                 
                 
                 node.append("text")
