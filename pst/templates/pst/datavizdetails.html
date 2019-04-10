@@ -91,6 +91,11 @@
         // ---INITALIZE MAP---
         var map; //make map global variable
         function init_map(){
+            var tweetsWithLocation = [];
+            tweetsWithLocation.push(
+                {'test': '{{tweetsWithLocation}}'}
+            )
+            console.log(tweetsWithLocation);
             //create map on center of US
             var test = new google.maps.LatLng(38, -90)
             var dummy = new google.maps.LatLng(40, -80)
