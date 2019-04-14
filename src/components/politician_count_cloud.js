@@ -8,7 +8,6 @@ class Cloud extends Component {
     constructor() {
         super()
         this.hostname = hostname()
-        this.click = this.click.bind(this)
     }
 
     componentDidMount() {
