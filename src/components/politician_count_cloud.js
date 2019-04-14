@@ -8,7 +8,7 @@ class Cloud extends Component {
     constructor() {
         super()
         this.hostname = hostname()
-        this.dblclick = this.dblclick.bind(this)
+        this.click = this.click.bind(this)
     }
 
     componentDidMount() {
@@ -17,12 +17,6 @@ class Cloud extends Component {
      componentDidUpdate() {
         this.politicianBubbles(this.hostname)
      }
-
-    dblclick (d) {
-        console.log(d.data.pk + 'CLICLED');
-        console.log('__________________')
-        return window.location.assign(this.hostname + "/data_viz/" + d.data.pk, '_blank');
-    }
 
     politicianBubbles (hostname) {
         $.getJSON(hostname + '/politicians/?format=json', function(politicians_data) {
@@ -99,7 +93,9 @@ class Cloud extends Component {
                             .duration(500)		
                             .style("opacity", 0);	
                     })
-                    .on("dblclick", this.dblclick);
+                    .on("dblclick", function(d){
+                        return window.location.assign(hostname + "/data_viz/" + d.data.pk, '_blank');
+                    })
                 
                 
                 node.append("text")
