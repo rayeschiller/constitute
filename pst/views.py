@@ -3,12 +3,11 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
+from .filters import *
 from .twitterSearch import getTweets
 from .tweetProcessing import processTweet
-from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework import filters as rest_filters
-
 from django_filters import rest_framework as filters
 from .serializers import *
 from .twitterStreaming import streamTweets
@@ -17,8 +16,6 @@ from django.db.models import Count
 import csv
 from .fetchTweets import fetchTweets
 import json
-
-
 
 # Create your views here.
 def print_tweets(request):
