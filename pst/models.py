@@ -25,6 +25,7 @@ class Tweet(models.Model):
 	def _str_(self):
 		return self.text
 
+
 class Politician(models.Model):
 	FEDERAL = 'Federal'
 	STATE = 'State'
