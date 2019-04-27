@@ -48,7 +48,7 @@ def data_viz_details(request, pk):
 		negativeTweets = Tweet.objects.filter(politician = politician, sentiment__lte=0).count()
 		neutralTweets = Tweet.objects.filter(politician = politician, sentiment=0).count()
 		positiveTweets = Tweet.objects.filter(politician = politician, sentiment__gte=0).count()
-		tweetsWithLocation = Tweet.objects.filter(politician = politician).exclude(location__exact='');
+		tweetsWithLocation = Tweet.objects.filter(politician = politician).exclude(location__exact='')
 
 	context = {
 		'politician': politician,

@@ -26,3 +26,4 @@ class TweetFilter(filters.FilterSet):
 			'location': ['exact'], 
 			'sentiment': ['gt', 'lt', 'exact'],
 		}
+        
