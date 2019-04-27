@@ -13,8 +13,8 @@ import {
 const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://pst-360.herokuapp.com"
 
 class Cloud extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.hostname = hostname()
     }
 
@@ -138,9 +138,10 @@ class Cloud extends Component {
     }
 
     render() {
-        return <svg ref={node => this.node = node}
-        width={500} height={500}>
-        </svg>
+        // return <svg ref={node => this.node = node}
+        // width={500} height={500}>
+        // </svg>
+        return <div>HELOWWWW</div>
      }
   }
 

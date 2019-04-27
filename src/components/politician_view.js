@@ -2,12 +2,35 @@ import React, { Component } from 'react';
 import * as d3 from "d3";
 import $ from 'jquery'
 
+const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://pst-360.herokuapp.com"
+
+let count = 0
+
 class PoliticianDetails extends Component {
-    // constructor() {
-    //     super()
-    // }
+    constructor(props) {
+        super(props)
+
+        this.hostname = hostname()
+
+        this.state = {
+            neutralData: null,
+            negData: null,
+            posData: null, 
+          };
+    }
 
     componentDidMount() {
+        console.log(this.hostname + '/tweets/?sentiment=0&politician__id=12&format=json')
+        fetch(this.hostname + '/tweets/?sentiment=0&politician__id=12&format=json')
+        .then(response => response.json())
+        .then(neutralData => this.setState({ neutralData: neutralData.count }));
+        fetch(this.hostname  + '/tweets/?sentiment__lt=0&politician__id=12&format=json')
+        .then(response => response.json())
+        .then(negData => this.setState({ negData: negData.count }));
+        fetch(this.hostname  + '/tweets/?sentiment__gt=0&politician__id=12&format=json')
+        .then(response => response.json())
+        .then(posData => {this.setState({ posData: posData.count })})
+        
         this.politicianTweetDetails()
      }
      componentDidUpdate() {
@@ -19,78 +42,82 @@ class PoliticianDetails extends Component {
         var data = [];
         data.push(
         {   'tweetType': 'negative',
-            'count': '{{negativeTweets}}'},
+            'count': this.state.negData},
         {   'tweetType': 'positive',
-            'count': '{{positiveTweets}}'}, 
+            'count': this.state.posData}, 
         {   'tweetType': 'neutral',
-            'count': '{{neutralTweets}}'})
-        
-        console.log(data);
-        var width = 300,
-            height = 300,
-            radius = Math.min(width, height) / 2;
-        
-        var color = d3.scaleOrdinal()
-            .range([ "#cc2816", "#075d9a", "#68605f"]);
-        
-        var div = d3.select("body").append("div")	
-                .attr("class", "tooltip")				
-                .style("opacity", 0);
+            'count': this.state.neutralData})
+        count ++ 
 
-        var pie = d3.pie()
-            .value(function(d) { return d.count; })(data);
+        if (count === 4) {
+
+            console.log(data)
+            var width = 300,
+                height = 300,
+                radius = Math.min(width, height) / 2;
             
-        var arc = d3.arc()
-                .outerRadius(height/2)
-                .innerRadius(height/4)
-                .padAngle(0.03)
-                .cornerRadius(1)
-        
-        var labelArc = d3.arc()
-            .outerRadius(radius - 40)
-            .innerRadius(radius - 40);
-    
-        var svg = d3.select("#pie")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-                .append("g")
-                .attr("transform", "translate(" + width/2 + "," + height/2 +")"); // Moving the center point. 1/2 the width and 1/2 the height    
+            var color = d3.scaleOrdinal()
+                .range([ "#cc2816", "#075d9a", "#68605f"]);
+            
+            var div = d3.select("body").append("div")	
+                    .attr("class", "tooltip")				
+                    .style("opacity", 0);
 
-        var g = svg.selectAll("arc")
-            .data(pie)
-            .enter().append("g")
-            .attr("class", "arc");
+            var pie = d3.pie()
+                .value(function(d) { return d.count; })(data);
+                
+            var arc = d3.arc()
+                    .outerRadius(height/2)
+                    .innerRadius(height/4)
+                    .padAngle(0.03)
+                    .cornerRadius(1)
+            
+            var labelArc = d3.arc()
+                .outerRadius(radius - 40)
+                .innerRadius(radius - 40);
         
-        g.append("path")
-            .attr("d", arc)
-            .style("fill", function(d) { return color(d.data.tweetType);})
-            .on("mouseover", function(d) { 
-                div.transition()		
-                    .duration(200)		
-                    .style("opacity", .9);		
-                div.html(d.data.count + " tweets")
-                    .style("left", (d3.event.pageX) + "px")		
-                    .style("top", (d3.event.pageY - 28) + "px");	
-                })					
-            .on("mouseout", function(d) {		
-                div.transition()		
-                    .duration(500)		
-                    .style("opacity", 0);	
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                    .append("g")
+                    .attr("transform", "translate(" + width/2 + "," + height/2 +")"); // Moving the center point. 1/2 the width and 1/2 the height    
+
+            var g = svg.selectAll("arc")
+                .data(pie)
+                .enter().append("g")
+                .attr("class", "arc");
+            
+            g.append("path")
+                .attr("d", arc)
+                .style("fill", function(d) { return color(d.data.tweetType);})
+                .on("mouseover", function(d) { 
+                    div.transition()		
+                        .duration(200)		
+                        .style("opacity", .9);		
+                    div.html(d.data.count + " tweets")
+                        .style("left", (d3.event.pageX) + "px")		
+                        .style("top", (d3.event.pageY - 28) + "px");	
+                    })					
+                .on("mouseout", function(d) {		
+                    div.transition()		
+                        .duration(500)		
+                        .style("opacity", 0);	
+                });
+            
+            g.append("text")
+                .attr("transform", function(d) {                    //set the label's origin to the center of the arc
+                    //we have to make sure to set these before calling arc.centroid
+                    d.innerRadius = 0;
+                    d.outerRadius = radius;
+                    return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
+                })
+            .attr("dy", ".50em")
+            .style("text-anchor", "middle")
+            .text(function(d) {
+                return d.data.tweetType;
             });
-        
-        g.append("text")
-    	    .attr("transform", function(d) {                    //set the label's origin to the center of the arc
-                //we have to make sure to set these before calling arc.centroid
-                d.innerRadius = 0;
-                d.outerRadius = radius;
-                return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
-            })
-        .attr("dy", ".50em")
-        .style("text-anchor", "middle")
-        .text(function(d) {
-            return d.data.tweetType;
-        });
+        }
     }
 
     render () {
