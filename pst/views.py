@@ -3,10 +3,12 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
+from .filters import *
 from .twitterSearch import getTweets
 from .tweetProcessing import processTweet
-from rest_framework.response import Response
-from rest_framework import viewsets, filters
+from rest_framework import viewsets
+from rest_framework import filters as rest_filters
+from django_filters import rest_framework as filters
 from .serializers import *
 from .twitterStreaming import streamTweets
 import json
@@ -14,7 +16,6 @@ from django.db.models import Count
 import csv
 from .fetchTweets import fetchTweets
 import json
-
 
 # Create your views here.
 def print_tweets(request):
@@ -47,7 +48,7 @@ def data_viz_details(request, pk):
 		negativeTweets = Tweet.objects.filter(politician = politician, sentiment__lte=0).count()
 		neutralTweets = Tweet.objects.filter(politician = politician, sentiment=0).count()
 		positiveTweets = Tweet.objects.filter(politician = politician, sentiment__gte=0).count()
-		tweetsWithLocation = Tweet.objects.exclude(location__exact='')
+		tweetsWithLocation = Tweet.objects.filter(politician = politician).exclude(location__exact='')
 
 	context = {
 		'politician': politician,
@@ -104,8 +105,9 @@ def load_politicians(request):
 class TweetViewSet(viewsets.ModelViewSet):
 	serializer_class = TweetSerializer
 	queryset = Tweet.objects.order_by("-date")
-	filter_backends = (DjangoFilterBackend,filters.OrderingFilter)
-	filter_fields = ('twitterUser', 'tweet_id', 'politician', 'date', 'location', 'sentiment')
+	filter_backends = (DjangoFilterBackend,rest_filters.OrderingFilter)
+	# filter_backends = (DjangoFilterBackend,)
+	filterset_class = TweetFilter
 	ordering_fields = ('politician', 'date', 'sentiment')
 	# search_fields = ('twitterUser', 'date', 'location', 'sentiment')
 	
@@ -116,14 +118,14 @@ class SexistWordViewSet(viewsets.ModelViewSet):
 class PoliticianViewSet(viewsets.ModelViewSet):
 	serializer_class = PoliticianSerializer
 	queryset = Politician.objects.all()
-	filter_backends = (DjangoFilterBackend,filters.OrderingFilter)
+	filter_backends = (DjangoFilterBackend,rest_filters.OrderingFilter)
 	filter_fields = ('id',)
 	ordering_fields = ('state', 'tweet_count')
 
 class TwitterUserViewSet(viewsets.ModelViewSet):
 	serializer_class = TwitterUserSerializer
 	queryset = TwitterUser.objects.all()
-	filter_backends = (DjangoFilterBackend,filters.OrderingFilter)
+	filter_backends = (DjangoFilterBackend,rest_filters.OrderingFilter)
 	filter_fields = ('tweet_count', 'username', 'user_id', 'followers_count')
 	ordering_fields = ('tweet_count',)
 
