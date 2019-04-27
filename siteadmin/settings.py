@@ -25,7 +25,7 @@ SECRET_KEY = '$qejs(-&epj2g#763!ff1g=)1l4*@@16bc^cw&vy&rzy1!06o_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False,
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'pst-360.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'constitute.herokuapp.com']
 
 CORS_ORIGIN_ALLOW_ALL=True
 
@@ -165,7 +165,7 @@ USE_TZ = True
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000/',
     'localhost:8000/',
-    'pst-360.herokuapp.com',
+    'constitute.herokuapp.com',
 
 )
 

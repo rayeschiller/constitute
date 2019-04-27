@@ -28,7 +28,7 @@ class Tweets extends Component {
     if (window.location.hostname === "localhost"){
       hostname = "http://localhost:8000";
     } else {
-      hostname = "https://pst-360.herokuapp.com"
+      hostname = "https://constitute.herokuapp.com"
     }
 
     console.log(hostname + `/tweets/?politicians=${e.target.value}&format=json`);
@@ -59,7 +59,7 @@ class Tweets extends Component {
     if (window.location.hostname === "localhost"){
       hostname = "http://localhost:8000";
     } else {
-      hostname = "https://pst-360.herokuapp.com"
+      hostname = "https://constitute.herokuapp.com"
     }
 
 
@@ -78,7 +78,7 @@ class Tweets extends Component {
     if (window.location.hostname === "localhost"){
       hostname = "http://localhost:8000";
     } else {
-      hostname = "https://pst-360.herokuapp.com"
+      hostname = "https://constitute.herokuapp.com"
     }
     console.log(hostname);
     fetch(hostname + "/tweets/?format=json")

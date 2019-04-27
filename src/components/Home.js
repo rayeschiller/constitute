@@ -42,7 +42,7 @@ class Home extends Component {
       </div>
    <div className="col-lg-8 col-md-8 col-sm-12 desc">
      
-    <h3>Political Sexism on Twitter (PST)
+    <h3>Constitute
       <img src={logoFinal}/>
     </h3>
     <p>
