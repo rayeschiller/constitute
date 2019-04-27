@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
 import $ from 'jquery'
+import PoliticianDetails from './politician_view'
+import { Redirect } from 'react-router'
+
+import {
+    Route,
+    Switch,
+    BrowserRouter,
+  } from 'react-router-dom';
 
 const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://pst-360.herokuapp.com"
 
@@ -93,7 +101,12 @@ class Cloud extends Component {
                             .style("opacity", 0);	
                     })
                     .on("dblclick", function(d){
-                        return window.location.assign(hostname + "/data_viz/" + d.data.pk, '_blank');
+                        // var test = "http://localhost:3000/"
+                        //  return <BrowserRouter>
+                        //      <Route path="/politiciansDetails" Component={PoliticianDetails} />
+                        //      </BrowserRouter>
+                    //     // return window.location.assign(test + PoliticianDetails + d.data.pk, '_blank');
+                    //    return <Redirect to="/politiciansDetails" />
                     })
                 
                 
