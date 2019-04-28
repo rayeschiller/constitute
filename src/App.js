@@ -69,7 +69,7 @@ class App extends Component {
             if (window.location.hostname === "localhost"){
               hostname = "http://localhost:8000";
             } else {
-              hostname = "https://constitute-360.herokuapp.com"
+              hostname = "https://constitute.herokuapp.com"
             }
             window.location = hostname + '/data_viz/'; return null;} }/>
         </Switch>
