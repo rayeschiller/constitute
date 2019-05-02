@@ -8,8 +8,6 @@ class MyCharFilter(filters.CharFilter):
 	empty_value = 'EMPTY'
 	def filter(self, qs, value):
 		if value != self.empty_value:
-			print('self is ')
-			print(dir(self))
 			return super(MyCharFilter, self).filter(qs, value)
 		qs = self.get_method(qs)(**{'%s__%s' % (self.field_name, self.lookup_expr): ""})
 		return qs.distinct() if self.distinct else qs
