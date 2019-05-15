@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import {Tweet} from 'react-twitter-widgets';
 import './styles.css'
+import { Suspense, lazy } from 'react';
+
+// const Tweet = React.lazy(() => {
+//   import {Tweet} from 'react-twitter-widgets';
+// });
 
 
 
@@ -13,6 +18,8 @@ const TweetList = (props) => {
 
   ); 
 }
+
+// const TweetLazy = React.lazy(() => TweetList);
 
 class Tweets extends Component {
 
@@ -30,7 +37,7 @@ class Tweets extends Component {
     } else {
       hostname = "https://pst-360.herokuapp.com"
     }
-
+    // this is what we want to lazy load
     console.log(hostname + `/tweets/?politicians=${e.target.value}&format=json`);
     fetch(hostname + `/tweets/?politician=${e.target.value}&format=json`)
     .then(res => res.json())
@@ -133,7 +140,9 @@ render () {
         </select>
     </div>
     <div className="col-sm-7 text-left tweet-list"> 
+    <Suspense fallback={<h1>Still Loading…</h1>}>
       <TweetList tweets={this.state.tweets} />
+      </Suspense>
     </div>
     <div className="col-sm-2 sidenav">
     </div>
