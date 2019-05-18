@@ -20,6 +20,7 @@ class Cloud extends Component {
 
     componentDidMount() {
         this.politicianBubbles(this.hostname)
+        console.log(window.location.origin)
      }
      componentDidUpdate() {
         this.politicianBubbles(this.hostname)
@@ -101,12 +102,9 @@ class Cloud extends Component {
                             .style("opacity", 0);	
                     })
                     .on("dblclick", function(d){
-                        // var test = "http://localhost:3000/"
-                        //  return <BrowserRouter>
-                        //      <Route path="/politiciansDetails" Component={PoliticianDetails} />
-                        //      </BrowserRouter>
-                    //     // return window.location.assign(test + PoliticianDetails + d.data.pk, '_blank');
-                    //    return <Redirect to="/politiciansDetails" />
+                        console.log('clicked')
+                        console.log(window.location)
+                        window.location.assign(window.location.origin + '/' + d.data.pk)
                     })
                 
                 

@@ -7,7 +7,7 @@ import Home from './components/Home';
 import Analytics from './components/Analytics';
 import Map from './components/Map';
 import Cloud from './components/politician_count_cloud'
-import {PoliticianDetails, SimpleMap, PageLayout} from './components/politician_view'
+import {PageLayout} from './components/politician_view'
 
 import Helmet from 'react-helmet';
 
@@ -45,13 +45,13 @@ class App extends Component {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
-              <a className="nav-item nav-link" href="/cloud">Cloud</a>
+              <a className="nav-item nav-link" href="/cloud">Politican Trends</a>
               <a className="nav-item nav-link" href="/appTweets">Tweets</a>
               <a className="nav-item nav-link" href="/analytics">Analytics</a>
-              <a className="nav-item nav-link" href="/vis">Top Words</a>
+              {/* <a className="nav-item nav-link" href="/vis">Top Words</a> */}
               {/* <a className="nav-item nav-link" href="/maps">Maps</a> */}
               <a className="nav-item nav-link" href="/politicians">Politician Breakdown</a>
-              <a className="nav-item nav-link" href="/:politicianId">Fuckers</a>
+              {/* <a className="nav-item nav-link" href="/:politicianId">Politician Trends</a> */}
             </div>
           </div>
           </div>
@@ -65,8 +65,6 @@ class App extends Component {
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/analytics" component={Analytics} />
           <Route path="/:politicianId" component={PageLayout}/>
-          {/* <Route path='/vis' component={() => { window.location = 'http://localhost:8080/'; return null;} }/> */}
-          {/* <Route path="/maps" component={Map}/> */}
           <Route path='/vis' component={() => { 
             var hostname = "";
             if (window.location.hostname === "localhost"){

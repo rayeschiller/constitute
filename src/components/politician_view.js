@@ -211,8 +211,8 @@ class PageLayout extends Component {
             lastName: null,
             altName: null,
             username: null,
-            district: null,
             office: null,
+            district: null,
         }
 
     }
@@ -224,7 +224,7 @@ class PageLayout extends Component {
         fetch(this.hostname + `/politicians/?id=${politicianId}&format=json`)
           .then( response => response.json())
           .then(politicianId => {
-              this.setState({pk : politicianId.results[0].pk, firstName:politicianId.results[0].first_name, lastName: politicianId.results[0].last_name, altName: politicianId.results[0].alternativeName, username: politicianId.results[0].username, office: politicianId.results[0].office_level, place: politicianId.results[0].district })
+              this.setState({pk : politicianId.results[0].pk, firstName:politicianId.results[0].first_name, lastName: politicianId.results[0].last_name, altName: politicianId.results[0].alternativeName, username: politicianId.results[0].username, office: politicianId.results[0].office_level, district: politicianId.results[0].district })
             }
               );
           
