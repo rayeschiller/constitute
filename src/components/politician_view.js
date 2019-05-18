@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import * as d3 from "d3";
 import marker from './images/marker.png'
 import './styles/w3-styles.css'
+import AOC from './images/AOC.jpg'
+import Pressley from './images/AyannaPressley.jpg'
+import Haaland from './images/DebHaaland.jpg'
+import Harris from './images/KamalaHarris.jpg'
+import Gillibrand from './images/KirstenGillibrand.jpg'
+import Collins from './images/SusanCollins.jpg'
+import Warren from './images/ElizabethWarren.jpg'
 
 import GoogleMapReact from 'google-map-react';
 
@@ -33,7 +40,7 @@ class PoliticianDetails extends Component {
     componentDidMount() {
 
         console.log(this.hostname + '/tweets/?sentiment__lt=0&politician__id=' + this.pk + '&format=json')
-        fetch(this.hostname + '/tweets/?sentiment__lt=0&politician__id=' + this.pk + '&format=json')
+        fetch(this.hostname + '/tweets/?sentiment=0&politician__id=' + this.pk + '&format=json')
         .then(response => response.json())
         .then(neutralData => this.setState({ neutralData: neutralData.count }));
         fetch(this.hostname  + '/tweets/?sentiment__lt=0&politician__id=' + this.pk + '&format=json')
@@ -242,7 +249,7 @@ class PageLayout extends Component {
                     <div className="w3-third">
                         <div className="w3-white w3-text-grey w3-card-4">
                             <div className="w3-display-container">
-                                {/* <img src="{% static '/'|add:politician.image_url %}" alt="Avatar"></img> */}
+                                <img src={{uri: "/static/img/" + this.state.lastName + ".jpg"}}  alt="Avatar"></img>
                                 <div className="w3-display-bottomleft w3-container w3-text-black w3-white">
                                 <h2>{this.state.firstName}{this.state.lastName}</h2>
                                 </div>

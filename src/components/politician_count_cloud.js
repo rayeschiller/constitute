@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
 import $ from 'jquery'
-import PoliticianDetails from './politician_view'
-import { Redirect } from 'react-router'
+
+
 
 import {
     Route,
@@ -29,7 +29,7 @@ class Cloud extends Component {
     politicianBubbles (hostname) {
         $.getJSON(hostname + '/politicians/?format=json', function(politicians_data) {
             $.getJSON(hostname + '/tweets/?format=json', function(tweet_data) {    
-                console.log(hostname)            
+                         
                 const width = 1000 //max size of the bubbles
                 const height =800
                 // const color = d3.scaleOrdinal(d3.schemeAccent);
