@@ -157,7 +157,7 @@ class SimpleMap extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '50vh', width: '50%' }}>
+      <div style={{ height: '75vh', width: '75%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyBiWXWkBEsSpN4viAXNSEDyFlKHOJ8SGu4' }}
           defaultCenter={this.props.center}
@@ -211,7 +211,7 @@ class PageLayout extends Component {
             lastName: null,
             altName: null,
             username: null,
-            state: null,
+            district: null,
             office: null,
         }
 
@@ -224,7 +224,7 @@ class PageLayout extends Component {
         fetch(this.hostname + `/politicians/?id=${politicianId}&format=json`)
           .then( response => response.json())
           .then(politicianId => {
-              this.setState({pk : politicianId.results[0].pk, firstName:politicianId.results[0].first_name, lastName: politicianId.results[0].last_name, altName: politicianId.results[0].alternativeName, username: politicianId.results[0].username, office: politicianId.results[0].office_level, state: politicianId.results[0].state })
+              this.setState({pk : politicianId.results[0].pk, firstName:politicianId.results[0].first_name, lastName: politicianId.results[0].last_name, altName: politicianId.results[0].alternativeName, username: politicianId.results[0].username, office: politicianId.results[0].office_level, place: politicianId.results[0].district })
             }
               );
           
@@ -232,24 +232,25 @@ class PageLayout extends Component {
       
     render(){
         let style1 = {
-            maxWidth: '1400px'
+            maxWidth: '1400px',
+            marginTop:'100px'
         }
        return(
         <body className="w3-light-grey">
-            <div className="w3-content w3-margin-top" style={style1}>
+            <div className="w3-content" style={style1}>
                 <div className="w3-row-padding">
                     <div className="w3-third">
                         <div className="w3-white w3-text-grey w3-card-4">
                             <div className="w3-display-container">
-                                <img src="{% static '/'|add:politician.image_url %}" alt="Avatar"></img>
+                                {/* <img src="{% static '/'|add:politician.image_url %}" alt="Avatar"></img> */}
                                 <div className="w3-display-bottomleft w3-container w3-text-black w3-white">
                                 <h2>{this.state.firstName}{this.state.lastName}</h2>
                                 </div>
                             </div>
                             <div className="w3-container">
-                                <p><i className="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>{this.state.office_level}</p>
-                                <p><i className="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>{this.state.state}</p>
-                                <p><i className="fa fa-twitter fa-fw w3-margin-right w3-large w3-text-teal"></i><a href={'https://twitter.com/'+ this.state.username}>@{this.state.username}</a></p>
+                                <p>{this.state.office}</p>
+                                <p>{this.state.district}</p>
+                                <p><a href={'https://twitter.com/'+ this.state.username}>@{this.state.username}</a></p>
                                 {/* {% if politician.alternativeName %}<p><i className="fa fa-twitter fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="https://twitter.com/{{politician.alternativeName}}">@{{politician.alternativeName}}</a></p>{% endif %} */}
                                 <hr></hr>
                             </div>
