@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
-import $ from 'jquery'
+import marker from './images/marker.png'
+import './styles/w3-styles.css'
+
+import GoogleMapReact from 'google-map-react';
+
+const pk = () => {
+    let path = window.location.pathname
+    return path = path.replace('/', '');
+}
 
 const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://pst-360.herokuapp.com"
 
@@ -9,7 +17,7 @@ let count = 0
 class PoliticianDetails extends Component {
     constructor(props) {
         super(props)
-
+        this.test = this.props.pk
         this.hostname = hostname()
 
         this.state = {
@@ -17,17 +25,21 @@ class PoliticianDetails extends Component {
             negData: null,
             posData: null, 
           };
+
+        this.pk = pk()
+    
     }
 
     componentDidMount() {
-        console.log(this.hostname + '/tweets/?sentiment=0&politician__id=12&format=json')
-        fetch(this.hostname + '/tweets/?sentiment=0&politician__id=12&format=json')
+
+        console.log(this.hostname + '/tweets/?sentiment__lt=0&politician__id=' + this.pk + '&format=json')
+        fetch(this.hostname + '/tweets/?sentiment__lt=0&politician__id=' + this.pk + '&format=json')
         .then(response => response.json())
         .then(neutralData => this.setState({ neutralData: neutralData.count }));
-        fetch(this.hostname  + '/tweets/?sentiment__lt=0&politician__id=12&format=json')
+        fetch(this.hostname  + '/tweets/?sentiment__lt=0&politician__id=' + this.pk + '&format=json')
         .then(response => response.json())
         .then(negData => this.setState({ negData: negData.count }));
-        fetch(this.hostname  + '/tweets/?sentiment__gt=0&politician__id=12&format=json')
+        fetch(this.hostname  + '/tweets/?sentiment__gt=0&politician__id=' + this.pk + '&format=json')
         .then(response => response.json())
         .then(posData => {this.setState({ posData: posData.count })})
         
@@ -51,7 +63,6 @@ class PoliticianDetails extends Component {
 
         if (count === 4) {
 
-            console.log(data)
             var width = 300,
                 height = 300,
                 radius = Math.min(width, height) / 2;
@@ -60,7 +71,7 @@ class PoliticianDetails extends Component {
                 .range([ "#cc2816", "#075d9a", "#68605f"]);
             
             var div = d3.select("body").append("div")	
-                    .attr("class", "tooltip")				
+                    .attr("className", "tooltip")				
                     .style("opacity", 0);
 
             var pie = d3.pie()
@@ -76,7 +87,7 @@ class PoliticianDetails extends Component {
                 .outerRadius(radius - 40)
                 .innerRadius(radius - 40);
         
-            var svg = d3.select("body")
+            var svg = d3.select("#pie")
                 .append("svg")
                 .attr("width", width)
                 .attr("height", height)
@@ -86,7 +97,7 @@ class PoliticianDetails extends Component {
             var g = svg.selectAll("arc")
                 .data(pie)
                 .enter().append("g")
-                .attr("class", "arc");
+                .attr("className", "arc");
             
             g.append("path")
                 .attr("d", arc)
@@ -120,11 +131,155 @@ class PoliticianDetails extends Component {
         }
     }
 
+
     render () {
         return <svg ref={node => this.node = node}
-        width={500} height={500}>
+        width={200} height={100}>
         </svg>
     }
 }
 
-export default PoliticianDetails
+const AnyReactComponent = ({text}) => <div>{text}</div>;
+
+class SimpleMap extends Component {
+  static defaultProps = {
+    center: {
+      lat: 39,
+      lng: -95
+    },
+    pin1: {
+        lat:39,
+        lng:-95
+    },
+    zoom: 4
+  };
+
+  render() {
+    return (
+      // Important! Always set the container height explicitly
+      <div style={{ height: '50vh', width: '50%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: 'AIzaSyBiWXWkBEsSpN4viAXNSEDyFlKHOJ8SGu4' }}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
+        >
+          <AnyReactComponent
+            lat={38}
+            lng={-90}
+            text="My Marker"
+          />
+            <AnyReactComponent
+            lat={40}
+            lng={-80}
+            text="My Marker"
+          />
+            <AnyReactComponent
+            lat={38}
+            lng={-90}
+            text="My Marker"
+          />
+            <AnyReactComponent
+            lat={30}
+            lng={-100}
+            text="My Marker"
+          />
+            <AnyReactComponent
+            lat={41}
+            lng={71}
+            text="My Marker"
+          />
+            <AnyReactComponent
+            lat={50}
+            lng={-90}
+            text="My Marker"
+          />
+        </GoogleMapReact>
+      </div>
+    );
+  }
+}
+
+class PageLayout extends Component {
+    constructor(props) {
+        super(props)
+
+        this.hostname = hostname()
+
+        this.state = {
+            pk: null,
+            firstName: null,
+            lastName: null,
+            altName: null,
+            username: null,
+            state: null,
+            office: null,
+        }
+
+    }
+
+
+    componentDidMount() {
+
+        const { politicianId } = this.props.match.params;
+        fetch(this.hostname + `/politicians/?id=${politicianId}&format=json`)
+          .then( response => response.json())
+          .then(politicianId => {
+              this.setState({pk : politicianId.results[0].pk, firstName:politicianId.results[0].first_name, lastName: politicianId.results[0].last_name, altName: politicianId.results[0].alternativeName, username: politicianId.results[0].username, office: politicianId.results[0].office_level, state: politicianId.results[0].state })
+            }
+              );
+          
+      }
+      
+    render(){
+        let style1 = {
+            maxWidth: '1400px'
+        }
+       return(
+        <body className="w3-light-grey">
+            <div className="w3-content w3-margin-top" style={style1}>
+                <div className="w3-row-padding">
+                    <div className="w3-third">
+                        <div className="w3-white w3-text-grey w3-card-4">
+                            <div className="w3-display-container">
+                                <img src="{% static '/'|add:politician.image_url %}" alt="Avatar"></img>
+                                <div className="w3-display-bottomleft w3-container w3-text-black w3-white">
+                                <h2>{this.state.firstName}{this.state.lastName}</h2>
+                                </div>
+                            </div>
+                            <div className="w3-container">
+                                <p><i className="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>{this.state.office_level}</p>
+                                <p><i className="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>{this.state.state}</p>
+                                <p><i className="fa fa-twitter fa-fw w3-margin-right w3-large w3-text-teal"></i><a href={'https://twitter.com/'+ this.state.username}>@{this.state.username}</a></p>
+                                {/* {% if politician.alternativeName %}<p><i className="fa fa-twitter fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="https://twitter.com/{{politician.alternativeName}}">@{{politician.alternativeName}}</a></p>{% endif %} */}
+                                <hr></hr>
+                            </div>
+                        </div><br></br>
+                    </div>
+                    <div className="w3-twothird">
+    
+                        <div className="w3-container w3-card w3-white w3-margin-bottom">
+                            <h2 className="w3-text-grey w3-padding-16"><i className="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Sentiment Levels</h2>
+                            <div className="w3-container">
+                            <div  id="pie"><PoliticianDetails/></div>
+                            <hr></hr>
+                            </div>
+                        </div>
+                        <div className="w3-container w3-card w3-white">
+                            <h2 className="w3-text-grey w3-padding-16"><i className="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Tweet Map</h2>
+                            <div className="w3-container">
+                                    <div id = "map-container" ><SimpleMap></SimpleMap><br></br><br></br></div>
+                                <hr></hr>
+                            
+                            </div>
+                        </div>
+                    </div>          
+                </div> 
+            </div>
+        </body>
+  
+        );
+    }
+}
+export { PageLayout, PoliticianDetails };
+ 
+

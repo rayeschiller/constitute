@@ -138,10 +138,10 @@ class Cloud extends Component {
     }
 
     render() {
-        // return <svg ref={node => this.node = node}
-        // width={500} height={500}>
-        // </svg>
-        return <div>HELOWWWW</div>
+        return( <div>TEST
+            <p>random</p>
+        </div>
+        )
      }
   }
 
