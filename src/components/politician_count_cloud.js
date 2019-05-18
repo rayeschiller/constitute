@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 import * as d3 from "d3";
 import $ from 'jquery'
 
-
-
-import {
-    Route,
-    Switch,
-    BrowserRouter,
-  } from 'react-router-dom';
-
 const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://pst-360.herokuapp.com"
 
 class Cloud extends Component {

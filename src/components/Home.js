@@ -26,7 +26,7 @@ class Home extends Component {
       </header>
       <div className="container">
         <div className="description ">
-          <h1>POLITICAL SEXISM ON TWITTER
+          <h1>Constitute
           <p>    
           A gender driven political analytics design to shed light on online harassment and inequalities women and LQBTQ folx encounter when running for office.
           </p>   
@@ -42,12 +42,12 @@ class Home extends Component {
       </div>
    <div className="col-lg-8 col-md-8 col-sm-12 desc">
      
-    <h3>Political Sexism on Twitter (PST)
+    <h3>Constitute
       <img src={logoFinal}/>
     </h3>
     <p>
 
-The goal of Political Sexism on Twitter (PST) is to raise awareness of online rhetoric towards female politicians and how that feeds into public perception during election cycles and effects outcomes.
+The goal of Constitute is to raise awareness of online rhetoric towards female politicians and how that feeds into public perception during election cycles and effects outcomes.
 We want to: Use sexist words along with most prominent female politicians of the 2020 election cycle to create mappings and visualizations of the the candidates receiving the most online negatively as well as the words being and imagery being used to describe them. Compare against their male counterparts, and raise public awareness. 
     </p>
    </div>

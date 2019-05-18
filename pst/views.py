@@ -20,7 +20,7 @@ import json
 # Create your views here.
 def print_tweets(request):
 	politician_ids = Politician.objects.values_list('id', flat=True)
-	fetchTweets(politician_ids, searchOnlySexistWords=True)
+	fetchTweets(politician_ids, searchOnlySexistWords=False)
 
 	tweetsForUi = Tweet.objects.all().filter(politician=politician_ids[0])
 	template = loader.get_template('pst/index.html')
