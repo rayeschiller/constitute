@@ -110,6 +110,12 @@ render () {
   } else{
   return (
   <div className="container-fluid text-center tweets">
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
   <h2 className="tweetHeader">Trending Tweets</h2>
   <div className="row">
     <div className="col-sm-3 sidenav">
