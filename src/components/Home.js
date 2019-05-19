@@ -20,7 +20,7 @@ class Home extends Component {
   render (){
   return(
   <div>
-      <Helmet bodyAttributes={{style: 'background-color : #b3cccc'}}/>
+      <Helmet bodyAttributes={{style: 'background-color : white'}}/>
       <header className="header">
         <div className="overlay"></div>
       </header>
@@ -90,10 +90,6 @@ We want to: Use sexist words along with most prominent female politicians of the
    </div>
   </div>
 </div>
-
-<nav class="navbar fixed-bottom navbar-light bg-dark">
-  <a class="navbar-brand" href="#">Together we can affect change!</a>
-</nav>
 </div>
     )
   }
