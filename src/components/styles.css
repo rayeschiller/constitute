@@ -8,6 +8,23 @@
 .tweetHeader {
     text-align: center;
 }
+.tweet-card1 {
+    background-color: #00aced;
+    height: 5rem;
+}
+
+.tweet-card2 {
+    text-align: center;
+    text-justify: distribute-all-lines;
+    height: 10rem;
+    background: white;
+    margin-bottom: 2rem;
+}
+
+.sidenav {
+    position: fixed;
+}
+
 
 /*header style*/
 .header{

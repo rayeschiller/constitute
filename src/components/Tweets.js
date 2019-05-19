@@ -110,9 +110,21 @@ render () {
   } else{
   return (
   <div className="container-fluid text-center tweets">
-  <h2 className="tweetHeader">Trending Tweets</h2>
+  <br>
+  </br>
+  <br>
+  </br>
+  <br>
+  </br>
+  {/* <h2 className="tweetHeader">Trending Tweets</h2> */}
   <div className="row">
-    <div className="col-sm-3 sidenav">
+    <div className="col-sm-4 sidenav">
+      <div class="tweet-card1">
+      </div>
+      <div class="tweet-card2">
+        <h5 class="card-text">Trending Tweets</h5>
+      </div>
+    {/* <h2 className="tweetHeader">Trending Tweets</h2> */}
     <select className="browser-default custom-select" onChange={this.onDropdownSelected.bind(this)}>
           <option>Choose politician</option>
           <option value="1">Alexandria Ocasio-Cortez</option>
