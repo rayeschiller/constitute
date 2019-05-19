@@ -242,6 +242,43 @@ class PageLayout extends Component {
             maxWidth: '1400px',
             marginTop:'100px'
         }
+
+        let imgStyle = {
+            height: '100%',
+            width: '100%'
+        }
+
+        const lastName = this.state.lastName
+        let img
+        
+        if (lastName === 'Collins') {
+            img = <img src={Collins}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        if (lastName === 'Pressley') {
+            img = <img src={Pressley}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        if (lastName === 'Gillibrand') {
+            img = <img src={Gillibrand}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        if (lastName === 'Haaland') {
+            img = <img src={Haaland}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        if (lastName === 'Harris') {
+            img = <img src={Harris}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        if (lastName === 'Warren') {
+            img = <img src={Warren}   style={imgStyle} alt="Avatar"></img>
+
+        }
+        if (lastName === 'Ocasio-Cortez') {
+            img = <img src={AOC}  style={imgStyle} alt="Avatar"></img>
+
+        }
        return(
         <body className="w3-light-grey">
             <div className="w3-content" style={style1}>
@@ -249,7 +286,8 @@ class PageLayout extends Component {
                     <div className="w3-third">
                         <div className="w3-white w3-text-grey w3-card-4">
                             <div className="w3-display-container">
-                                <img src={{uri: "/static/img/" + this.state.lastName + ".jpg"}}  alt="Avatar"></img>
+                                <person lastName={lastName}/>
+                                {img}
                                 <div className="w3-display-bottomleft w3-container w3-text-black w3-white">
                                 <h2>{this.state.firstName}{this.state.lastName}</h2>
                                 </div>
