@@ -17,7 +17,7 @@ const pk = () => {
     return path = path.replace('/', '');
 }
 
-const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://pst-360.herokuapp.com"
+const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://constitute.herokuapp.com"
 
 let count = 0
 

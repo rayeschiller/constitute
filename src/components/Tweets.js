@@ -40,8 +40,6 @@ class Tweets extends Component {
           isLoaded: true,
           items: result,
           tweets: result.results.map(function(tweet){
-            console.log("tweet id")
-            console.log(tweet.tweet_id);
             return {"tweetId": tweet.tweet_id};
           })
         });
