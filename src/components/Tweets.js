@@ -31,8 +31,8 @@ class Tweets extends Component {
       hostname = "https://constitute.herokuapp.com"
     }
 
-    console.log(hostname + `/tweets/?politicians=${e.target.value}&format=json`);
-    fetch(hostname + `/tweets/?politician=${e.target.value}&format=json`)
+    console.log(hostname + `/tweets/?politician__id=${e.target.value}&format=json`);
+    fetch(hostname + `/tweets/?politician__id=${e.target.value}&format=json`)
     .then(res => res.json())
     .then(
       (result) => {
@@ -40,6 +40,8 @@ class Tweets extends Component {
           isLoaded: true,
           items: result,
           tweets: result.results.map(function(tweet){
+            console.log("tweet id")
+            console.log(tweet.tweet_id);
             return {"tweetId": tweet.tweet_id};
           })
         });
