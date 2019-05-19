@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import {Tweet} from 'react-twitter-widgets';
-import logoFinal from './components/images/logoFinal.png';
+import logoFinal from './components/images/logo.png';
 import Tweets from './components/Tweets';
 import Home from './components/Home';
 import Analytics from './components/Analytics';
@@ -34,28 +34,37 @@ class App extends Component {
   render () {
     return (
      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-        <div className="container">
-          <a className="navbar-brand pull-left" href="/home">
+        <header>
+        <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a className="navbar-brand pull-left" href="/home">
           <div>
-          <img src={logoFinal} width='100' margintop='-7' /></div></a>
+          <img src={logoFinal} width='115' margintop='-100' /></div></a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
-              <a className="nav-item nav-link active" href="/home">Home<span className="sr-only">(current)</span></a>
-              <a className="nav-item nav-link" href="/cloud">Politican Trends</a>
-              <a className="nav-item nav-link" href="/appTweets">Tweets</a>
-              <a className="nav-item nav-link" href="/analytics">Analytics</a>
-              {/* <a className="nav-item nav-link" href="/vis">Top Words</a> */}
-              {/* <a className="nav-item nav-link" href="/maps">Maps</a> */}
-              <a className="nav-item nav-link" href="/politicians">Politician Breakdown</a>
-              {/* <a className="nav-item nav-link" href="/:politicianId">Politician Trends</a> */}
-            </div>
-          </div>
+          <a className="navbar-brand" href="/home">Constitute</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarCollapse">
+            <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+                <a className="nav-link" href="/tweets">Tweets <span className="sr-only">(current)</span></a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/vis">Analytics <span className="sr-only">(current)</span></a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/about">About</a>
+              </li>
+            </ul>
+            <form className="form-inline mt-2 mt-md-0">
+              <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
           </div>
         </nav>
+      </header>
 
        <div className="App-intro">
         <Switch>
