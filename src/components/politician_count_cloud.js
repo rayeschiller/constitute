@@ -2,32 +2,26 @@ import React, { Component } from 'react';
 import * as d3 from "d3";
 import $ from 'jquery'
 
-const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://constitute.herokuapp.com"
+const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://pst-360.herokuapp.com"
 
 class Cloud extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.hostname = hostname()
-        this.dblclick = this.dblclick.bind(this)
     }
 
     componentDidMount() {
         this.politicianBubbles(this.hostname)
+        console.log(window.location.origin)
      }
      componentDidUpdate() {
         this.politicianBubbles(this.hostname)
      }
 
-    dblclick (d) {
-        console.log(d.data.pk + 'CLICLED');
-        console.log('__________________')
-        return window.location.assign(this.hostname + "/data_viz/" + d.data.pk, '_blank');
-    }
-
     politicianBubbles (hostname) {
         $.getJSON(hostname + '/politicians/?format=json', function(politicians_data) {
             $.getJSON(hostname + '/tweets/?format=json', function(tweet_data) {    
-                console.log(hostname)            
+                         
                 const width = 1000 //max size of the bubbles
                 const height =800
                 // const color = d3.scaleOrdinal(d3.schemeAccent);
@@ -99,7 +93,11 @@ class Cloud extends Component {
                             .duration(500)		
                             .style("opacity", 0);	
                     })
-                    .on("dblclick", this.dblclick);
+                    .on("dblclick", function(d){
+                        console.log('clicked')
+                        console.log(window.location)
+                        window.location.assign(window.location.origin + '/' + d.data.pk)
+                    })
                 
                 
                 node.append("text")
@@ -130,9 +128,10 @@ class Cloud extends Component {
     }
 
     render() {
-        return <svg ref={node => this.node = node}
-        width={500} height={500}>
-        </svg>
+        return( <div>TEST
+            <p>random</p>
+        </div>
+        )
      }
   }
 
