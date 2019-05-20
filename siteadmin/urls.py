@@ -34,6 +34,7 @@ urlpatterns.extend([
   re_path('analytics/', TemplateView.as_view(template_name='index.html')),
   re_path('vis/', TemplateView.as_view(template_name='index.html')),
   re_path('about/', TemplateView.as_view(template_name='index.html')),
+  re_path(r'^politician/(?P<pk>\d+)/$', TemplateView.as_view(template_name='index.html')),
   path('print_tweets/', print_tweets),
   path('load_politicians/', load_politicians),
   path('stream_tweets/', streaming),
