@@ -39,7 +39,7 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .description h1{
- color:maroon ;
+ color: #1a3980;
  font-size: 3.5em;
 }
 .description p{
@@ -173,6 +173,15 @@
     text-align: center;
     margin-bottom: 20px;
   }
+
+  .navbar {
+      background: pink!important;
+      color: #1a3980!important;
+  }
+
+  .nav > li > a:hover{
+    background-color:#FCC;
+}
 
   footer{
     width:100%;

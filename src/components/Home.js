@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import './styles.css'
-import $ from 'jquery'
-import logoFinal from './images/logoFinal.png'
-import aboutImg from './images/about-img.jpg'
-import rina from './images/rina.jpg'
-import jules from './images/jules.jpg'
-import nat from './images/nat.jpg'
-import Chart from './Chart'
+import './styles.css';
+import $ from 'jquery';
+import logoFinal from './images/logoFinal.png';
+import aboutImg from './images/about-img.jpg';
+import Chart from './Chart';
 
 class Home extends Component {
   
