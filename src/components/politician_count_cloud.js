@@ -96,7 +96,7 @@ class Cloud extends Component {
                     .on("dblclick", function(d){
                         console.log('clicked')
                         console.log(window.location)
-                        window.location.assign(window.location.origin + '/' + d.data.pk)
+                        window.location.assign(window.location.origin + '/politician/' + d.data.pk)
                     })
                 
                 

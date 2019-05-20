@@ -23,7 +23,9 @@ import GoogleMapReact from 'google-map-react';
 
 const pk = () => {
     let path = window.location.pathname
-    return path = path.replace('/', '');
+    path = path.replace('/', '');
+    path = path.split('/')
+    return path.pop()
 }
 
 const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://constitute.herokuapp.com"
