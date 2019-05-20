@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import rina from './images/rina.jpg'
-import jules from './images/jules.jpg'
-import nat from './images/nat.jpg'
+import rina from './images/rina.jpg';
+import jules from './images/jules.jpg';
+import nat from './images/nat.jpg';
+import $ from 'jquery';
 
 class About extends Component {
+
+    componentDidMount () {
+        $(document).ready(function(){
+          $('.header').height($(window).height());
+         })
+      }
 
 
     render() {

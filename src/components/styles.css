@@ -176,13 +176,8 @@
 
   .navbar {
       background: lightgray!important;
-      color: #1a3980!important;
   }
-
-  .nav > li > a:hover{
-    background-color:#FCC;
-}
-
+  
   footer{
     width:100%;
     min-height:100px;    
