@@ -57,11 +57,11 @@ class App extends Component {
             <li className="nav-item">
                 <a className="nav-link" href="/appTweets">Tweets <span className="sr-only">(current)</span></a>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link" href="/vis">Analytics <span className="sr-only">(current)</span></a>
-              </li>
+              </li> */}
               <li className="nav-item">
-                <a className="nav-link" href="/cloud">Cloud <span className="sr-only">(current)</span></a>
+                <a className="nav-link" href="/analytics">Analytics <span className="sr-only">(current)</span></a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/about">About <span className="sr-only">(current)</span></a>
@@ -74,10 +74,10 @@ class App extends Component {
        <div className="App-intro">
         <Switch>
           <Route path="/home" component={Home}/>
-          <Route path="/cloud" render={(props)=> <Cloud></Cloud>} />
+          <Route path="/analytics" render={(props)=> <Cloud></Cloud>} />
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
-          <Route path="/analytics" component={Analytics} />
+          {/* <Route path="/analytics" component={Analytics} /> */}
           <Route path="/about" component={About} />
           <Route path="/:politicianId" component={PageLayout}/>
           <Route path='/vis' component={() => { 
