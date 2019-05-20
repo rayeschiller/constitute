@@ -79,7 +79,7 @@ class App extends Component {
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           {/* <Route path="/analytics" component={Analytics} /> */}
           <Route path="/about" component={About} />
-          <Route path="/:politicianId" component={PageLayout}/>
+          <Route path="/politician/:politicianId" component={PageLayout}/>
           <Route path='/vis' component={() => { 
             var hostname = "";
             if (window.location.hostname === "localhost"){
