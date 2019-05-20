@@ -9,6 +9,15 @@ import Harris from './images/KamalaHarris.jpg'
 import Gillibrand from './images/KirstenGillibrand.jpg'
 import Collins from './images/SusanCollins.jpg'
 import Warren from './images/ElizabethWarren.jpg'
+import Spanberger from './images/Spanberger.jpg'
+import Pelosi from './images/Pelosi.jpg'
+import Mosby from './images/Mosby.jpg'
+import Murkowski from './images/Murkowski.jpg'
+import Waters from './images/Waters.jpg'
+import Schumer from './images/Schumer.jpg'
+import Sinema from './images/Sinema.jpg'
+import Sanders from './images/Sanders.jpg'
+import placeholder from './images/placeholder.jpg'
 
 import GoogleMapReact from 'google-map-react';
 
@@ -255,30 +264,66 @@ class PageLayout extends Component {
             img = <img src={Collins}  style={imgStyle} alt="Avatar"></img>
 
         }
-        if (lastName === 'Pressley') {
+        else if (lastName === 'Pressley') {
             img = <img src={Pressley}  style={imgStyle} alt="Avatar"></img>
 
         }
-        if (lastName === 'Gillibrand') {
+        else if (lastName === 'Gillibrand') {
             img = <img src={Gillibrand}  style={imgStyle} alt="Avatar"></img>
 
         }
-        if (lastName === 'Haaland') {
+        else if (lastName === 'Haaland') {
             img = <img src={Haaland}  style={imgStyle} alt="Avatar"></img>
 
         }
-        if (lastName === 'Harris') {
+        else if (lastName === 'Harris') {
             img = <img src={Harris}  style={imgStyle} alt="Avatar"></img>
 
         }
-        if (lastName === 'Warren') {
+        else if (lastName === 'Warren') {
             img = <img src={Warren}   style={imgStyle} alt="Avatar"></img>
 
         }
-        if (lastName === 'Ocasio-Cortez') {
+        else if (lastName === 'Ocasio-Cortez') {
             img = <img src={AOC}  style={imgStyle} alt="Avatar"></img>
 
+        } 
+        else if (lastName === 'Spanberger') {
+            img = <img src={Spanberger}  style={imgStyle} alt="Avatar"></img>
+
         }
+        else if (lastName === 'Pelosi') {
+            img = <img src={Pelosi}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        if (lastName === 'Mosby') {
+            img = <img src={Mosby}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        else if (lastName === 'Murkowski') {
+            img = <img src={Murkowski}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        else if (lastName === 'Schumer') {
+            img = <img src={Schumer}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        else if (lastName === 'Sanders') {
+            img = <img src={Sanders}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        else if (lastName === 'Waters') {
+            img = <img src={Waters}  style={imgStyle} alt="Avatar"></img>
+
+        }
+        else if (lastName === 'Sinema') {
+            img = <img src={Sinema}  style={imgStyle} alt="Avatar"></img>
+
+        }
+    //   else {
+    //         img = <img src={placeholder}  style={imgStyle} alt="Avatar"></img>
+
+    //     }  
        return(
         <body className="w3-light-grey">
             <div className="w3-content" style={style1}>
