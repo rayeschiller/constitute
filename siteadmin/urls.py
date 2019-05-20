@@ -30,6 +30,7 @@ urlpatterns.extend([
   path('admin/', admin.site.urls),
   re_path('home/', TemplateView.as_view(template_name='index.html')),
   re_path('appTweets/', TemplateView.as_view(template_name='index.html')),
+  re_path('cloud/', TemplateView.as_view(template_name='index.html')),
   re_path('analytics/', TemplateView.as_view(template_name='index.html')),
   re_path('vis/', TemplateView.as_view(template_name='index.html')),
   re_path('about/', TemplateView.as_view(template_name='index.html')),
