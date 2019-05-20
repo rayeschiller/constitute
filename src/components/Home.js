@@ -23,7 +23,7 @@ class Home extends Component {
       </header>
       <div className="container">
         <div className="description ">
-          <h1>Constitute!
+          <h1>Constitute
           <p>    
           A gender driven political analytics design to shed light on online harassment and inequalities women and LQBTQ folx encounter when running for office.
           </p>   

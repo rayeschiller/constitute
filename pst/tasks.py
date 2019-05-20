@@ -18,4 +18,4 @@ def fetchAllTweets():
     from .fetchTweets import fetchTweets
     from .models import Politician
     politician_ids = Politician.objects.values_list('id', flat=True)
-    fetchTweets(politician_ids, False)
+    fetchTweets(politician_ids, True)
