@@ -44,7 +44,7 @@ class App extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
         <a className="navbar-brand pull-left" href="/home">
           <div>
-          <img src={logoFinal} className="logoStyle" width='115' margintop='-100'/></div></a>
+          <img src={logoFinal} className="logoStyle" width='115'   margintop='-100'/></div></a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -74,7 +74,7 @@ class App extends Component {
        <div className="App-intro">
         <Switch>
           <Route path="/home" component={Home}/>
-          <Route path="/analytics" render={(props)=> <Cloud></Cloud>} />
+          {/* <Route path="/analytics" render={(props)=> <Cloud></Cloud>} /> */}
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           {/* <Route path="/analytics" component={Analytics} /> */}
