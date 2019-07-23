@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as d3 from "d3";
 import $ from 'jquery'
 
-const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : "https://constitute.herokuapp.com"
+const hostname = () => window.location.hostname === "localhost" ?  "http://localhost:8000" : window.location.origin
 
 class Cloud extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Cloud extends Component {
 
     componentDidMount() {
         this.politicianBubbles(this.hostname)
-        console.log(window.location.origin)
+        // console.log(window.location.origin)
      }
      componentDidUpdate() {
         this.politicianBubbles(this.hostname)
@@ -75,18 +75,21 @@ class Cloud extends Component {
                         return color(i);
                     })
                     .on("mouseover", function(d){ 
-                        console.log(d.data)
+                        // console.log(d.data)
+                        // console.log(window.location);
                         div.transition()		
                             .duration(200)		
-                            .style("opacity", .9);		
+                            .style("opacity", .9)
+                            .attr('fill', 'springgreen');
+                            		
                         div.html(d.data.first_name + " " + d.data.last_name 
                             + "<br/>"  + d.data.tweet_count + " tweets"
                             + "<br/>" + d.data.political_party
                             + "<br/>"  + d.data.office_level
                             )
-                            
-                            .style("left", (d3.event.pageX) + "px")		
-                            .style("top", (d3.event.pageY - 28) + "px");	
+                            .style("left", (d3.event.pageX + 30) + "px")		
+                            .style("top", (d3.event.pageY) + "px")
+                            .attr('fill', 'springgreen');
                         })					
                     .on("mouseout", function(d) {		
                         div.transition()		

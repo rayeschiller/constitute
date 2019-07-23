@@ -1,13 +1,15 @@
 {% load staticfiles %}
 <!DOCTYPE html>
+<!-- DEPRECATED DEAD CODE -->
+@DEPRECATED
 <html> 
 <head>
         <!-- <script src="{% static 'd3/d3.min.js' %}"></script>  -->
         <!-- <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>  -->
         <!-- <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script> -->
-        <script src="../../static/d3/d3.min.js"></script>
+        <!-- <script src="../../static/d3/d3.min.js"></script>
         <script src="../../static/js/jquery-3.3.1.min.js"></script>
-        
+         -->
         <style>
             div.tooltip {
                 position: absolute;
@@ -45,13 +47,13 @@
             $.getJSON(hostname + '/tweets/?format=json', function(tweet_data) {                
                 var width = 1000 //max size of the bubbles
                 var height =800
-                // var color = d3.scaleOrdinal(d3.schemeAccent);
+                var color = d3.scaleOrdinal(d3.schemeAccent);
                 var scale = d3.scaleLinear()
                     .domain([100, 3000])
                     .range([50, 300]);
-                var color = d3.scaleLinear()
-                    .domain([0,5]) //map colors based on value
-                    .range(['green', '#47DFFF']); //color category
+                // var color = d3.scaleLinear()
+                //     .domain([0,5]) //map colors based on value
+                //     .range(['green', '#47DFFF']); //color category
                 var politiciansData = {};
                 politiciansData['children'] = politicians_data.results;
                
