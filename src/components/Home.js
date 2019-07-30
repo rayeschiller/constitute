@@ -25,7 +25,7 @@ class Home extends Component {
         <div className="description ">
           <h1>Constitute
           <p>    
-          A gender driven political analytics design to shed light on online harassment and inequalities women and LQBTQ folx encounter when running for office.
+          A data driven and artificially intelligent analytics platform to combat online discrimination against women and LGBTQ folks in political life.
           </p>   
         </h1>  
       </div>
