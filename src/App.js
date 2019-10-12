@@ -68,7 +68,6 @@ class App extends Component {
 
        <div className="App-intro">
         <Switch>
-          <Route path="/home" component={Home}/>
           <Route path="/analytics" render={(props)=> <Cloud></Cloud>} />
           <Route path="/appTweets" render={(props) => <Tweets {...props} tweets="home" />} />
           <Route path="/genderTweets" render={(props) => <Tweets {...props} tweets="home" />} />
@@ -83,6 +82,7 @@ class App extends Component {
               hostname = "https://constitute.herokuapp.com"
             }
             window.location = hostname + '/data_viz/'; return null;} }/>
+          <Route path="/" component={Home}/>
         </Switch>
         </div>
 
