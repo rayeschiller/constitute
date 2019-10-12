@@ -29,11 +29,6 @@ const TweetList = (props) => {
   ); 
 }
 
-// var imgStyle = {
-//   margin-top: 15px;
-// }
-
-
 class App extends Component {
 
 

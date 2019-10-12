@@ -10,8 +10,6 @@ import Collins from './images/SusanCollins.jpg'
 import Warren from './images/ElizabethWarren.jpg'
 
 const TweetList = (props) => {
-    // console.log('tweet list props');
-    // console.log(props)
     return (
       <div>{props.tweets.map(tweet=> <Tweet key={tweet.tweet_id} {...tweet}/>)}
       </div>
