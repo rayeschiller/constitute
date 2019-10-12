@@ -16,10 +16,6 @@ const TweetList = (props) => {
 
 class Tweets extends Component {
 
-  handleClick() {
-    console.log('torture')
-  }
-
   onDropdownSelected(e) {
     console.log('selected');
     console.log(e.target.value);
@@ -40,6 +36,7 @@ class Tweets extends Component {
           isLoaded: true,
           items: result,
           tweets: result.results.map(function(tweet){
+            console.log(tweet.tweet_id);
             return {"tweetId": tweet.tweet_id};
           })
         });
@@ -52,8 +49,6 @@ class Tweets extends Component {
 
   constructor(props) {
     super(props)
-    console.log("tweet props");
-    console.log(props);
     
     var hostname = "";
     if (window.location.hostname === "localhost"){
@@ -68,6 +63,10 @@ class Tweets extends Component {
       isLoaded: false,
       items: [],
       tweets: [],
+      uri: "https://twitter.com/DameWendyDBE",
+      hashtagUri: "https://twitter.com/hashtag/SaveTheWeb?src=hash",
+      hashtag: "#SaveTheWeb",
+
     };
   }
 
@@ -138,6 +137,17 @@ render () {
           <option value="28">Bernie Sanders</option>
         </select>
     </div>
+<div>
+  <blockquote class="twitter-tweet" data-lang="en">
+    <p lang="en" dir="ltr">.
+      <a href="https://twitter.com/DameWendyDBE">@DameWendyDBE</a>
+      : Invest in data science training for librarians.  In future, libraries will be data warehouses. 
+      <a href={this.state.hashtagUri}>{this.state.hashtag}</a>
+    </p>
+    &mdash; Justin Littman (@justin_littman) 
+    <a href={this.state.uri}>June 16, 2016</a></blockquote>
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
     <div className="col-sm-7 text-left tweet-list"> 
       <TweetList tweets={this.state.tweets} />
     </div>
