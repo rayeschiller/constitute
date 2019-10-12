@@ -28,7 +28,7 @@ urlpatterns = router.urls
 
 urlpatterns.extend([
   path('admin/', admin.site.urls),
-  re_path(r'^/', TemplateView.as_view(template_name='index.html')),
+  re_path('', TemplateView.as_view(template_name='index.html')),
   re_path('home/', TemplateView.as_view(template_name='index.html')),
   re_path('appTweets/', TemplateView.as_view(template_name='index.html')),
   re_path('analytics/', TemplateView.as_view(template_name='index.html')),
