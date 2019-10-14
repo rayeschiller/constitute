@@ -59,7 +59,7 @@ six==1.11.0
 static3==0.7.0
 textblob==0.15.2
 tweepy==3.7.0
-Twisted==18.9.0
+Twisted==19.7.0
 TwitterSearch==1.0.2
 txaio==18.8.1
 urllib3==1.22
