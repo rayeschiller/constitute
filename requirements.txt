@@ -52,7 +52,7 @@ python-crontab==2.3.5
 python-dateutil==2.7.5
 pytz==2018.3
 redis==2.10.6
-requests==2.18.4
+requests==2.20.0
 requests-oauthlib==0.8.0
 singledispatch==3.4.0.3
 six==1.11.0
