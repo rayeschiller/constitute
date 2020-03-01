@@ -24,10 +24,10 @@ class Tweet(models.Model):
     date = models.DateTimeField(auto_now=True)
     sentiment = models.DecimalField(null=True, max_digits=19, decimal_places=2)
     tweet_id = models.CharField(max_length=255, null=True, unique=True)
-    toxicity = models.DecimalField(null=True, max_digits=19, decimal_places=10)
-    sexually_explicit = models.DecimalField(null=True, max_digits=19, decimal_places=10)
-    flirtation = models.DecimalField(null=True, max_digits=19, decimal_places=10)
-    identity_attack = models.DecimalField(null=True, max_digits=19, decimal_places=10)
+    toxicity = models.DecimalField(null=True, max_digits=10, decimal_places=5)
+    sexually_explicit = models.DecimalField(null=True, max_digits=10, decimal_places=5)
+    flirtation = models.DecimalField(null=True, max_digits=10, decimal_places=5)
+    identity_attack = models.DecimalField(null=True, max_digits=10, decimal_places=5)
 
 
     def _str_(self):

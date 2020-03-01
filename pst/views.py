@@ -9,6 +9,7 @@ from .serializers import *
 from django.db.models import Count
 import csv
 from pst.tweet_handling.fetchTweets import fetchTweets
+from pst.tweet_handling.perspectiveapi import get_and_update_toxicity
 
 
 # Create your views here.
@@ -101,6 +102,14 @@ def load_politicians(request):
     return HttpResponse("Politicians Saved")
 
 
+def update_toxicity(request):
+    recent_tweets = Tweet.objects.all().order_by('-id')[:100]
+    for tweet in recent_tweets:
+        get_and_update_toxicity(tweet)
+    print("Toxicity Updated for tweets {}".format(recent_tweets))
+    return HttpResponse("Toxicity updated")
+
+
 class TweetViewSet(viewsets.ModelViewSet):
     serializer_class = TweetSerializer
     queryset = Tweet.objects.order_by("-date")
@@ -108,6 +117,8 @@ class TweetViewSet(viewsets.ModelViewSet):
     # filter_backends = (DjangoFilterBackend,)
     filterset_class = TweetFilter
     ordering_fields = ('politician', 'date', 'sentiment')
+
+
 # search_fields = ('twitterUser', 'date', 'location', 'sentiment')
 
 

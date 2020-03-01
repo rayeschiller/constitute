@@ -18,21 +18,21 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tweet',
             name='flirtation',
-            field=models.DecimalField(decimal_places=10, max_digits=19, null=True),
+            field=models.DecimalField(decimal_places=7, max_digits=10, null=True),
         ),
         migrations.AddField(
             model_name='tweet',
             name='identity_attack',
-            field=models.DecimalField(decimal_places=10, max_digits=19, null=True),
+            field=models.DecimalField(decimal_places=7, max_digits=10, null=True),
         ),
         migrations.AddField(
             model_name='tweet',
             name='sexually_explicit',
-            field=models.DecimalField(decimal_places=10, max_digits=19, null=True),
+            field=models.DecimalField(decimal_places=7, max_digits=10, null=True),
         ),
         migrations.AddField(
             model_name='tweet',
             name='toxicity',
-            field=models.DecimalField(decimal_places=10, max_digits=19, null=True),
+            field=models.DecimalField(decimal_places=7, max_digits=10, null=True),
         ),
     ]

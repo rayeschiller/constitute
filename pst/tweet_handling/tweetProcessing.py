@@ -1,13 +1,9 @@
 from pst.models import Tweet, TwitterUser, Politician
 from textblob import TextBlob
-from textblob.sentiments import NaiveBayesAnalyzer
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from django.db.models import Count
 import re
-import logging
-import time
-import datetime
-import pytz
+
+from pst.tweet_handling.perspectiveapi import get_and_update_toxicity
 
 
 def processTweet(politician_id, tweet):
@@ -56,9 +52,10 @@ def saveNewTweet(tweet, politician_id):
                             tweet_id=getTweetId(tweet),
                             politician=politician)
         tweetToSave.save()
+        get_and_update_toxicity(tweetToSave)
         # print("New tweet " + str(tweetToSave.tweet_id) + " successfully saved")
     except Exception as e:
-        print('Tweet ' + str(tweetToSave.tweet_id) + ' not saved with error ' + str(e))
+        print('Tweet {} not saved with error {}'.format(getTweetId(tweet), e))
 
 
 def userExists(userId):
