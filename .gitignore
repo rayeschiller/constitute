@@ -1,3 +1,4 @@
+.idea/
 pst/migrations/__pycache__
 .DS_Store
 pst/__pycache__
@@ -12,3 +13,4 @@ Pipfile
 Pipfile.lock
 node_modules/
 package-lock.json
+*.pyc

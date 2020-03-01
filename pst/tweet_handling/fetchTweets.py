@@ -1,6 +1,6 @@
-from .models import Politician
-from .twitterSearch import getTweets
-from .tweetProcessing import processTweet
+from pst.tweet_handling.twitterSearch import getTweets
+from pst.tweet_handling.tweetProcessing import processTweet
+
 
 def fetchTweets(politician_ids, searchOnlySexistWords):
     for politician_id in politician_ids:
@@ -10,7 +10,7 @@ def fetchTweets(politician_ids, searchOnlySexistWords):
         for tweet in tweets:
             isTweetNew = processTweet(politician_id, tweet)
             if isTweetNew:
-                newCounter += 1 
+                newCounter += 1
             else:
                 alreadyExistsCounter += 1
         print("Processed " + str(alreadyExistsCounter) + " already existing tweets")
