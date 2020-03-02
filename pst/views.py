@@ -103,7 +103,7 @@ def load_politicians(request):
 
 
 def update_toxicity(request):
-    recent_tweets = Tweet.objects.all().order_by('-id')[:100]
+    recent_tweets = Tweet.objects.all().order_by('-id')[:1]
     for tweet in recent_tweets:
         get_and_update_toxicity(tweet)
     print("Toxicity Updated for tweets {}".format(recent_tweets))

@@ -10,7 +10,7 @@ def clean_text(tweet_text:str) -> str:
 
 
 def get_tweet_toxicity(tweet_text: str) -> dict:
-    api_key = 'AIzaSyCzcFM0rN3smd9wYqda6k73NT_QU7XtJ3Y'
+    api_key = 'AIzaSyAda6yV-wOVJiAW07cC_Ntf4lKa69R3CmA'
     text = tweet_text
     url = ('https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze' + '?key=' + api_key)
     data_dict = {
