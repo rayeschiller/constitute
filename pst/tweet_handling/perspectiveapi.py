@@ -33,21 +33,29 @@ def get_tweet_toxicity(tweet_text: str) -> dict:
         return dict(zip(attributes, scores))
     else:
         print("Error - Response code {}".format(response.status_code))
+        return dict()
 
 
 def update_tweet_toxicity(db_tweet: Tweet, t_scores: dict):
     if t_scores:
-        db_tweet.toxicity = t_scores['TOXICITY']
-        db_tweet.identity_attack = t_scores['IDENTITY_ATTACK']
-        db_tweet.flirtation = t_scores['FLIRTATION']
-        db_tweet.sexually_explicit = t_scores['SEXUALLY_EXPLICIT']
-        db_tweet.save()
+        try:
+            db_tweet.toxicity = t_scores['TOXICITY']
+            db_tweet.identity_attack = t_scores['IDENTITY_ATTACK']
+            db_tweet.flirtation = t_scores['FLIRTATION']
+            db_tweet.sexually_explicit = t_scores['SEXUALLY_EXPLICIT']
+            db_tweet.save()
+            print("Toxicity Updated for tweets {}".format(db_tweet.id))
+        except Exception as e:
+            print("Tweet toxicity could not be updated with error {}".format(e))
 
 
 def get_and_update_toxicity(db_tweet: Tweet):
     db_tweet.clean_text = clean_text(db_tweet.text)
     db_tweet.save()
-    scores = get_tweet_toxicity(db_tweet.clean_text)
-    update_tweet_toxicity(db_tweet, scores)
+    if db_tweet.toxicity is None:
+        scores = get_tweet_toxicity(db_tweet.clean_text)
+        update_tweet_toxicity(db_tweet, scores)
+    else:
+        print("Toxicity already exists for tweet {}".format(db_tweet.id))
 
 
