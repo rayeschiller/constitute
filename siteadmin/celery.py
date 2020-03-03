@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
-from pst.tasks import test, fetchSexistTweets, fetchAllTweets
+from pst.tasks import test, fetchSexistTweets, fetchAllTweets, updateTweetToxicity
 from celery.schedules import crontab
 
 # set the default Django settings module for the 'celery' program.
@@ -17,6 +17,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
+
 
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
@@ -38,6 +39,15 @@ def setup_periodic_tasks(sender, **kwargs):
         fetchAllTweets.s(),
         name="Fetch all tweets"
     )
+
+    sender.add_periodic_task(
+        crontab(hour='*', minute="2"),
+        updateTweetToxicity.s(),
+        name="Update tweet toxicity"
+    )
+
+
+
 
 @app.task(bind=True)
 def debug_task(self):

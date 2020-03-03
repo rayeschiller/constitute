@@ -1,10 +1,10 @@
 FirstName,LastName,Gender,Username,AlternativeName,District,OfficeLevel,PoliticalParty,City,State
-Alexandria,Ocasio-Cortez,Female,AOC,,NY 14,Federal,Democrat,New York,NY
+Alexandria,Ocasio-Cortez,Female,AOC,RepAOC,NY 14,Federal,Democrat,New York,NY
 Ayanna,Pressley,Female,AyannaPressley,,MA 7,Federal,Democrat,Boston,MA
 Nancy,Pelosi,Female,speakerpelosi,,CA 12,Federal,Democrat,San Fransisco,CA
 Elizabeth,Warren,Female,SenWarren,ewarren,MA,Federal,Democrat,,MA
 Kirsten,Gillibrand,Female,SenGillibrand,gillibrandny,NY,Federal,Democrat,,NY
-Kyrsten,Sinema,Female,kyrstensinema,SenatorSinema,AZ 9,Federal,Democrat,,Arizona
+Kyrsten,Sinema,Female,kyrstensinema,SenatorSinema,AZ 9,Federal,Democrat,,AZ
 Maxine,Waters,Female,repmaxinewaters,maxinewaters,CA 43,Federal,Democrat,Los Angeles,CA
 Kamala,Harris,Female,KamalaHarris,senkamalaharris,CA,Federal,Democrat,,CA
 Deb,Haaland,Female,RepDebHaaland,Deb4CongressNM,NM CD-1,Federal,Democrat,Albuquerque,NM
@@ -14,3 +14,6 @@ Susan,Collins,Female,SenatorCollins,,ME,Federal,Republican,,ME
 Lisa,Murkowski,Female,lisamurkowski,,AK,Federal,Republican,,AK
 Chuck,Schumer,Male,SenSchumer,chuckschumer,NY,Federal,Democrat,,NY
 Bernie,Sanders,Male,SenSanders,berniesanders,VT,Federal,Democrat,,VT
+Joe,Biden,Male,JoeBiden,,,Federal,Democrat,,DE
+Pete,Buttigieg,Male,PeteButtigieg,,,State,Democrat,South Bend,IN
+Amy,Klobuchar,Female,amyklobuchar,,,Federal,Democrat,,MN

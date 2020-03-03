@@ -1,6 +1,6 @@
 from channels.generic.websocket import WebsocketConsumer
 import json
-from .twitterStreaming import streamTweets
+
 
 class TweetConsumer(WebsocketConsumer):
     # groups = ["broadcast"]

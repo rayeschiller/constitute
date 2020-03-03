@@ -82,7 +82,7 @@ class App extends Component {
               hostname = "https://constitute.herokuapp.com"
             }
             window.location = hostname + '/data_viz/'; return null;} }/>
-          <Route path="/*" component={Home}/>
+          {/*<Route path="/*" component={Home}/>*/}
         </Switch>
         </div>
 

@@ -1,5 +1,5 @@
 import tweepy
-from .tweetProcessing import processTweet
+from pst.tweet_handling.tweetProcessing import processTweet
 
 class StreamListener(tweepy.StreamListener): 
     def on_status(self, status):
