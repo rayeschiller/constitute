@@ -28,8 +28,9 @@ def fetchAllTweets():
 def updateTweetToxicity():
     from .models import Politician, Tweet
     from pst.tweet_handling.perspectiveapi import get_and_update_toxicity
-    politician_ids = Politician.objects.values_list('id', flat=True)
+    politician_ids = [1, 28, 4, 58, 59, 3]
     for pid in politician_ids:
+        print("Updating tweets for politician {}".format(pid))
         recent_tweets = Tweet.objects.filter(politician_id=pid).filter(toxicity__isnull=True).order_by('-date')[:10]
         for tweet in recent_tweets:
             get_and_update_toxicity(tweet)
