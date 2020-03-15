@@ -28,6 +28,7 @@ class TweetFilter(filters.FilterSet):
     politician__last_name = filters.CharFilter(field_name='politician__last_name', lookup_expr='exact')
     politician__political_party = filters.ChoiceFilter(choices=POLITICAL_PARTY_CHOICES)
     location = MyCharFilter(field_name='location', exclude=True)
+    is_retweet = filters.BooleanFilter(field_name='is_retweet', lookup_expr='exact')
 
     class Meta:
         model = Tweet
@@ -36,4 +37,5 @@ class TweetFilter(filters.FilterSet):
             'tweet_id': ['exact'],
             'location': ['exact'],
             'sentiment': ['gt', 'lt', 'exact'],
+            'is_retweet': ['exact']
         }
