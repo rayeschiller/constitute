@@ -33,7 +33,7 @@ class TweetFilter(filters.FilterSet):
     class Meta:
         model = Tweet
         fields = {
-            'date': ['year__lt', 'year__gt', 'month__gt', 'day__gt'],
+            'date': ['year__lt', 'year__gt', 'month__gt', 'month__lt', 'day__gt', 'day__lt'],
             'tweet_id': ['exact'],
             'location': ['exact'],
             'sentiment': ['gt', 'lt', 'exact'],
