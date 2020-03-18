@@ -26,6 +26,7 @@ class TweetFilter(filters.FilterSet):
     twitterUser__id = filters.NumberFilter(field_name='twitterUser__id', lookup_expr='exact')
     politician__id = filters.NumberFilter(field_name='politician__id', lookup_expr='exact')
     politician__last_name = filters.CharFilter(field_name='politician__last_name', lookup_expr='exact')
+    politician__gender = filters.CharFilter(field_name='politician__gender', lookup_expr='exact')
     politician__political_party = filters.ChoiceFilter(choices=POLITICAL_PARTY_CHOICES)
     location = MyCharFilter(field_name='location', exclude=True)
     is_retweet = filters.BooleanFilter(field_name='is_retweet', lookup_expr='exact')
