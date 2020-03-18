@@ -6,7 +6,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 class TweetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Tweet
-        fields = ("pk", "text", "is_retweet", "location", "date", "sentiment", "tweet_id", "twitterUser", "politician", "toxicity", "sexually_explicit", "flirtation", "identity_attack")
+        fields = ("pk", "text", "clean_text", "is_retweet", "location", "date", "sentiment", "tweet_id", "twitterUser", "politician", "toxicity", "sexually_explicit", "flirtation", "identity_attack")
 
 
 class SexistWordSerializer(serializers.HyperlinkedModelSerializer):
