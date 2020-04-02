@@ -1,28 +1,24 @@
 import json
 import requests
-
+import os
 from pst.models import Tweet
 import re
 
 
 def clean_text(tweet_text:str) -> str:
+    # this only strips the url, should this also strip mentions?
     return re.sub(r'http\S+', '', tweet_text)
 
 
 def get_tweet_toxicity(tweet_text: str) -> dict:
-    api_key = 'AIzaSyAda6yV-wOVJiAW07cC_Ntf4lKa69R3CmA'
+    api_key = os.environ.get('PERSPECTIVE_KEY')
     text = tweet_text
+    attributes = ['TOXICITY', 'SEVERE_TOXICITY', 'IDENTITY_ATTACK', 'FLIRTATION', 'SEXUALLY_EXPLICIT']
     url = ('https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze' + '?key=' + api_key)
     data_dict = {
         'comment': {'text': text},
         'languages': ['en'],
-        'requestedAttributes': {
-            'TOXICITY': {},
-            'SEVERE_TOXICITY': {},
-            'IDENTITY_ATTACK': {},
-            'SEXUALLY_EXPLICIT': {},
-            'FLIRTATION': {}
-        }
+        'requestedAttributes': {c: {} for c in attributes}
     }
     response = requests.post(url=url, data=json.dumps(data_dict))
     if response.status_code == 200:
