@@ -14,7 +14,7 @@ def get_tweet_toxicity(tweet_text: str) -> dict:
     api_key = os.environ.get('PERSPECTIVE_KEY')
     text = tweet_text
     attributes = ['TOXICITY', 'SEVERE_TOXICITY', 'IDENTITY_ATTACK', 'FLIRTATION', 'SEXUALLY_EXPLICIT']
-    url = ('https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze' + '?key=' + api_key)
+    url = ('https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key={}'.format(api_key))
     data_dict = {
         'comment': {'text': text},
         'languages': ['en'],
