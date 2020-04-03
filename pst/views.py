@@ -104,10 +104,10 @@ def load_politicians(request):
 
 def update_toxicity(request):
     politician_ids = Politician.objects.values_list('id', flat=True)
-    recent_tweets = Tweet.objects.all().order_by('-date')[:100]
+    # recent_tweets = Tweet.objects.all().order_by('-date')[:100]
 
     for pid in politician_ids:
-        print("Updating tweets for politician {}".format(pid))
+        print("Updating tweet toxicity for politician {}".format(pid))
         recent_tweets = Tweet.objects.filter(politician_id=pid).filter(toxicity__isnull=True).order_by('-date')[:10]
         for tweet in recent_tweets:
             get_and_update_toxicity(tweet)
