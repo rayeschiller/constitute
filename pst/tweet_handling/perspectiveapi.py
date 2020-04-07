@@ -40,7 +40,7 @@ def update_tweet_toxicity(db_tweet: Tweet, t_scores: dict):
             db_tweet.flirtation = t_scores['FLIRTATION']
             db_tweet.sexually_explicit = t_scores['SEXUALLY_EXPLICIT']
             db_tweet.save()
-            print("Toxicity Updated for tweet {}".format(db_tweet.id))
+            # print("Toxicity Updated for tweet {}".format(db_tweet.id))
         except Exception as e:
             print("Tweet toxicity could not be updated with error {}".format(e))
 

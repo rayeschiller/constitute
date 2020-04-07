@@ -34,3 +34,4 @@ def updateTweetToxicity():
         recent_tweets = Tweet.objects.filter(politician_id=pid).filter(toxicity__isnull=True).order_by('-date')[:50]
         for tweet in recent_tweets:
             get_and_update_toxicity(tweet)
+        print("Updated {} tweet toxicity".format(len(recent_tweets)))
