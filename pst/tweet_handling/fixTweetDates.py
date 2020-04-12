@@ -13,7 +13,7 @@ def update_tweet_dates():
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
 
-    recent_tweets = Tweet.objects.filter(created_at__isnull=True).order_by('-date')[:100]
+    recent_tweets = Tweet.objects.filter(created_at__isnull=True).order_by('-date')[:200]
     for r in recent_tweets:
         try:
             tweet = api.get_status(r.tweet_id)

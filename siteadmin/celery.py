@@ -46,7 +46,7 @@ def setup_periodic_tasks(sender, **kwargs):
     )
 
     sender.add_periodic_task(
-        crontab(hour='*', minute="*/1"),
+        crontab(hour='*', minute="*/5"),
         updateTweetDates.s(),
         name="Update tweet dates"
     )

@@ -28,4 +28,4 @@ class PoliticianSerializer(serializers.HyperlinkedModelSerializer):
         model = Politician
         fields = (
         "pk", "first_name", "last_name", "username", "tweet_count", "alternativeName", "district", "office_level",
-        "image_url", "political_party", "gender", "active")
+        "image_url", "political_party", "gender")
