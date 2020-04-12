@@ -22,13 +22,13 @@ class Tweet(models.Model):
     is_retweet = models.BooleanField()
     location = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now=True)
+    created_at = models.CharField(max_length=255, null=True)
     sentiment = models.DecimalField(null=True, max_digits=19, decimal_places=2)
     tweet_id = models.CharField(max_length=255, null=True, unique=True)
     toxicity = models.DecimalField(null=True, max_digits=10, decimal_places=5)
     sexually_explicit = models.DecimalField(null=True, max_digits=10, decimal_places=5)
     flirtation = models.DecimalField(null=True, max_digits=10, decimal_places=5)
     identity_attack = models.DecimalField(null=True, max_digits=10, decimal_places=5)
-
 
     def _str_(self):
         return self.text
@@ -69,6 +69,7 @@ class Politician(models.Model):
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, null=True)
     tweet_count = models.IntegerField(default=0, null=True)
     image_url = models.CharField(max_length=255, null=True)
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.first_name + self.last_name

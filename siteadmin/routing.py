@@ -1,9 +1,8 @@
 # mysite/routing.py
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.conf.urls import url
-from django.urls import include, path, re_path
 from channels.auth import AuthMiddlewareStack
-from pst.consumers import TweetConsumer
+from pst.tweet_handling.tweet_streaming.consumers import TweetConsumer
 
 
 application = ProtocolTypeRouter({

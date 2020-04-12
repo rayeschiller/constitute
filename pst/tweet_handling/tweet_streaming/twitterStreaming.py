@@ -1,5 +1,5 @@
 import tweepy 
-from pst.streamListener import StreamListener
+from pst.tweet_handling.tweet_streaming.streamListener import StreamListener
 from pst.config import CONFIG
 
 def streamTweets():

@@ -48,7 +48,7 @@ def saveNewTweet(tweet, politician_id):
         twitterUser = TwitterUser.objects.get(user_id=getUserId(tweet))
         politician = Politician.objects.get(id=politician_id)
         tweetToSave = Tweet(text=getText(tweet), twitterUser=twitterUser, is_retweet=getIsRetweet(tweet),
-                            date=getDate(tweet), location=getLocation(tweet), sentiment=getSentiment(tweet),
+                            location=getLocation(tweet), sentiment=getSentiment(tweet), created_at=getCreatedAt(tweet),
                             tweet_id=getTweetId(tweet),
                             politician=politician)
         tweetToSave.save()
@@ -72,10 +72,7 @@ def getUserId(tweet):
     return tweet['user']['id']
 
 
-def getDate(tweet):
-    # TODO: fix this date field from timezone error
-    # convertedDate = time.strftime('%Y-%m-%d %H:%M:%S', time.strptime(tweet['created_at'],'%a %b %d %H:%M:%S +0000 %Y'))   
-    # return convertedDate
+def getCreatedAt(tweet):
     return tweet['created_at']
 
 

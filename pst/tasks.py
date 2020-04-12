@@ -12,7 +12,7 @@ def test(arg):
 def fetchSexistTweets():
     from pst.tweet_handling.fetchTweets import fetchTweets
     from .models import Politician
-    politician_ids = Politician.objects.values_list('id', flat=True)
+    politician_ids = Politician.objects.filter(active=True).values_list('id', flat=True)
     fetchTweets(politician_ids, True)
 
 
@@ -20,7 +20,7 @@ def fetchSexistTweets():
 def fetchAllTweets():
     from pst.tweet_handling.fetchTweets import fetchTweets
     from .models import Politician
-    politician_ids = Politician.objects.values_list('id', flat=True)
+    politician_ids = Politician.objects.filter(active=True).values_list('id', flat=True)
     fetchTweets(politician_ids, False)
 
 
@@ -28,10 +28,16 @@ def fetchAllTweets():
 def updateTweetToxicity():
     from .models import Politician, Tweet
     from pst.tweet_handling.perspectiveapi import get_and_update_toxicity
-    politician_ids = Politician.objects.values_list('id', flat=True)
+    politician_ids = Politician.objects.filter(active=True).values_list('id', flat=True)
     for pid in politician_ids:
         print("Updating tweet toxicity for politician {}".format(pid))
         recent_tweets = Tweet.objects.filter(politician_id=pid).filter(toxicity__isnull=True).order_by('-date')[:50]
         for tweet in recent_tweets:
             get_and_update_toxicity(tweet)
         print("Updated {} tweet toxicity".format(len(recent_tweets)))
+
+
+@shared_task
+def updateTweetDates():
+    from pst.tweet_handling.fixTweetDates import update_tweet_dates
+    update_tweet_dates()

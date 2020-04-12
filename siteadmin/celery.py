@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
-from pst.tasks import test, fetchSexistTweets, fetchAllTweets, updateTweetToxicity
+from pst.tasks import *
 from celery.schedules import crontab
 
 # set the default Django settings module for the 'celery' program.
@@ -27,9 +27,8 @@ def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(
         crontab(minute="*/5"), test.s("--celery crontab 5 min beat--"), name='Crontab Beat every 5 Minutes')
    
-    # Executes every hour on the hour
     sender.add_periodic_task(
-        crontab(hour='*', minute="0,30,50"),
+        crontab(hour='*', minute="0,30"),
         fetchSexistTweets.s(),
         name='Fetch sexist tweets'
     )
@@ -44,6 +43,12 @@ def setup_periodic_tasks(sender, **kwargs):
         crontab(hour='*', minute="*/20"),
         updateTweetToxicity.s(),
         name="Update tweet toxicity"
+    )
+
+    sender.add_periodic_task(
+        crontab(hour='*', minute="*/1"),
+        updateTweetDates.s(),
+        name="Update tweet dates"
     )
 
 
