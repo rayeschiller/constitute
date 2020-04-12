@@ -41,7 +41,7 @@ def setup_periodic_tasks(sender, **kwargs):
     )
 
     sender.add_periodic_task(
-        crontab(hour='*', minute="*/5"),
+        crontab(hour='*', minute="*/20"),
         updateTweetToxicity.s(),
         name="Update tweet toxicity"
     )
