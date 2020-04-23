@@ -2,14 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.decorators import action
+
 from .filters import *
 from rest_framework import viewsets
+from rest_framework.response import Response
 from rest_framework import filters as rest_filters
 from .serializers import *
 from django.db.models import Count
 import csv
 from pst.tweet_handling.fetchTweets import fetchTweets
-from pst.tweet_handling.perspectiveapi import get_and_update_toxicity
 
 
 # Create your views here.
@@ -102,18 +104,6 @@ def load_politicians(request):
     return HttpResponse("Politicians Saved")
 
 
-def update_toxicity(request):
-    politician_ids = Politician.objects.values_list('id', flat=True)
-    # recent_tweets = Tweet.objects.all().order_by('-date')[:100]
-
-    for pid in politician_ids:
-        print("Updating tweet toxicity for politician {}".format(pid))
-        recent_tweets = Tweet.objects.filter(politician_id=pid).filter(toxicity__isnull=True).order_by('-date')[:10]
-        for tweet in recent_tweets:
-            get_and_update_toxicity(tweet)
-    return HttpResponse("Toxicity updated")
-
-
 class TweetViewSet(viewsets.ModelViewSet):
     serializer_class = TweetSerializer
     queryset = Tweet.objects.order_by("-date")
@@ -121,9 +111,6 @@ class TweetViewSet(viewsets.ModelViewSet):
     # filter_backends = (DjangoFilterBackend,)
     filterset_class = TweetFilter
     ordering_fields = ('politician', 'date', 'sentiment')
-
-
-# search_fields = ('twitterUser', 'date', 'location', 'sentiment')
 
 
 class SexistWordViewSet(viewsets.ModelViewSet):
@@ -135,8 +122,16 @@ class PoliticianViewSet(viewsets.ModelViewSet):
     serializer_class = PoliticianSerializer
     queryset = Politician.objects.all()
     filter_backends = (DjangoFilterBackend, rest_filters.OrderingFilter)
-    filter_fields = ('id','active',)
+    filter_fields = ('id', 'active',)
     ordering_fields = ('state', 'tweet_count')
+
+    @action(detail=False)
+    def toxicity_counts(self, request):
+        active_politicians = Politician.objects.filter(active=True)
+        toxic_counts = {}
+        for politician in active_politicians:
+            toxic_counts[politician.last_name] = Tweet.objects.filter(politician=politician, toxicity__gt=.7).count()
+        return Response(toxic_counts)
 
 
 class TwitterUserViewSet(viewsets.ModelViewSet):
