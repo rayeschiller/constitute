@@ -135,7 +135,7 @@ class PoliticianViewSet(viewsets.ModelViewSet):
     serializer_class = PoliticianSerializer
     queryset = Politician.objects.all()
     filter_backends = (DjangoFilterBackend, rest_filters.OrderingFilter)
-    filter_fields = ('id',)
+    filter_fields = ('id','active',)
     ordering_fields = ('state', 'tweet_count')
 
 
