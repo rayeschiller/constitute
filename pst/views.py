@@ -130,7 +130,8 @@ class PoliticianViewSet(viewsets.ModelViewSet):
         active_politicians = Politician.objects.filter(active=True)
         toxic_counts = {}
         for politician in active_politicians:
-            counts = {'toxicity': Tweet.objects.filter(politician=politician, toxicity__gt=.7).count(),
+            counts = {'gender': politician.gender,
+                      'toxicity': Tweet.objects.filter(politician=politician, toxicity__gt=.7).count(),
                       'sexually_explicit': Tweet.objects.filter(politician=politician,
                                                                 sexually_explicit__gt=.7).count(),
                       'identity_attack': Tweet.objects.filter(politician=politician, identity_attack__gt=.7).count()}
