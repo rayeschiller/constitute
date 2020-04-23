@@ -22,7 +22,7 @@ class Tweet(models.Model):
     is_retweet = models.BooleanField()
     location = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now=True)
-    created_at = models.CharField(max_length=255, null=True)
+    created_at = models.DateTimeField(null=True)
     sentiment = models.DecimalField(null=True, max_digits=19, decimal_places=2)
     tweet_id = models.CharField(max_length=255, null=True, unique=True)
     toxicity = models.DecimalField(null=True, max_digits=10, decimal_places=5)
