@@ -38,6 +38,9 @@ class TweetFilter(filters.FilterSet):
             # 'created_at': ['month__gt', 'month'],
             'tweet_id': ['exact'],
             'location': ['exact'],
-            'sentiment': ['gt', 'lt', 'exact'],
+            # 'sentiment': ['gt', 'lt', 'exact'],
+            'toxicity': ['gt'],
+            'sexually_explicit': ['gt'],
+            'identity_attack': ['gt'],
             'is_retweet': ['exact']
         }
