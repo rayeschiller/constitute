@@ -1,3 +1,7 @@
+from datetime import datetime
+
+from django.utils import timezone
+import pytz
 from pst.models import Tweet, TwitterUser, Politician
 from textblob import TextBlob
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -73,7 +77,10 @@ def getUserId(tweet):
 
 
 def getCreatedAt(tweet):
-    return tweet['created_at']
+    timezone.now()
+    dt = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
+    dt.replace(tzinfo=timezone.utc)
+    return dt
 
 
 def getUsername(tweet):
