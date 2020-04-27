@@ -110,7 +110,7 @@ class TweetViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, rest_filters.OrderingFilter)
     # filter_backends = (DjangoFilterBackend,)
     filterset_class = TweetFilter
-    ordering_fields = ('politician', 'date', 'sentiment')
+    ordering_fields = ('politician', 'date', 'toxicity', 'sexually_explicit', 'identity_attack')
 
 
 class SexistWordViewSet(viewsets.ModelViewSet):

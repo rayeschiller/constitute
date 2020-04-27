@@ -2,7 +2,9 @@ import tweepy
 from pst.config import CONFIG
 from pst.models import Tweet
 
+from datetime import datetime
 
+from django.utils import timezone
 def update_tweet_dates():
     consumer_key = CONFIG['CONSUMER_KEY']
     consumer_secret = CONFIG['CONSUMER_SECRET']
@@ -17,8 +19,10 @@ def update_tweet_dates():
     for r in recent_tweets:
         try:
             tweet = api.get_status(r.tweet_id)
-            created_at = tweet.created_at
-            r.created_at = created_at
+            timezone.now()
+            dt = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
+            dt.replace(tzinfo=timezone.utc)
+            r.created_at = dt
             r.save()
         except tweepy.error.TweepError as e:
             print("Tweepy error: {}".format(e))

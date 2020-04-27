@@ -44,7 +44,6 @@ class TweetFilter(filters.FilterSet):
         model = Tweet
         fields = {
             'created_at': ['year__lt', 'year__gt', 'month__gt', 'month__lt', 'day__gt', 'day__lt'],
-            # 'created_at': ['month__gt', 'month'],
             'tweet_id': ['exact'],
             'location': ['exact'],
             # 'sentiment': ['gt', 'lt', 'exact'],
