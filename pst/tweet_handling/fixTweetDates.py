@@ -19,8 +19,7 @@ def update_tweet_dates():
     for r in recent_tweets:
         try:
             tweet = api.get_status(r.tweet_id)
-            timezone.now()
-            dt = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
+            dt = timezone.now() + datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
             dt.replace(tzinfo=timezone.utc)
             r.created_at = dt
             r.save()
