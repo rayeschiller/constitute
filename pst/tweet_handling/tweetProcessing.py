@@ -79,7 +79,7 @@ def getUserId(tweet):
 def getCreatedAt(tweet):
     timezone.now()
     dt = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
-    dt.replace(tzinfo=timezone.utc)
+    dt = dt.replace(tzinfo=pytz.UTC)
     return dt
 
 
