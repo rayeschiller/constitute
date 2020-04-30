@@ -1,3 +1,4 @@
+celerybeat-schedule.db
 dump.rdb
 .idea/
 pst/migrations/__pycache__

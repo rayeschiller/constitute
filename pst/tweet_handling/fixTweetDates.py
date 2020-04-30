@@ -25,4 +25,6 @@ def update_tweet_dates():
             r.created_at = dt
             r.save()
         except tweepy.error.TweepError as e:
+            r.created_at = r.date
+            r.save()
             print("Tweepy error: {}".format(e))
