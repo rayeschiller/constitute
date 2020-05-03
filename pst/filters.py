@@ -39,11 +39,16 @@ class TweetFilter(filters.FilterSet):
     # politician__active = filters.BooleanFilter(field_name='politician__active', lookup_expr='exact')
     # location = MyCharFilter(field_name='location', exclude=True)
     is_retweet = filters.BooleanFilter(field_name='is_retweet', lookup_expr='exact')
+    created_at = filters.DateFilter(field_name='created_at', lookup_expr='exact')
+    start_date = filters.DateFilter(field_name='created_at', lookup_expr=('lt'))
+    end_date = filters.DateFilter(field_name='created_at', lookup_expr=('gt'))
+    created_at_range = filters.DateRangeFilter(field_name='created_at', label='Date Range')
+    date = filters.DateFilter(field_name='date', lookup_expr='exact')
 
     class Meta:
         model = Tweet
         fields = {
-            'created_at': ['year__lt', 'year__gt', 'month__gt', 'month__lt', 'day__gt', 'day__lt'],
+            # 'created_at': ['year__lt', 'year__gt', 'month__gt', 'month__lt', 'day__gt', 'day__lt'],
             'tweet_id': ['exact'],
             'location': ['exact'],
             # 'sentiment': ['gt', 'lt', 'exact'],
