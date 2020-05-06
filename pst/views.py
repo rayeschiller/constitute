@@ -112,10 +112,10 @@ class TweetViewSet(viewsets.ModelViewSet):
     filterset_class = TweetFilter
     ordering_fields = ('politician', 'date', 'toxicity', 'sexually_explicit', 'identity_attack')
 
-
-class SexistWordViewSet(viewsets.ModelViewSet):
-    serializer_class = SexistWordSerializer
-    queryset = SexistWord.objects.all()
+#
+# class SexistWordViewSet(viewsets.ModelViewSet):
+#     serializer_class = SexistWordSerializer
+#     queryset = SexistWord.objects.all()
 
 
 class PoliticianViewSet(viewsets.ModelViewSet):

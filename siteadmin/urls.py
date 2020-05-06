@@ -21,7 +21,7 @@ from pst.views import *
 
 router = DefaultRouter()
 router.register(r'tweets', TweetViewSet)
-router.register(r'sexistwords', SexistWordViewSet)
+# router.register(r'sexistwords', SexistWordViewSet)
 router.register(r'twitterusers', TwitterUserViewSet)
 router.register(r'politicians', PoliticianViewSet)
 urlpatterns = router.urls
