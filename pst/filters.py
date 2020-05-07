@@ -52,8 +52,8 @@ class TweetFilter(filters.FilterSet):
             'tweet_id': ['exact'],
             'location': ['exact'],
             # 'sentiment': ['gt', 'lt', 'exact'],
-            'toxicity': ['gt'],
-            'sexually_explicit': ['gt'],
-            'identity_attack': ['gt'],
+            'toxicity': ['gte'],
+            'sexually_explicit': ['gte'],
+            'identity_attack': ['gte'],
             'is_retweet': ['exact']
         }
