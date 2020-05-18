@@ -10,3 +10,6 @@ In order to have everything working locally, you need the following processes:
 Heroku local port: 5000
 Django server port: 8000
 React js port: 3000
+
+API: http://constitute.tech/tweets
+Homepage: http://constitute.tech/home
