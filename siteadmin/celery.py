@@ -28,7 +28,7 @@ def setup_periodic_tasks(sender, **kwargs):
         crontab(minute="*/5"), test.s("--celery crontab 5 min beat--"), name='Crontab Beat every 5 Minutes')
    
     sender.add_periodic_task(
-        crontab(hour='*', minute="0,30"),
+        crontab(hour='*', minute="0"),
         fetchAllTweets.s(),
         name='Fetch all tweets2'
     )
