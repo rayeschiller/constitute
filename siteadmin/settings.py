@@ -88,14 +88,13 @@ WSGI_APPLICATION = 'siteadmin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# local
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pst',
-        'USER': 'rinaschiller',
-        'PASSWORD': 'fucksexism',
-        'HOST': 'localhost',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': os.environ['RDS_PASSWORD'],
+        'HOST': os.environ['RDS_HOSTNAME'],
         'PORT': '5432',
     }
 }
@@ -105,15 +104,6 @@ DATABASES = {
 # db_from_env = dj_database_url.config(conn_max_age=500, ssl_require=True)
 # DATABASES['default'] = db_from_env
 
-# DATABASES = {
-#    'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'd2pbnd12evl5hv',
-#         'USER': 'bwvmyilvptrtnr',
-#         'PASSWORD': 'b52165df7e76420aa0f1f37b3f083970d6a898e4f6990e4bf7acf2e0edc250dc',
-#         'HOST': 'ec2-54-163-240-54.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#     }       
 
 
 # webpack loader config
