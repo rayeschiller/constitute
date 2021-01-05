@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$qejs(-&epj2g#763!ff1g=)1l4*@@16bc^cw&vy&rzy1!06o_'
+SECRET_KEY = os.environ['DJANGO_SECRET']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False,
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'constitute.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'constitute.herokuapp.com']
 
 CORS_ORIGIN_ALLOW_ALL=True
 
