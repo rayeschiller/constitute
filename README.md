@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+Constitute is a django web app and REST API to view data on harassment & sexism towards female politicians on Twitter. Uses Django, React.js, D3.js, Heroku, and Postgres.
 
 In order to have everything working locally, you need the following processes:
 Install python requirements with ```pip install -r requirements.txt```
