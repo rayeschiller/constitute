@@ -17,7 +17,7 @@ constantly==15.1.0
 daphne==2.2.4
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==2.2.13
+Django==2.2.21
 django-celery-beat==1.4.0
 django-celery-results==1.0.4
 django-cors-headers==2.4.0
